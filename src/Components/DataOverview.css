@@ -1,0 +1,175 @@
+.data-overview {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(240, 236, 236);
+    overflow-y: auto;
+}
+
+.data-overview .features {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0 1rem 0;
+    flex-wrap: wrap;
+}
+
+
+.data-overview .feature-blocks {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.data-overview .feature-container {
+    width: 20%;
+}
+
+.data-overview .feature-title {
+    width: 100%;
+    text-align: center;
+}
+
+.data-overview .feature-block {
+    width: 100%;
+    border: 1px solid gray;
+    text-align: center;
+    background-color: white;
+    border-radius: .5rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+}
+
+.data-overview .search-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.data-overview .search-block .search-button {
+    width: auto;
+    padding: 0 1rem;
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: .5rem;
+    background-color: white;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.data-overview .details {
+    display: flex;
+    justify-content: center;
+}
+
+.data-overview .detail-blocks {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.data-overview .detail-block {
+    text-decoration: none;
+    color: black;
+    width: 20rem;
+    height: 16rem;
+    margin: 1rem .2rem 0 .2rem;
+    border: 1px solid black;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.data-overview .detail-block:hover {
+    background-color: rgb(255, 255, 255, .7);
+}
+
+.data-overview .detail-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-top: .5rem;
+}
+
+.data-overview .detail-carbon-footprint-data-overview,
+.data-overview .detail-commuting-carbon-footprint-data,
+.data-overview .detail-transportation-carbon-footprint-data,
+.data-overview .detail-current-usage-of-transportation-modes,
+.data-overview .detail-current-usage-of-public-transportation,
+.data-overview .detail-accumulation-status {
+    flex-grow: 1;
+    margin: 1rem;
+    border: 1px solid gray;
+    border-radius: .5rem;
+}
+
+
+@media (min-width: 1200px) {}
+
+@media (max-width: 1199px) {
+    .data-overview .detail-blocks {
+        width: 90%;
+    }
+
+    .data-overview .feature-blocks {
+        width: 90%;
+    }
+}
+
+@media (max-width: 991px) {
+    .data-overview .detail-block {
+        width: 15rem;
+        height: 15rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .data-overview .detail-blocks {
+        width: 90%;
+    }
+
+    .data-overview .detail-block {
+        width: 45%;
+    }
+
+    .data-overview .feature-blocks {
+        width: 95%;
+    }
+
+    .data-overview .feature-block {
+        height: 2rem;
+    }
+
+    .data-overview .feature-container {
+        width: 45%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .data-overview {
+        padding-bottom: 5rem;
+    }
+
+    .data-overview .detail-block {
+        width: 100%;
+        padding: 1rem 0 0 0;
+    }
+
+    .data-overview .feature-block {
+        height: 3rem;
+    }
+
+    .data-overview .feature-container {
+        width: 100%;
+    }
+}

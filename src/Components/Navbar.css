@@ -1,0 +1,196 @@
+.navbar-container {
+    width: 100%;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    background-color: rgb(10, 4, 45);
+    display: flex;
+    align-items: end;
+}
+
+.navbar-container .page {
+    flex: 1;
+    flex-shrink: 1;
+    max-width: 20%;
+    color: black;
+    height: 70%;
+    background-color: rgb(135, 135, 135);
+    margin-right: .1rem;
+    border-radius: .3rem .3rem 0 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: background-color .2s;
+    overflow: hidden;
+}
+
+.navbar-container .page:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+
+.navbar-container .page.highlight {
+    background-color: rgb(240, 236, 236);
+}
+
+.navbar-container .page-text {
+    display: flex;
+    width: 80%;
+    font-weight: 600;
+    padding-left: .5rem;
+    text-decoration: none;
+    color: black;
+    max-width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.navbar-container .page-delete-button {
+    position: absolute;
+    right: .1rem;
+    font-size: .8rem;
+    padding: 0 .2rem;
+}
+
+.navbar-container .page-delete-button:hover {
+    background-color: rgb(225, 225, 225);
+    border-radius: .2rem;
+}
+
+.navbar-container .logo {
+    display: none;
+}
+
+.navbar-container .nav-items {
+    display: none;
+}
+
+.navbar-container .menu-toggle {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgb(10, 4, 45);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-mid {
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: .5rem;
+    margin: .3rem 0;
+    opacity: 1;
+    transition: transform .3s ease-in, opacity .3s;
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-mid.toggle {
+    transform: translateX(-500%);
+    opacity: 0;
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-top {
+    content: "";
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: .5rem;
+    transition: transform .3s ease-in;
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-top.toggle {
+    transform: translateY(.5rem) rotate(135deg);
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-bot {
+    content: "";
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: .5rem;
+    transition: transform .3s ease-in;
+}
+
+.navbar-container .menu-toggle .menu-toggle-hamburger-bot.toggle {
+    transform: translateY(-.5rem) rotate(-135deg);
+}
+
+
+@media (min-width: 1200px) {}
+
+@media (max-width: 1199px) {}
+
+@media (max-width: 991px) {
+    .navbar-container .page-text {
+        max-width: 5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-container {
+        height: auto;
+        min-height: auto;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .navbar-container .page {
+        display: none;
+    }
+
+    .navbar-container .logo {
+        display: block;
+        object-fit: contain;
+        height: 3.5rem;
+        margin: .5rem 0 .5rem 1rem;
+    }
+
+    .navbar-container .menu-toggle {
+        display: block;
+    }
+
+    .navbar-container .menu-toggle {
+        margin-right: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .navbar-container .nav-items {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        flex-direction: column;
+        transition: max-height 0.3s ease-in-out;
+        justify-content: center;
+        align-items: center;
+        background: rgb(10, 4, 45)
+    }
+
+    .navbar-container .nav-item {
+        height: 2rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .navbar-container .nav-item.highlight {
+        background-image: linear-gradient(to bottom, rgb(132, 255, 132), rgb(112, 215, 255));
+        color: black;
+
+    }
+
+    .navbar-container .nav-items.show {
+        max-height: 25rem;
+    }
+}
+
+@media (max-width: 575px) {}
