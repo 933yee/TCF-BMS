@@ -27,40 +27,40 @@ function Main(props) {
 
     return (
         <div className='main-container'>
-            {props.loading ? (
+            {!props.loading ? (
                 <>
                     {
-                        props.login ? null :
-                            (
-                                <div className="loading-indicator">
-                                    <div className='complete'>
-                                        <input className='complete-input' type='checkbox' id='check'></input>
-                                        <label className='check-container' htmlFor="check">
-                                        </label>
-                                    </div>
-                                </div>
-                            )
+                        // props.login ? null :
+                        //     (
+                        //         <div className="loading-indicator">
+                        //             <div className='complete'>
+                        //                 <input className='complete-input' type='checkbox' id='check'></input>
+                        //                 <label className='check-container' htmlFor="check">
+                        //                 </label>
+                        //             </div>
+                        //         </div>
+                        //     )
                     }
-                    <CSSTransition
+                    {/* <CSSTransition
                         in={props.login}
                         timeout={1000}
                         classNames="fade"
                         unmountOnExit
-                    >
-                        <>
-                            <Panel />
-                            <div className='contents'>
-                                <Navbar />
-                                <Route path="/data-overview" exact component={() => <DataOverview />} />
-                                <Route path="/carbon-footprint-data-overview" exact component={() => <>碳足跡數據總覽</>} />
-                                <Route path="/commuting-carbon-footprint-data" exact component={() => <>通勤碳足跡數據</>} />
-                                <Route path="/transportation-carbon-footprint-data" exact component={() => <>運輸碳足跡數據</>} />
-                                <Route path="/current-usage-of-transportation-modes" exact component={() => <>交通工具使用情況</>} />
-                                <Route path="/current-usage-of-public-transportation" exact component={() => <>交通車使用情況</>} />
-                                <Route path="/accumulation-status" exact component={() => <>積點狀況</>} />
-                            </div>
-                        </>
-                    </CSSTransition>
+                    > */}
+                    <>
+                        <Panel />
+                        <div className='contents'>
+                            <Navbar />
+                            <Route path="/data-overview" exact component={() => <DataOverview />} />
+                            <Route path="/carbon-footprint-data-overview" exact component={() => <>碳足跡數據總覽</>} />
+                            <Route path="/commuting-carbon-footprint-data" exact component={() => <>通勤碳足跡數據</>} />
+                            <Route path="/transportation-carbon-footprint-data" exact component={() => <>運輸碳足跡數據</>} />
+                            <Route path="/current-usage-of-transportation-modes" exact component={() => <>交通工具使用情況</>} />
+                            <Route path="/current-usage-of-public-transportation" exact component={() => <>交通車使用情況</>} />
+                            <Route path="/accumulation-status" exact component={() => <>積點狀況</>} />
+                        </div>
+                    </>
+                    {/* </CSSTransition> */}
                 </>
             ) : (
                 <Login />

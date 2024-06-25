@@ -1,5 +1,4 @@
 node_modules/*
-dist/*
 .tern-project
 package-lock.json
 .DS_Store

@@ -3,7 +3,7 @@
     min-width: 15rem;
     width: fix-content;
     height: 100%;
-    background-color: rgb(10, 4, 45);
+    background-color: rgb(49, 49, 49);
     display: flex;
     flex-direction: column;
 }
@@ -14,11 +14,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 3rem;
+    padding-top: 2rem;
 }
 
 .panel-container .panel-home {
-    width: 90%;
+    width: 80%;
     object-fit: contain;
 }
 
@@ -28,12 +28,14 @@
     align-items: center;
     justify-content: start;
     flex-grow: 1;
-    padding-top: 4rem;
+    padding-top: 3rem;
 }
 
 .panel-container .panel-item {
-    width: 100%;
+    width: 80%;
+    border-radius: 10px;
     padding: .5rem 0;
+    margin: .5rem 0;
     font-size: 1.2rem;
     font-weight: 700;
     text-align: center;
@@ -46,8 +48,40 @@
 
 .panel-container .panel-item.focused {
     color: black;
-    background-image: linear-gradient(to bottom, rgb(132, 255, 132), rgb(112, 215, 255));
+    background-color: rgb(233, 188, 31);
+    border: 2px solid rgb(255, 234, 43);
+    /* background-image: linear-gradient(to bottom, rgb(233, 188, 31), rgb(112, 215, 255)); */
 }
+
+.panel-container .panel-item.not-focused {
+    /* background-color: rgb(233, 188, 31); */
+    /* border: 2px solid rgb(255, 234, 43); */
+    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+}
+
+.panel-container .bottom-function-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    /* padding-bottom: 0rem; */
+
+}
+
+.panel-container .bottom-function-button {
+    width: 80%;
+    border-radius: 10px;
+    padding: .5rem 0;
+    margin: .5rem 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-image: linear-gradient(0.5turn, rgb(25, 164, 208), rgb(152, 231, 255));
+}
+
 
 @media (min-width: 1200px) {}
 
