@@ -6,59 +6,6 @@
     overflow-y: auto;
 }
 
-.data-overview .features {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1rem 0 1rem 0;
-    flex-wrap: wrap;
-}
-
-
-.data-overview .feature-blocks {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.data-overview .feature-container {
-    width: 20%;
-}
-
-.data-overview .feature-title {
-    width: 100%;
-    text-align: center;
-}
-
-.data-overview .feature-block {
-    width: 100%;
-    border: 1px solid gray;
-    text-align: center;
-    background-color: white;
-    border-radius: .5rem;
-    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-}
-
-.data-overview .search-block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.data-overview .search-block .search-button {
-    width: auto;
-    padding: 0 1rem;
-    text-align: center;
-    border: 1px solid gray;
-    border-radius: .5rem;
-    background-color: white;
-    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
 .data-overview .details {
     display: flex;
     justify-content: center;
@@ -84,11 +31,12 @@
     border: 1px solid black;
     text-align: center;
     background-color: white;
-    display: flex;
     flex-direction: column;
+    display: flex;
     border-radius: .5rem;
     box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
     cursor: pointer;
+
 }
 
 .data-overview .detail-block:hover {
@@ -99,19 +47,42 @@
     font-size: 1.2rem;
     font-weight: 700;
     padding-top: .5rem;
+    /* flex: 0 1 auto; */
 }
 
-.data-overview .detail-carbon-footprint-data-overview,
-.data-overview .detail-commuting-carbon-footprint-data,
-.data-overview .detail-transportation-carbon-footprint-data,
-.data-overview .detail-current-usage-of-transportation-modes,
-.data-overview .detail-current-usage-of-public-transportation,
-.data-overview .detail-accumulation-status {
-    flex-grow: 1;
-    margin: 1rem;
-    border: 1px solid gray;
-    border-radius: .5rem;
+
+.data-overview .detail-carbon-footprint-data-overview {
+    background: url('./images/tmp1.png') no-repeat;
 }
+
+.data-overview .detail-commuting-carbon-footprint-data {
+    background: url('./images/tmp2.png') no-repeat;
+}
+
+.data-overview .detail-transportation-carbon-footprint-data {
+    background: url('./images/tmp3.png') no-repeat;
+}
+
+.data-overview .detail-current-usage-of-transportation-modes {
+    background: url('./images/tmp4.png') no-repeat;
+}
+
+.data-overview .detail-current-usage-of-public-transportation {
+    background: url('./images/tmp5.png') no-repeat;
+}
+
+.data-overview .detail-accumulation-status {
+    background: url('./images/tmp6.png') no-repeat;
+}
+
+.data-overview .detail-tmp-img-container {
+    flex: 1;
+    /* flex-grow: 1; */
+    /* background-size: 80% 90%; */
+    background-size: contain;
+    background-position: center center;
+}
+
 
 
 @media (min-width: 1200px) {}

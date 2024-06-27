@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import {
-    HashRouter as Router,
+    HashRouter,
+    Routes,
 } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Main from 'Components/Main.jsx';
 import { searchParams, pageState, loginState } from 'States/reducers.js';
 
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 
@@ -18,11 +19,12 @@ const store = createStore(
     }),
 );
 
-ReactDOM.render(
+ReactDOM.createRoot(
+    document.getElementById('root'),
+).render(
     <Provider store={store}>
-        <Router basename="/">
+        <HashRouter basename="/">
             <Main />
-        </Router>,
+        </HashRouter>,
     </Provider>,
-    document.getElementById('root')
 );

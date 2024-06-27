@@ -29,29 +29,26 @@ function Panel(props) {
                 <Link to="/data-overview" className={`panel-item ${props.currentPage === '數據總覽' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/data-overview')}>
                     數據總覽
                 </Link>
-                <Link to="/carbon-footprint-data-overview" className={`panel-item  ${props.currentPage === '碳足跡數據總覽' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/carbon-footprint-data-overview')}>
-                    碳足跡數據總覽
+                <Link to="/employee-travel" className={`panel-item  ${props.currentPage === '員工差旅' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-travel')}>
+                    員工差旅
                 </Link>
-                <Link to="/commuting-carbon-footprint-data" className={`panel-item  ${props.currentPage === '通勤碳足跡數據' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/commuting-carbon-footprint-data')}>
-                    通勤碳足跡數據
+                <Link to="/upstream-transportation" className={`panel-item  ${props.currentPage === '上游運輸' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/upstream-transportation')}>
+                    上游運輸
                 </Link>
-                <Link to="/transportation-carbon-footprint-data" className={`panel-item  ${props.currentPage === '運輸碳足跡數據' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/transportation-carbon-footprint-data')}>
-                    運輸碳足跡數據
+                <Link to="/downstream-transportation" className={`panel-item  ${props.currentPage === '下游運輸' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/downstream-transportation')}>
+                    下游運輸
                 </Link>
-                <Link to="/current-usage-of-transportation-modes" className={`panel-item  ${props.currentPage === '交通工具使用現況' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/current-usage-of-transportation-modes')}>
-                    交通工具使用現況
+                <Link to="/employee-commuting" className={`panel-item  ${props.currentPage === '員工通勤' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-commuting')}>
+                    員工通勤
                 </Link>
-                <Link to="/current-usage-of-public-transportation" className={`panel-item  ${props.currentPage === '交通車使用現況' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/current-usage-of-public-transportation')}>
-                    交通車使用現況
-                </Link>
-                <Link to="/accumulation-status" className={`panel-item  ${props.currentPage === '積點狀況' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/accumulation-status')}>
-                    積點狀況
+                <Link to="/official-vehicle" className={`panel-item  ${props.currentPage === '公務車' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/official-vehicle')}>
+                    公務車
                 </Link>
             </div>
             <div className='bottom-function-buttons'>
-                <div className='bottom-function-button'>
+                <Link to="/upload-and-modify-data" className='bottom-function-button' onClick={() => handleLinkClick('/upload-and-modify-data')}>
                     上傳與修改資料
-                </div>
+                </Link>
                 <div className='bottom-function-button'>
                     登入/ 登出
                 </div>

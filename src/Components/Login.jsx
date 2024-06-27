@@ -3,7 +3,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import {
     Route,
 } from 'react-router-dom';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import Navbar from 'Components/Navbar.jsx';
 import { loginAndLoading } from 'States/actions.js';
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 
 function Login() {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const history = useNavigate();
     const [recaptchaValue, setRecaptchaValue] = useState(null);
 
     const handleRecaptchaChange = (value) => {

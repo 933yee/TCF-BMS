@@ -1,0 +1,6 @@
+.employee-travel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0 0 1rem 0;
+}

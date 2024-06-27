@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const srcPath = path.resolve(__dirname, 'src');
 const distPath = path.resolve(__dirname, 'dist');
 
@@ -16,12 +15,9 @@ module.exports = {
     context: srcPath,
     resolve: {
         alias: {
-            States: path.resolve(srcPath, 'states'),
-            Utilities: path.resolve(srcPath, 'utilities'),
+            States: path.resolve(srcPath, 'States'),
+            Utilities: path.resolve(srcPath, 'Utilities'),
             Components: path.resolve(srcPath, 'Components'),
-            Home: path.resolve(srcPath, 'Components/Home'),
-            api: path.resolve(srcPath, 'api'),
-            settings: path.resolve(srcPath, 'settings')
         }
     },
     entry: {
@@ -37,25 +33,12 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: [/node_modules/],
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                [
-                                    '@babel/preset-env', {
-                                        modules: false
-                                    }
-                                ],
-                                '@babel/preset-react'
-                            ],
-                            plugins: [
-                                '@babel/plugin-proposal-class-properties',
-                                '@babel/plugin-proposal-object-rest-spread'
-                            ]
-                        }
-                    }
-                ]
+                use:
+                {
+                    loader: 'babel-loader',
+
+                }
+
             }, {
                 test: /\.css$/,
                 use: [
@@ -67,23 +50,13 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'sass-loader'
-                ]
             }
         ]
     },
-    optimization: {
-        splitChunks: {
-            chunks: "all"
-        }
-    },
     plugins: [htmlPlugin],
     devServer: {
-        contentBase: distPath,
+        static: distPath,
+        // contentBase: distPath,
         compress: true,
         port: 7070,
         historyApiFallback: true,

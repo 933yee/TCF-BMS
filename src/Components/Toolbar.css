@@ -1,0 +1,187 @@
+.toolbar .features {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1rem 0 1rem 0;
+    flex-wrap: wrap;
+}
+
+
+.toolbar .feature-blocks {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.toolbar .main-features {
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar .feature-container {
+    display: flex;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+
+.toolbar .feature-title {
+    text-align: center;
+    margin-right: 1rem;
+    color: white;
+    padding: .2rem 2rem .2rem 2rem;
+    border-radius: 10px;
+    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+}
+
+.toolbar .department-selector select {
+    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+    color: white;
+    padding: 6px 20px;
+    border: none;
+    font-size: 20px;
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    border-radius: 10px;
+}
+
+.toolbar .department-selector select option {
+    padding: 30px;
+    background: rgb(48, 48, 48);
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar .time-selector {
+    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+    color: white;
+    padding: 0px 40px;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    position: relative;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.toolbar .time-selector-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar .arrow {
+    right: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+
+.toolbar .arrow.toggle {
+    transform: rotate(90deg);
+}
+
+.toolbar .dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: .1rem;
+    background-color: rgb(48, 48, 48);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1000;
+    padding: 10px 20px 10px 10px;
+}
+
+.toolbar .time-option {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.toolbar .time-option label {
+    display: block;
+    margin-bottom: 5px;
+    margin: 0 10px;
+    font-size: 1rem;
+    color: white;
+    white-space: nowrap;
+}
+
+.toolbar .start-time-selector,
+.toolbar .end-time-selector {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.toolbar .sub-features {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+}
+
+.toolbar .sub-feature-container {
+    display: flex;
+    justify-content: end;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+
+.toolbar .map-show,
+.toolbar .export,
+.toolbar .export-all,
+.toolbar .add-new-data,
+.toolbar .delete-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    padding: 0px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.toolbar .map-show {
+    background-image: linear-gradient(0.5turn, rgb(92, 229, 31), rgb(73, 183, 26));
+}
+
+.toolbar .export,
+.toolbar .export-all,
+.toolbar .add-new-data {
+    background-image: linear-gradient(0.5turn, rgb(33, 156, 225), rgb(28, 122, 176));
+}
+
+.toolbar .delete-data {
+    background-image: linear-gradient(0.5turn, rgb(185, 54, 13), rgb(185, 54, 13));
+}
+
+.toolbar .search-keyword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar .search-keyword-input {
+    padding: 6px 0px;
+    margin-right: .5rem;
+}
