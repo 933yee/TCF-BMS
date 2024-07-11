@@ -29,7 +29,7 @@
     height: 20rem;
     margin: 1rem .2rem 0 .2rem;
     border: 1px solid black;
-    text-align: center;
+    /* text-align: center; */
     background-color: white;
     flex-direction: column;
     display: flex;
@@ -46,25 +46,84 @@
 .data-overview .detail-title {
     font-size: 1.2rem;
     font-weight: 700;
-    padding-top: .5rem;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
     /* flex: 0 1 auto; */
 }
 
 
-.data-overview .detail-carbon-footprint-data-overview {
-    background: url('./images/tmp1.png') no-repeat;
+.data-overview .detail-carbon-footprint-data-overview,
+.data-overview .detail-commuting-carbon-footprint-data,
+.data-overview .detail-current-usage-of-transportation-modes {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: space-evenly;
+    align-items: start;
+    text-align: center;
 }
 
-.data-overview .detail-commuting-carbon-footprint-data {
-    background: url('./images/tmp2.png') no-repeat;
+.data-overview .detail-carbon-footprint-data-overview .block,
+.data-overview .detail-commuting-carbon-footprint-data .block {
+    /* background-color: ; */
+    border: rgb(195, 195, 195) 1px solid;
+    border-radius: 10px;
+    height: 45%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.data-overview .detail-carbon-footprint-data-overview .block-data,
+.data-overview .detail-commuting-carbon-footprint-data .block-data {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-weight: 700;
+    flex: 1;
+    font-size: 1.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.data-overview .detail-current-usage-of-transportation-modes .block {
+    border: rgb(195, 195, 195) 1px solid;
+    border-radius: 10px;
+    height: 45%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    padding-top: 5px;
+}
+
+.data-overview .detail-current-usage-of-transportation-modes .block-data {
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    flex: 1;
+    font-size: 1.5rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.data-overview .block-data-compare {
+    display: flex;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0px 1rem 0px 1rem;
+    border-radius: 50px;
+    background-color: rgb(14, 148, 167);
 }
 
 .data-overview .detail-transportation-carbon-footprint-data {
     background: url('./images/tmp3.png') no-repeat;
-}
-
-.data-overview .detail-current-usage-of-transportation-modes {
-    background: url('./images/tmp4.png') no-repeat;
 }
 
 .data-overview .detail-current-usage-of-public-transportation {
@@ -82,7 +141,6 @@
     background-size: contain;
     background-position: center center;
 }
-
 
 
 @media (min-width: 1200px) {}

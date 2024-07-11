@@ -38,43 +38,47 @@
 }
 
 .toolbar .department-selector select {
-    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+    /* background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48)); */
+    background-color: rgb(49, 49, 49);
     color: white;
-    padding: 6px 20px;
+    padding: 4px 20px;
     border: none;
     font-size: 20px;
     -webkit-appearance: button;
     appearance: button;
     outline: none;
-    border-radius: 10px;
+    border-radius: 100px;
 }
 
 .toolbar .department-selector select option {
     padding: 30px;
-    background: rgb(48, 48, 48);
+    background: rgb(49, 49, 49);
     color: white;
     font-size: 20px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
 .toolbar .time-selector {
-    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+    /* background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48)); */
+    background-color: rgb(49, 49, 49);
     color: white;
-    padding: 0px 40px;
     border: none;
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 100px;
     position: relative;
-    display: inline-block;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
+    cursor: default;
 }
 
 .toolbar .time-selector-text {
     display: flex;
+    padding: 0px 60px 0px 25px;
+
     align-items: center;
     justify-content: center;
+    margin-bottom: 1px;
 }
 
 .toolbar .arrow {
@@ -139,7 +143,7 @@
 
 .toolbar .sub-feature-container {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     padding-right: 1rem;
     padding-top: 1rem;
 }
@@ -156,19 +160,34 @@
     flex-wrap: wrap;
     padding: 0px 20px;
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 100px;
     color: white;
     cursor: pointer;
+    transition: opacity 0.2s;
 }
 
+.toolbar .map-show:hover,
+.toolbar .export:hover,
+.toolbar .export-all:hover,
+.toolbar .add-new-data:hover,
+.toolbar .delete-data:hover {
+    opacity: 0.7;
+}
+
+
 .toolbar .map-show {
-    background-image: linear-gradient(0.5turn, rgb(92, 229, 31), rgb(73, 183, 26));
+    /* background-image: linear-gradient(0.5turn, rgb(92, 229, 31), rgb(73, 183, 26)); */
+    background-color: rgb(89, 89, 89);
+}
+
+.toolbar .add-new-data {
+    /* background-image: linear-gradient(0.5turn, rgb(33, 156, 225), rgb(28, 122, 176)); */
+    background-color: rgb(73, 183, 26);
 }
 
 .toolbar .export,
-.toolbar .export-all,
-.toolbar .add-new-data {
-    background-image: linear-gradient(0.5turn, rgb(33, 156, 225), rgb(28, 122, 176));
+.toolbar .export-all {
+    background-color: rgb(33, 156, 225);
 }
 
 .toolbar .delete-data {

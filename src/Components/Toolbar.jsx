@@ -5,6 +5,7 @@ import { GoTriangleRight } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 
 function Toolbar(props) {
+    const onClickAddData = props.onClickAddData;
     const [timeSelectorToggle, setTimeSelectorToggle] = useState(false);
     const [department, setDepartment] = useState('');
     const [startTime, setStartTime] = useState('');
@@ -100,7 +101,11 @@ function Toolbar(props) {
                             <div className='export-all'>一鍵匯出</div>
                         </div>
                         <div className='sub-feature-container'>
-                            <div className='add-new-data'>新增資料</div>
+                            <div className='add-new-data'
+                                onClick={() => {
+                                    if (onClickAddData) onClickAddData();
+                                }}
+                            >新增資料</div>
                         </div>
                         <div className='sub-feature-container'>
                             <div className='delete-data'>刪除</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import './CarbonDataTable.css';
 import { useDispatch } from 'react-redux';
 import { changePageState } from 'States/actions.js';
-import englishToChineseMap from 'Utilities/EnglishToChinese.js';
+import { englishToChineseMap } from 'Utilities/Auxiliary.js';
 
 function CarbonDataTable(props) {
     const dispatch = useDispatch();

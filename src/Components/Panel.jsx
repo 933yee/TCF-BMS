@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { changePageState } from 'States/actions.js';
-import englishToChineseMap from 'Utilities/EnglishToChinese.js';
+import { englishToChineseMap } from 'Utilities/Auxiliary.js';
 import { connect } from 'react-redux';
 
 import './Panel.css';
@@ -10,6 +10,13 @@ import './Panel.css';
 function Panel(props) {
     const dispatch = useDispatch();
     const [focusedLink, setFocusedLink] = useState('/data-overview');
+
+    useEffect(() => {
+        const location = window.location.pathname;
+        setFocusedLink(location);
+        const chinesePageState = englishToChineseMap[location.slice(1)];
+        dispatch(changePageState(chinesePageState));
+    }, []);
 
     const handleLinkClick = (link) => {
         setFocusedLink(link);
@@ -46,11 +53,17 @@ function Panel(props) {
                 </Link>
             </div>
             <div className='bottom-function-buttons'>
-                <Link to="/upload-and-modify-data" className='bottom-function-button' onClick={() => handleLinkClick('/upload-and-modify-data')}>
+                <Link to="/upload-and-modify-data" className={`bottom-function-button upload-and-modify-button ${props.currentPage === '上傳與修改資料' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/upload-and-modify-data')}>
                     上傳與修改資料
                 </Link>
-                <div className='bottom-function-button'>
-                    登入/ 登出
+                <div className={`bottom-function-button logout-button`}
+                    onClick={() => {
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('account');
+                        window.location.href = '/login'
+                    }}
+                >
+                    登出
                 </div>
             </div>
         </div >

@@ -20,6 +20,7 @@
 .panel-container .panel-home {
     width: 80%;
     object-fit: contain;
+    padding-left: 1rem;
 }
 
 .panel-container .panel-items {
@@ -32,33 +33,33 @@
 }
 
 .panel-container .panel-item {
-    width: 80%;
-    border-radius: 10px;
-    padding: .5rem 0;
-    margin: .5rem 0;
-    font-size: 1.2rem;
+    width: 100%;
+    padding: .8rem 0;
+    margin: .2rem 0;
+    font-size: 1.3rem;
     font-weight: 700;
     text-align: center;
     cursor: pointer;
     transition: background-color .2s;
     text-decoration: none;
-    color: white;
-    transition: color .2s;
-}
-
-
-
-.panel-container .panel-item.focused {
-    color: black;
-    /* background-color: rgb(233, 188, 31); */
-    /* border: 2px solid rgb(255, 234, 43); */
-    background-image: linear-gradient(to bottom, rgb(255, 255, 0), rgb(233, 188, 31));
+    color: rgb(135, 135, 135);
+    transition: color .2s, border-left .1s;
 }
 
 .panel-container .panel-item.not-focused {
+    border-left: 0px solid white;
+}
+
+.panel-container .panel-item:hover {
+    color: rgb(191, 191, 191);
+    border-left: 8px solid rgb(191, 191, 191);
+}
+
+.panel-container .panel-item.focused {
+    color: white;
     /* background-color: rgb(233, 188, 31); */
     /* border: 2px solid rgb(255, 234, 43); */
-    background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48));
+    /* background-image: linear-gradient(to bottom, rgb(255, 255, 0), rgb(233, 188, 31)); */
 }
 
 .panel-container .bottom-function-buttons {
@@ -72,19 +73,44 @@
 }
 
 .panel-container .bottom-function-button {
-    width: 80%;
-    border-radius: 10px;
+    width: 100%;
     padding: .5rem 0;
     margin: .5rem 0;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
     text-align: center;
     cursor: pointer;
-    color: white;
     text-decoration: none;
-    background-image: linear-gradient(0.5turn, rgb(25, 164, 208), rgb(152, 231, 255));
+    transition: color .2s, border-left .1s;
+    /* background-image: linear-gradient(0.5turn, rgb(25, 164, 208), rgb(152, 231, 255)); */
 }
 
+.panel-container .bottom-function-button.upload-and-modify-button {
+    color: rgb(135, 135, 135);
+}
+
+.panel-container .bottom-function-button.upload-and-modify-button.not-focused {
+    border-left: 0px solid white;
+}
+
+.panel-container .bottom-function-button.upload-and-modify-button:hover {
+    color: rgb(191, 191, 191);
+    border-left: 8px solid white;
+}
+
+.panel-container .bottom-function-button.upload-and-modify-button.focused {
+    color: white;
+}
+
+.panel-container .bottom-function-button.logout-button {
+    color: rgb(255, 0, 0, .7);
+    border-left: 0px solid red;
+}
+
+.panel-container .bottom-function-button.logout-button:hover {
+    color: rgb(255, 0, 0);
+    border-left: 8px solid red;
+}
 
 @media (min-width: 1200px) {}
 

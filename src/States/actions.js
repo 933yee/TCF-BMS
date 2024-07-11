@@ -60,3 +60,17 @@ export function login(loginInfo) {
         loginInfo,
     };
 }
+
+export function postOverview(overview) {
+    return {
+        type: '@DATA/POST_OVERVIEW',
+        overview,
+    };
+}
+
+export function postEmployeeOverview(employeeOverview) {
+    return {
+        type: '@DATA/POST_EMPLOYEE_OVERVIEW',
+        employeeOverview,
+    };
+}

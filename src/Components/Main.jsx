@@ -13,6 +13,8 @@ import EmployeeTravel from 'Components/EmployeeTravel.jsx';
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
 import UploadAndModifyData from 'Components/UploadAndModifyData.jsx';
+import CarbonFootprintDataOverview from 'Components/CarbonFootprintDataOverview.jsx';
+
 import DetailedData from 'Components/DetailedData.jsx';
 
 import Toolbar from 'Components/Toolbar.jsx';
@@ -33,12 +35,12 @@ function Main(props) {
             }, 3000);
         }
     }, [props.loading]);
-
+    // return <UploadAndModifyData></UploadAndModifyData>
     return (
         <div className='main-container'>
-            {!props.loading ? (
+            {props.loading ? (
                 <>
-                    {/* {
+                    {
                         props.login ? null :
                             (
                                 <div className="loading-indicator">
@@ -55,31 +57,30 @@ function Main(props) {
                         timeout={1000}
                         classNames="fade"
                         unmountOnExit
-                    > */}
-                    <>
-                        <Panel />
-                        <div className='contents'>
-                            <Navbar />
-                            <Toolbar />
-                            <Routes>
-                                <Route path="/data-overview" exact element={<DataOverview />} />
-                                <Route path="/carbon-footprint-data-overview" exact compelementnent={<>碳足跡數據總覽</>} />
-                                <Route path="/commuting-carbon-footprint-data" exact element={<>通勤碳足跡數據</>} />
-                                <Route path="/transportation-carbon-footprint-data" exact element={<>運輸碳足跡數據</>} />
-                                <Route path="/current-usage-of-transportation-modes" exact element={<>交通工具使用情況</>} />
-                                <Route path="/current-usage-of-public-transportation" exact element={<>交通車使用情況</>} />
-                                <Route path="/accumulation-status" exact element={<>積點狀況</>} />
-                                <Route path="/employee-travel/*" exact element={<EmployeeTravel />} />
-                                <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
-                                <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
-                                <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
-                                <Route path="/official-vehicle" exact element={<>公務車</>} />
-                                <Route path="/upload-and-modify-data" exact element={<UploadAndModifyData />} />
-                                {/* <Route path="/employee-detail" element={<DetailedData />} /> */}
-                            </Routes>
-                        </div>
-                    </>
-                    {/* </CSSTransition> */}
+                    >
+                        <>
+                            <Panel />
+                            <div className='contents'>
+                                <Navbar />
+                                <Routes>
+                                    <Route path="/data-overview" exact element={<DataOverview />} />
+                                    <Route path="/carbon-footprint-data-overview" exact element={<CarbonFootprintDataOverview />} />
+                                    <Route path="/commuting-carbon-footprint-data" exact element={<>通勤碳足跡數據</>} />
+                                    <Route path="/transportation-carbon-footprint-data" exact element={<>運輸碳足跡數據</>} />
+                                    <Route path="/current-usage-of-transportation-modes" exact element={<>交通工具使用情況</>} />
+                                    <Route path="/current-usage-of-public-transportation" exact element={<>交通車使用情況</>} />
+                                    <Route path="/accumulation-status" exact element={<>積點狀況</>} />
+                                    <Route path="/employee-travel/*" exact element={<EmployeeTravel />} />
+                                    <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
+                                    <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
+                                    <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
+                                    <Route path="/official-vehicle" exact element={<>公務車</>} />
+                                    <Route path="/upload-and-modify-data" exact element={<UploadAndModifyData />} />
+                                    {/* <Route path="/employee-detail" element={<DetailedData />} /> */}
+                                </Routes>
+                            </div>
+                        </>
+                    </CSSTransition>
                 </>
             ) : (
                 <Login />

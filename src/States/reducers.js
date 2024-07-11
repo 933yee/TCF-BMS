@@ -78,6 +78,8 @@ export function pageState(state = initPages, action) {
 const initLogin = {
     login: false,
     loading: false,
+    account: '',
+    token: '',
 };
 
 export function loginState(state = initLogin, action) {
@@ -85,12 +87,38 @@ export function loginState(state = initLogin, action) {
         case '@USER/LOGIN_AND_LOADING':
             return {
                 ...state,
-                loading: action.loginInfo,
+                loading: action.loginInfo.loading,
+                login: action.loginInfo.login,
+                account: action.loginInfo.account,
+                token: action.loginInfo.token,
             };
         case '@USER/LOGIN':
             return {
                 ...state,
                 login: action.loginInfo,
+            };
+        default:
+            return state;
+    }
+}
+
+
+const initDataState = {
+    overview: {},
+    employeeOverview: {},
+};
+
+export function dataState(state = initDataState, action) {
+    switch (action.type) {
+        case '@DATA/POST_OVERVIEW':
+            return {
+                ...state,
+                overview: action.overview,
+            };
+        case '@DATA/POST_EMPLOYEE_OVERVIEW':
+            return {
+                ...state,
+                employeeOverview: action.employeeOverview,
             };
         default:
             return state;

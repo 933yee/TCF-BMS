@@ -1,6 +1,7 @@
 import React from 'react';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import './UpstreamTransportation.css';
+import Toolbar from 'Components/Toolbar.jsx';
 
 const dataHeaders = [
     '廠商', '員工姓名', '運輸時間', '交通工具', '貨物公斤', '公里數', '碳足跡-KG', '查看'
@@ -14,11 +15,13 @@ const fakeData = [
 function UpstreamTransportation() {
 
     return (
-        <div className='employee-travel'>
-            <div>
-                <CarbonDataTable headers={dataHeaders} data={fakeData} />
+        <> <Toolbar />
+            <div className='employee-travel'>
+                <div>
+                    <CarbonDataTable headers={dataHeaders} data={fakeData} />
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 export default UpstreamTransportation;

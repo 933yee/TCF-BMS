@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RxCross1 } from "react-icons/rx";
 import { connect, useDispatch } from 'react-redux';
-import chineseToEnglishMap from 'Utilities/ChinsesToEnglish.js';
+import { chineseToEnglishMap } from 'Utilities/Auxiliary.js';
 import { changeCurrentPage, deletePage } from 'States/actions.js';
 
 import './Navbar.css';
