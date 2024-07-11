@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { IoIosClose } from "react-icons/io";
 import Toolbar from 'Components/Toolbar.jsx';
@@ -10,14 +10,42 @@ const dataHeaders = [
 ]
 
 const fakeData = [
-    { '性別': '男', '姓名': '陳美華', '員工編號': 'A001', '部門': '研發部', '職稱': '工程師', '使用運具概況': '火車、公車、走路、機車', '狀態': 'active', '備註': '無' },
-    { '性別': '女', '姓名': '許曉明', '員工編號': 'B002', '部門': '行政部', '職稱': '行政助理', '使用運具概況': '走路、汽車', '狀態': 'inactive', '備註': '無' },
+    { '性別': '男性', '姓名': '陳美華', '員工編號': 'A001', '部門': '研發部', '職稱': '工程師', '使用運具概況': '火車、公車、走路、機車', '狀態': 'active', '備註': '無' },
+    { '性別': '女性', '姓名': '許曉明', '員工編號': 'B002', '部門': '行政部', '職稱': '行政助理', '使用運具概況': '走路、汽車', '狀態': 'inactive', '備註': '無' },
 ]
 
 function UploadAndModifyData() {
+    const [cities, setCities] = useState([]);
+    const [areas, setAreas] = useState([]);
+    const [selectedCity, setSelectedCity] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState(fakeData);
 
+    useEffect(() => {
+        fetch('https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json')
+            .then(response => response.json())
+            .then(data => {
+                const cityOptions = Object.keys(data).map(key => ({
+                    value: key,
+                    label: data[key].CityName
+                }));
+                setCities(cityOptions);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (selectedCity) {
+            fetch('https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json')
+                .then(response => response.json())
+                .then(data => {
+                    const areaOptions = data[selectedCity].AreaList.map((area, index) => ({
+                        value: index,
+                        label: area.AreaName
+                    }));
+                    setAreas(areaOptions);
+                });
+        }
+    }, [selectedCity]);
 
     const [checkedItems, setCheckedItems] = useState({
         upstreamAndDownstreamTransportation: false,
@@ -130,6 +158,8 @@ function UploadAndModifyData() {
                                 <IoIosClose />
                             </div>
                             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+
+
                                 <h2>新增資料</h2>
 
                                 <form onSubmit={handleSubmit}>
@@ -190,11 +220,21 @@ function UploadAndModifyData() {
                                     <div className="form-group">
                                         <label className='title'>居住地址</label>
                                         <div className='user-address'>
-                                            <select id="city" name="city" className='city'>
+                                            <select id="city" name="city" className='city' onChange={e => setSelectedCity(e.target.value)}>
                                                 <option value="" >縣市</option>
+                                                {cities.map(city => (
+                                                    <option key={city.value} value={city.value}>
+                                                        {city.label}
+                                                    </option>
+                                                ))}
                                             </select>
                                             <select id="area" name="area" className='town'>
                                                 <option value="">鄉鎮市區</option>
+                                                {areas.map(area => (
+                                                    <option key={area.value} value={area.value}>
+                                                        {area.label}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
                                         <input name='street' type="text" placeholder="路街名" className='street textfield' />

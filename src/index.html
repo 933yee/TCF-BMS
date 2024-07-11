@@ -56,37 +56,3 @@
 </body>
 
 </html>
-
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
-            type: "get",
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                $.each(data, function (key, value) {
-                    $('#city').append('<option value="' + key + '">' + data[key].CityName + '</option>')
-                })
-            },
-        });
-        $("#city").change(function () {
-            cityvalue = $("#city").val();
-            $("#area").empty();
-            $("#area").css("display", "inline");
-            $.ajax({
-                url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
-                type: "get",
-                dataType: "json",
-                success: function (data) {
-
-                    eachval = data[cityvalue].AreaList;
-
-                    $.each(eachval, function (key, value) {
-                        $('#area').append('<option value="' + key + '">' + eachval[key].AreaName + '</option>')
-                    });
-                },
-            });
-        });
-    });
-</script>

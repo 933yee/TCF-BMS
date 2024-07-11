@@ -51,7 +51,7 @@ function DataOverview(props) {
     }, []);
 
     const handleLinkClick = (page) => {
-        dispatch(changePageState(page));
+        // dispatch(changePageState(page));
     }
 
     const formattedNumber = (number) => {
@@ -67,7 +67,7 @@ function DataOverview(props) {
             <div className='data-overview'>
                 <div className='details'>
                     <div className='detail-blocks'>
-                        <div to="/carbon-footprint-data-overview" className='detail-block' onClick={() => handledivClick('碳足跡數據總覽')}>
+                        <div to="/carbon-footprint-data-overview" className='detail-block' onClick={() => handleLinkClick('碳足跡數據總覽')}>
                             <div className='detail-title'>
                                 碳足跡數據總覽
                             </div>
@@ -113,7 +113,7 @@ function DataOverview(props) {
                             {/* <div className='detail-tmp-img-container detail-carbon-footprint-data-overview'></div> */}
                             {/* </div> */}
                         </div>
-                        <div to="/commuting-carbon-footprint-data" className='detail-block' onClick={() => handledivClick('通勤碳足跡數據')}>
+                        <div to="/commuting-carbon-footprint-data" className='detail-block' onClick={() => handleLinkClick('通勤碳足跡數據')}>
                             <div className='detail-title'>
                                 通勤碳足跡數據
                             </div>
@@ -156,7 +156,7 @@ function DataOverview(props) {
                             {/* </div> */}
                             {/* <div className='detail-tmp-img-container detail-commuting-carbon-footprint-data'></div> */}
                         </div>
-                        <div to="/transportation-carbon-footprint-data" className='detail-block' onClick={() => handledivClick('運輸碳足跡數據')}>
+                        <div to="/transportation-carbon-footprint-data" className='detail-block' onClick={() => handleLinkClick('運輸碳足跡數據')}>
                             <div className='detail-title'>
                                 運輸碳足跡數據
                             </div>
@@ -164,7 +164,7 @@ function DataOverview(props) {
                             {/* </div> */}
                             <div className='detail-tmp-img-container detail-transportation-carbon-footprint-data'></div>
                         </div>
-                        <div to="/current-usage-of-transportation-modes" className='detail-block' onClick={() => handledivClick('交通工具使用現況')}>
+                        <div to="/current-usage-of-transportation-modes" className='detail-block' onClick={() => handleLinkClick('交通工具使用現況')}>
                             <div className='detail-title'>
                                 交通工具使用現況
                             </div>
@@ -230,7 +230,7 @@ function DataOverview(props) {
                             {/* <div className='detail-tmp-img-container detail-current-usage-of-transportation-modes'></div> */}
 
                         </div>
-                        <div to="/current-usage-of-public-transportation" className='detail-block' onClick={() => handledivClick('交通車使用現況')}>
+                        <div to="/current-usage-of-public-transportation" className='detail-block' onClick={() => handleLinkClick('交通車使用現況')}>
                             <div className='detail-title'>
                                 交通車使用現況
                             </div>
@@ -239,7 +239,7 @@ function DataOverview(props) {
                             <div className='detail-tmp-img-container detail-current-usage-of-public-transportation'></div>
 
                         </div>
-                        <div to="/accumulation-status" className='detail-block' onClick={() => handledivClick('積點狀況')}>
+                        <div to="/accumulation-status" className='detail-block' onClick={() => handleLinkClick('積點狀況')}>
                             <div className='detail-title'>
                                 積點狀況
                             </div>
