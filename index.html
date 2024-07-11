@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Righteous&display=swap" rel="stylesheet"><link rel="icon" href="./images/favicon.png" type="image/png"><title>Gintan 管理系統</title><script>// Single Page Apps for GitHub Pages
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Righteous&display=swap" rel="stylesheet"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><link rel="icon" href="./images/GINTAN_logo.png" type="image/png"><title>Gintan 管理系統</title><script>// Single Page Apps for GitHub Pages
         // MIT License
         // https://github.com/rafgraph/spa-github-pages
         // This script checks to see if a redirect is present in the query string,
@@ -17,4 +17,34 @@
                     l.pathname.slice(0, -1) + decoded + l.hash
                 );
             }
-        }(window.location))</script><script defer="defer" src="./index.bundle.js"></script></head><body><div id="root"></div></body></html>
+        }(window.location))</script><script defer="defer" src="./index.bundle.js"></script></head><body><div id="root"></div></body></html><script>$(document).ready(function () {
+        $.ajax({
+            url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $.each(data, function (key, value) {
+                    $('#city').append('<option value="' + key + '">' + data[key].CityName + '</option>')
+                })
+            },
+        });
+        $("#city").change(function () {
+            cityvalue = $("#city").val();
+            $("#area").empty();
+            $("#area").css("display", "inline");
+            $.ajax({
+                url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+
+                    eachval = data[cityvalue].AreaList;
+
+                    $.each(eachval, function (key, value) {
+                        $('#area').append('<option value="' + key + '">' + eachval[key].AreaName + '</option>')
+                    });
+                },
+            });
+        });
+    });</script>
