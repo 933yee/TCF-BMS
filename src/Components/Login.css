@@ -9,7 +9,7 @@
 .login-container .login-panel {
     background-color: white;
     width: 30rem;
-    height: 28rem;
+    height: 33rem;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -30,10 +30,10 @@
 }
 
 .login-container .logo {
-    height: 7rem;
-    margin-bottom: 1rem;
+    height: 8rem;
+    margin-bottom: 2rem;
     object-fit: contain;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .login-container .login-account {
@@ -68,13 +68,14 @@
     border-radius: 0 0 .5rem .5rem;
     font-weight: 700;
     transition: background-color .2s;
-    background-color: rgb(12, 129, 143);
+    background-color: rgb(46, 154, 0);
     color: white;
+    font-size: 1.3rem;
 }
 
 .login-container .login-submit:hover {
     cursor: pointer;
-    background-color: rgb(12, 129, 143, .7);
+    background-color: rgb(46, 154, 0, .8);
 }
 
 

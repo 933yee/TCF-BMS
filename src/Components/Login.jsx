@@ -70,7 +70,7 @@ function Login() {
     return (
         <div className='login-container'>
             <div className='login-panel'>
-                <img className='logo' src='./images/ECHO_TCF.png' alt='ECHO_TCF'></img>
+                <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='login-form' onSubmit={handleSubmit}>
                     <input className='login-account' type="text" name="account" placeholder="帳號" />
                     <input className='login-password' type="password" name="password" placeholder="密碼" />

@@ -6,13 +6,17 @@ import Toolbar from 'Components/Toolbar.jsx';
 import './UploadAndModifyData.css';
 
 const dataHeaders = [
-    '性別', '姓名', '員工編號', '部門', '職稱', '使用運具概況', '狀態', '備註'
+    '性別', '姓名', '員工編號', '部門', '職稱', '使用運具概況', '狀態', '查看'
 ]
 
 const fakeData = [
-    { '性別': '男性', '姓名': '陳美華', '員工編號': 'A001', '部門': '研發部', '職稱': '工程師', '使用運具概況': '火車、公車、走路、機車', '狀態': 'active', '備註': '無' },
-    { '性別': '女性', '姓名': '許曉明', '員工編號': 'B002', '部門': '行政部', '職稱': '行政助理', '使用運具概況': '走路、汽車', '狀態': 'inactive', '備註': '無' },
-]
+    { '性別': '男性', '姓名': '陳美華', '員工編號': 'A001', '部門': '研發部', '職稱': '工程師', '使用運具概況': '員工差旅', '狀態': 'active', '查看': '🔍' },
+    { '性別': '女性', '姓名': '許曉明', '員工編號': 'B002', '部門': '行政部', '職稱': '行政助理', '使用運具概況': '員工通勤', '狀態': 'inactive', '查看': '🔍' },
+    { '性別': '男性', '姓名': '王大明', '員工編號': 'C003', '部門': '市場部', '職稱': '市場經理', '使用運具概況': '公司車', '狀態': 'active', '查看': '🔍' },
+    { '性別': '女性', '姓名': '林小菁', '員工編號': 'D004', '部門': '客服部', '職稱': '客服專員', '使用運具概況': '員工通勤', '狀態': 'active', '查看': '🔍' },
+    { '性別': '男性', '姓名': '張偉文', '員工編號': 'E005', '部門': '財務部', '職稱': '會計師', '使用運具概況': '公司車', '狀態': 'inactive', '查看': '🔍' },
+];
+
 
 function UploadAndModifyData() {
     const [cities, setCities] = useState([]);
@@ -69,13 +73,19 @@ function UploadAndModifyData() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const transportationState = [];
+        if (checkedItems['upstreamAndDownstreamTransportation']) transportationState.push('上下游運輸');
+        if (checkedItems['employeeCommuting']) transportationState.push('員工通勤');
+        if (checkedItems['employeeTravel']) transportationState.push('員工差旅');
+        if (checkedItems['officialVehicle']) transportationState.push('公務車駕駛');
+
         const newData = {
             "性別": event.target.elements.gender.value,
             "姓名": event.target.elements.name.value,
             "員工編號": event.target.elements.employeeId.value,
             "部門": event.target.elements.dept.value,
             "職稱": event.target.elements.jobTitle.value,
-            "使用運具概況": "未知",
+            "使用運具概況": transportationState.join('、'),
             "狀態": "inactive",
             "備註": "無"
         };
