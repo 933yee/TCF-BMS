@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import {
     BrowserRouter,
     Routes,
+    Switch
 } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import Main from 'Components/Main.jsx';
-import { searchParams, pageState, loginState, dataState } from 'States/reducers.js';
+import { searchParams, pageState, loginState, localDatabaseState } from 'States/reducers.js';
 
 // import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
@@ -15,7 +16,7 @@ import './index.css';
 
 const store = createStore(
     combineReducers({
-        searchParams, pageState, loginState, dataState
+        searchParams, pageState, loginState, localDatabaseState
     }),
 );
 

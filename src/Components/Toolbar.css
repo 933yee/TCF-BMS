@@ -2,30 +2,36 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 1rem 0 1rem 0;
     flex-wrap: wrap;
+    /* background-color: rgb(215, 215, 215); */
+    align-items: center;
+    margin-top: .5rem;
 }
 
 
 .toolbar .feature-blocks {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
+    align-items: center;
+    padding: .5rem;
+
 }
 
 .toolbar .main-features {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .toolbar .feature-container {
     display: flex;
     justify-content: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 1rem;
+    align-items: center;
+    padding: 0 2px;
+
 }
 
 .toolbar .feature-title {
@@ -39,46 +45,47 @@
 
 .toolbar .department-selector select {
     /* background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48)); */
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(255, 255, 255); */
+    /* background-color: rgb(49, 49, 49); */
+    /* font-weight: bold; */
+    background-color: rgb(48, 48, 48);
     color: white;
+    /* border: 2px solid rgb(48, 48, 48); */
     padding: 4px 20px;
-    border: none;
-    font-size: 20px;
-    -webkit-appearance: button;
-    appearance: button;
-    outline: none;
-    border-radius: 100px;
+    /* border-radius: 100px; */
+    font-size: 1rem;
+    font-weight: bold;
+
 }
 
 .toolbar .department-selector select option {
-    padding: 30px;
     background: rgb(49, 49, 49);
     color: white;
-    font-size: 20px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 
 .toolbar .time-selector {
     /* background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48)); */
+    height: 100%;
+    width: 100%;
     background-color: rgb(49, 49, 49);
-    color: white;
+    font-size: 1rem;
     border: none;
-    font-size: 20px;
-    border-radius: 100px;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
+    /* color: rgb(48, 48, 48); */
+    color: white;
+    /* border: 2px solid rgb(48, 48, 48); */
+    /* border-radius: 100px; */
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .toolbar .time-selector-text {
     display: flex;
-    padding: 0px 60px 0px 25px;
-
+    flex: 1;
+    padding: 3px 60px 3px 40px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1px;
 }
 
 .toolbar .arrow {
@@ -90,7 +97,6 @@
     transition: transform 0.2s;
 }
 
-
 .toolbar .arrow.toggle {
     transform: rotate(90deg);
 }
@@ -100,7 +106,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: .1rem;
+    margin-top: .5rem;
     background-color: rgb(48, 48, 48);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -121,7 +127,6 @@
     display: block;
     margin-bottom: 5px;
     margin: 0 10px;
-    font-size: 1rem;
     color: white;
     white-space: nowrap;
 }
@@ -129,23 +134,24 @@
 .toolbar .start-time-selector,
 .toolbar .end-time-selector {
     width: 100%;
-    padding: 8px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 .toolbar .sub-features {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .toolbar .sub-feature-container {
     display: flex;
     justify-content: center;
-    padding-right: 1rem;
-    padding-top: 1rem;
+    padding-right: .5rem;
 }
 
 .toolbar .map-show,
@@ -158,12 +164,13 @@
     align-items: center;
     white-space: nowrap;
     flex-wrap: wrap;
-    padding: 0px 20px;
-    font-size: 20px;
-    border-radius: 100px;
+    padding: 2px 20px;
+    /* border-radius: 100px; */
+    /* font-weight: bold; */
     color: white;
     cursor: pointer;
     transition: opacity 0.2s;
+    font-size: 1rem;
 }
 
 .toolbar .map-show:hover,
@@ -203,4 +210,11 @@
 .toolbar .search-keyword-input {
     padding: 6px 0px;
     margin-right: .5rem;
+}
+
+.toolbar .vehicle-type-filter {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    padding-bottom: .5rem;
 }

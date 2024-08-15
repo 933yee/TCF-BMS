@@ -3,7 +3,9 @@ import {
     useLocation,
     Route,
     Routes,
+    Switch
 } from 'react-router-dom';
+
 import { CSSTransition } from 'react-transition-group';
 import DataOverview from 'Components/DataOverview.jsx';
 import Panel from 'Components/Panel.jsx';
@@ -12,22 +14,30 @@ import Login from 'Components/Login.jsx';
 import EmployeeTravel from 'Components/EmployeeTravel.jsx';
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
-import UploadAndModifyData from 'Components/UploadAndModifyData.jsx';
+import EmployeeData from 'Components/EmployeeData.jsx';
+import VehicleData from 'Components/VehicleData.jsx';
 import CarbonFootprintDataOverview from 'Components/CarbonFootprintDataOverview.jsx';
+import MobileSourceEmissions from 'Components/MobileSourceEmissions.jsx';
 
 import DetailedData from 'Components/DetailedData.jsx';
 
 import Toolbar from 'Components/Toolbar.jsx';
 
-import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { login } from 'States/actions.js';
+import { connect, useDispatch } from 'react-redux';
+import { login, initializeDatabase } from 'States/actions.js';
 
 import './Animations.css';
 import './Main.css';
 
 function Main(props) {
+    const [renderKey, setRenderKey] = useState(0);
     const dispatch = useDispatch();
+    const localData = props.data;
+
+    useEffect(() => {
+        setRenderKey(prevKey => prevKey + 1);
+    }, [props.currentPage]);
+
     useEffect(() => {
         if (props.loading) {
             setTimeout(() => {
@@ -35,9 +45,10 @@ function Main(props) {
             }, 3000);
         }
     }, [props.loading]);
-    // return <UploadAndModifyData></UploadAndModifyData>
+
+    // return <EmployeeData></EmployeeData>
     return (
-        <div className='main-container'>
+        <div className='main-container' key={renderKey}>
             {props.loading ? (
                 <>
                     {
@@ -74,8 +85,29 @@ function Main(props) {
                                     <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
-                                    <Route path="/official-vehicle" exact element={<>公務車</>} />
-                                    <Route path="/upload-and-modify-data" exact element={<UploadAndModifyData />} />
+                                    <Route
+                                        path="/mobile-source-emissions"
+                                        exact
+                                        element={
+                                            <MobileSourceEmissions />
+                                        }
+                                    />
+                                    {localData['mobileSourceEmissions'].data.map((row, index) => (
+                                        <Route key={index} path={`/mobile-source-emissions/${index + 1}`} element={
+                                            <MobileSourceEmissions isDetailed={true} detailIndex={index} />
+                                        } />
+                                    ))}
+
+                                    <Route path="/vehicle-data" exact
+                                        element={
+                                            <VehicleData />
+                                        }
+                                    />
+                                    <Route path="/employee-data" exact element={
+                                        <EmployeeData />
+                                    }
+                                    />
+                                    <Route path="/*" element="404 not found" />
                                     {/* <Route path="/employee-detail" element={<DetailedData />} /> */}
                                 </Routes>
                             </div>
@@ -91,6 +123,8 @@ function Main(props) {
 
 export default connect((state) => {
     return {
-        ...state.loginState
+        ...state.loginState,
+        ...state.pageState,
+        ...state.localDatabaseState
     }
 })(Main);

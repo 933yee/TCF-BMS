@@ -21,7 +21,7 @@ function Login() {
                 account: localStorage.getItem('account'),
                 token: token
             }));
-            history('/data-overview');
+            // history('/data-overview');
         }
     }, []);
 

@@ -2,28 +2,61 @@ import React, { useState, useEffect } from 'react';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { IoIosClose } from "react-icons/io";
 import Toolbar from 'Components/Toolbar.jsx';
+import './AddDataForm.css';
+import { connect, useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { addEmployeeData, deleteEmployeeData } from 'States/actions.js';
 
-import './UploadAndModifyData.css';
+function EmployeeData(props) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-const dataHeaders = [
-    '性別', '姓名', '員工編號', '部門', '職稱', '使用運具概況', '狀態', '查看'
-]
-
-const fakeData = [
-    { '性別': '男性', '姓名': '陳美華', '員工編號': 'A001', '部門': '研發部', '職稱': '工程師', '使用運具概況': '員工差旅', '狀態': 'active', '查看': '🔍' },
-    { '性別': '女性', '姓名': '許曉明', '員工編號': 'B002', '部門': '行政部', '職稱': '行政助理', '使用運具概況': '員工通勤', '狀態': 'inactive', '查看': '🔍' },
-    { '性別': '男性', '姓名': '王大明', '員工編號': 'C003', '部門': '市場部', '職稱': '市場經理', '使用運具概況': '公司車', '狀態': 'active', '查看': '🔍' },
-    { '性別': '女性', '姓名': '林小菁', '員工編號': 'D004', '部門': '客服部', '職稱': '客服專員', '使用運具概況': '員工通勤', '狀態': 'active', '查看': '🔍' },
-    { '性別': '男性', '姓名': '張偉文', '員工編號': 'E005', '部門': '財務部', '職稱': '會計師', '使用運具概況': '公司車', '狀態': 'inactive', '查看': '🔍' },
-];
-
-
-function UploadAndModifyData() {
     const [cities, setCities] = useState([]);
     const [areas, setAreas] = useState([]);
     const [selectedCity, setSelectedCity] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [data, setData] = useState(fakeData);
+    const [rerenderKey, setRerenderKey] = useState(0);
+    // const [data, setData] = useState(fakeData);
+    const dataHeaders = [
+        '姓名', '員工編號', '部門', '職稱',
+    ];
+    const data = props.data.employeeData.data;
+
+    // selected rows
+    const [selectedRows, setSelectedRows] = useState(data.map(() => false));
+    const handleSelectedRowsChange = (index) => {
+        const newSelectedRows = selectedRows;
+        newSelectedRows[index] = !newSelectedRows[index];
+        setSelectedRows(newSelectedRows);
+        setRerenderKey(rerenderKey + 1);
+    }
+
+    // delete button clicked
+    const onClickDeleteData = () => {
+        dispatch(deleteEmployeeData(selectedRows));
+        setRerenderKey(rerenderKey + 1);
+        const initSelectedRows = [];
+        props.data.employeeData.data.map((row, index) => {
+            initSelectedRows.push(false);
+        });
+        setSelectedRows(initSelectedRows);
+    }
+
+    const handleLinkClick = (index) => {
+        // if (canCheckDetail === false) return;
+        // const newPath = `${location.pathname}${index}`;
+        // navigate(newPath);
+    };
+
+    const handleStopPropagation = (event) => {
+        event.stopPropagation();
+    };
+
+    const handleTextFieldChange = (event) => {
+        console.log(event.target.value);
+    }
+
 
     useEffect(() => {
         fetch('https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json')
@@ -73,23 +106,22 @@ function UploadAndModifyData() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const transportationState = [];
-        if (checkedItems['upstreamAndDownstreamTransportation']) transportationState.push('上下游運輸');
-        if (checkedItems['employeeCommuting']) transportationState.push('員工通勤');
-        if (checkedItems['employeeTravel']) transportationState.push('員工差旅');
-        if (checkedItems['officialVehicle']) transportationState.push('公務車駕駛');
+        // const transportationState = [];
+        // if (checkedItems['upstreamAndDownstreamTransportation']) transportationState.push('上下游運輸');
+        // if (checkedItems['employeeCommuting']) transportationState.push('員工通勤');
+        // if (checkedItems['employeeTravel']) transportationState.push('員工差旅');
+        // if (checkedItems['officialVehicle']) transportationState.push('移動源排放駕駛');
 
-        const newData = {
-            "性別": event.target.elements.gender.value,
-            "姓名": event.target.elements.name.value,
-            "員工編號": event.target.elements.employeeId.value,
-            "部門": event.target.elements.dept.value,
-            "職稱": event.target.elements.jobTitle.value,
-            "使用運具概況": transportationState.join('、'),
-            "狀態": "inactive",
-            "備註": "無"
-        };
-        setData([...data, newData]);
+        // TODO: add new data to the database
+        const newData = [
+            event.target.elements.name.value,
+            event.target.elements.employeeId.value,
+            event.target.elements.dept.value,
+            event.target.elements.jobTitle.value,
+        ]
+        // setData([...data, newData]);
+        // updateEmployeeData(newData);
+        dispatch(addEmployeeData(newData));
 
         setShowModal(false);
     }
@@ -159,8 +191,8 @@ function UploadAndModifyData() {
 
 
     return (
-        <> <Toolbar onClickAddData={onClickAddData} />
-            <div className='employee-travel'>
+        <> <Toolbar onClickAddData={onClickAddData} onClickDeleteData={onClickDeleteData} />
+            <div className='employee-data add-data-form'>
                 {showModal && (
                     <div className="modal-overlay">
                         <div className="modal-content-container">
@@ -311,7 +343,7 @@ function UploadAndModifyData() {
                                         </div>
                                     </div>
 
-                                    <div className="form-group">
+                                    {/* <div className="form-group">
                                         <label className='title'>使用交通運具情形</label>
                                         <div className='transportation'>
                                             <label>
@@ -347,11 +379,11 @@ function UploadAndModifyData() {
                                                     checked={checkedItems['officialVehicle']}
                                                     onChange={handleCheckboxChange}
                                                 />
-                                                公務車駕駛
+                                                移動源排放駕駛
                                             </label>
                                             {checkedItems['officialVehicle'] && getTransportationMethods()}
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className='submit-button-container'>
                                         <button
                                             type="submit"
@@ -366,11 +398,49 @@ function UploadAndModifyData() {
                     </div >
                 )
                 }
-                <div>
-                    <CarbonDataTable headers={dataHeaders} data={data} />
+                <div className='data-table'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                {dataHeaders.map((header, index) => (
+                                    <th key={index}>{header}</th>
+                                ))}
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {data.map((row, index) => (
+                                <tr key={index} onClick={() => handleLinkClick(`/${index}`)}>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            onClick={handleStopPropagation}
+                                            onChange={() => handleSelectedRowsChange(index)}
+                                            checked={selectedRows[index]}
+                                        ></input>
+                                    </td>
+                                    {row.map((item, itemIndex) => {
+                                        return (
+                                            <td key={itemIndex}>{item}</td>
+                                        )
+                                    })}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
+                {/* <div>
+                    <CarbonDataTable headers={dataHeaders} data={data} isDetail={true} />
+                </div> */}
             </div >
         </>
     );
 }
-export default UploadAndModifyData;
+export default connect((state) => {
+    return {
+        ...state.loginState,
+        ...state.dataState,
+        ...state.localDatabaseState
+    }
+})(EmployeeData);

@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-// const baseApiUrl = 'http://api.wavjaby.nckuctf.org:80';
-const baseApiUrl = 'https://api.carbon-walker.com:80';
-// https://api.carbon-walker.com:80
+const baseApiUrl = "https://api.carbon-walker.com";
 const api = axios.create({
     baseURL: baseApiUrl,
     timeout: 10000,

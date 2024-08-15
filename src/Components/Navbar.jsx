@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { RxCross1 } from "react-icons/rx";
 import { connect, useDispatch } from 'react-redux';
-import { chineseToEnglishMap } from 'Utilities/Auxiliary.js';
+import { englishToChineseMap } from 'Utilities/Auxiliary.js';
 import { changeCurrentPage, deletePage } from 'States/actions.js';
+import { IoIosArrowForward } from "react-icons/io";
 
 import './Navbar.css';
 
 function Navbar(props) {
+    const [pathname, setPathname] = useState(window.location.pathname);
+    const paths = pathname.split('/');
+    useEffect(() => {
+        setPathname(window.location.pathname);
+    }, []);
 
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +26,32 @@ function Navbar(props) {
 
     return (
         <div className='navbar-container'>
-            {props.pages.map((page, index) => (
+            <div className='path'>
+                {paths[2] !== undefined ? (
+                    <Link to={`/${paths[1]}`} className='path-text' onClick={() => handleLinkClick(paths[1])}>
+                        {englishToChineseMap[paths[1]]}
+                    </Link>
+                ) : (
+                    <>
+                        {englishToChineseMap[paths[1]]}
+                    </>
+                )
+                }
+                {paths[2] !== undefined ? (
+                    <>
+                        <div className="split">
+                            <IoIosArrowForward />
+                        </div >
+                        {/* {props.data.mobileSourceEmissions.data[paths[2] - 1][0] + " "} */}
+                        {props.data.mobileSourceEmissions.data[paths[2] - 1][2] + " "}
+                        {props.data.mobileSourceEmissions.data[paths[2] - 1][3]}
+                    </>
+                ) : ''}
+            </div>
+            <div className='user-info'>
+                {props.account}
+            </div>
+            {/* {props.pages.map((page, index) => (
                 <div key={index} className={`page ${props.currentPage === page ? 'highlight' : ''}`} >
                     <Link to={`/${chineseToEnglishMap[page]}`} className='page-text' onClick={() => handleLinkClick(page)}>
                         {page}
@@ -34,7 +64,7 @@ function Navbar(props) {
                         )
                     }
                 </div>
-            ))}
+            ))} */}
             {/* <img className='logo' src='./images/ECHO_TCF.png' alt='ECHO_TCF'></img>
             <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
                 <div className={`menu-toggle-hamburger-top ${isOpen ? 'toggle' : ''}`}></div>
@@ -56,6 +86,8 @@ function Navbar(props) {
 
 export default connect((state) => {
     return {
-        ...state.pageState
+        ...state.loginState,
+        ...state.pageState,
+        ...state.localDatabaseState
     }
 })(Navbar);

@@ -61,16 +61,78 @@ export function login(loginInfo) {
     };
 }
 
-export function postOverview(overview) {
+// export function postOverview(overview) {
+//     return {
+//         type: '@DATA/POST_OVERVIEW',
+//         overview,
+//     };
+// }
+
+// export function postEmployeeOverview(employeeOverview) {
+//     return {
+//         type: '@DATA/POST_EMPLOYEE_OVERVIEW',
+//         employeeOverview,
+//     };
+// }
+
+export const initializeDatabase = () => {
     return {
-        type: '@DATA/POST_OVERVIEW',
-        overview,
+        type: '@POST/INIT_LOCAL_DATABASE',
+    };
+};
+
+export function initDataOverview(dataOverview) {
+    return {
+        type: '@POST/INIT_DATA_OVERVIEW',
+        dataOverview,
     };
 }
 
-export function postEmployeeOverview(employeeOverview) {
+export function initEmployeeCommutingData(employeeCommutingData) {
     return {
-        type: '@DATA/POST_EMPLOYEE_OVERVIEW',
-        employeeOverview,
+        type: '@POST/INIT_EMPLOYEE_COMMUTING_DATA',
+        employeeCommutingData,
     };
 }
+
+export function updateEmployeeCommutingData(employeeCommutingData) {
+    return {
+        type: '@POST/EMPLOYEE_COMMUTING_DATA',
+        employeeCommutingData,
+    };
+}
+
+export const addVehicleData = (vehicleData) => {
+    return {
+        type: '@POST/ADD_VEHICLE_DATA',
+        vehicleData
+    };
+};
+
+export const deleteVehicleData = (selectedRows) => {
+    return {
+        type: '@POST/DELETE_VEHICLE_DATA',
+        selectedRows
+    };
+};
+
+export const updateVehicleBindData = (vehicleBindEmployeeData) => {
+    return {
+        type: '@POST/UPDATE_VEHICLE_BIND_EMPLOYEE',
+        vehicleBindEmployeeData
+    };
+}
+
+export const addEmployeeData = (employeeData) => {
+    return {
+        type: '@POST/ADD_EMPLOYEE_DATA',
+        employeeData
+    };
+};
+
+export const deleteEmployeeData = (selectedRows) => {
+    return {
+        type: '@POST/DELETE_EMPLOYEE_DATA',
+        selectedRows
+    };
+};

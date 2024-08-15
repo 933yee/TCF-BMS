@@ -5,15 +5,18 @@ import { GoTriangleRight } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 
 function Toolbar(props) {
-    const onClickAddData = props.onClickAddData;
     const [timeSelectorToggle, setTimeSelectorToggle] = useState(false);
     const [department, setDepartment] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
 
+    const departmentList = props.toolbar.departmentList;
+    const showVehicleTypeFilter = props.showVehicleTypeFilter;
+    const vehicleTypeFilters = props.vehicleTypeFilters;
 
     const handleDepartmentChange = (event) => {
         setDepartment(event.target.value);
+        if (props.handleDepartmentChange) props.handleDepartmentChange(event.target.value);
     };
 
     const handleTimeSelectorToggle = () => {
@@ -42,6 +45,12 @@ function Toolbar(props) {
         };
     }, []);
 
+    // vehicle type filter
+    const handleVehicleTypeFilters = (e) => {
+        const { name, checked } = e.target;
+        props.handleVehicleTypeFilters(name, checked);
+    };
+
     return (
         <div className='toolbar'>
             <div className='features'>
@@ -52,9 +61,9 @@ function Toolbar(props) {
                             <div className='department-selector'>
                                 <select value={department} onChange={handleDepartmentChange}>
                                     <option value={''}>請選擇部門 </option>
-                                    <option>Department 1</option>
-                                    <option >Department 2</option>
-                                    <option>Department 3</option>
+                                    {departmentList.map((department, index) => (
+                                        <option key={index} value={department}>{department}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -89,7 +98,6 @@ function Toolbar(props) {
                             </div>
                         </div>
                     </div>
-
                     <div className='sub-features'>
                         <div className='sub-feature-container'>
                             <div className='map-show'>地圖顯示</div>
@@ -103,12 +111,16 @@ function Toolbar(props) {
                         <div className='sub-feature-container'>
                             <div className='add-new-data'
                                 onClick={() => {
-                                    if (onClickAddData) onClickAddData();
+                                    if (props.onClickAddData) props.onClickAddData();
                                 }}
                             >新增資料</div>
                         </div>
                         <div className='sub-feature-container'>
-                            <div className='delete-data'>刪除</div>
+                            <div className='delete-data'
+                                onClick={() => {
+                                    if (props.onClickDeleteData) props.onClickDeleteData();
+                                }}
+                            >刪除</div>
                         </div>
                         <div className='sub-feature-container'>
                             <div className='search-keyword'>
@@ -122,9 +134,42 @@ function Toolbar(props) {
                         </div>
                     </div>
                 </div>
+                {showVehicleTypeFilter && <div className='vehicle-type-filter'>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="貨物長途運輸"
+                            onChange={handleVehicleTypeFilters}
+                            checked={vehicleTypeFilters["貨物長途運輸"]}
+                        />
+                        貨物長途運輸
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="人員運輸"
+                            onChange={handleVehicleTypeFilters}
+                            checked={vehicleTypeFilters["人員運輸"]}
+                        />
+                        人員運輸
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="貨物廠區運輸"
+                            onChange={handleVehicleTypeFilters}
+                            checked={vehicleTypeFilters["貨物廠區運輸"]}
+                        />
+                        貨物廠區運輸
+                    </label>
+                </div>}
             </div>
         </div>
     );
 };
 
-export default Toolbar;
+export default connect((state) => {
+    return {
+        ...state.localDatabaseState
+    }
+})(Toolbar);

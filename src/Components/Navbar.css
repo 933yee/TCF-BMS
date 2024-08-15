@@ -1,10 +1,47 @@
 .navbar-container {
     width: 100%;
-    height: 2.5rem;
+    height: 3rem;
     min-height: 2.5rem;
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(49, 49, 49); */
     display: flex;
-    align-items: end;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(49, 49, 49);
+
+}
+
+.navbar-container .path {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(210, 210, 210)
+}
+
+.navbar-container a {
+    text-decoration: none;
+    color: rgb(61, 147, 218);
+    opacity: 1;
+    transition: 0.1s
+}
+
+.navbar-container a:hover {
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.navbar-container .split {
+    margin: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .9rem;
+}
+
+.navbar-container .user-info {
+    color: white
 }
 
 .navbar-container .page {

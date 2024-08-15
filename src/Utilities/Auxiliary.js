@@ -10,8 +10,9 @@ export const chineseToEnglishMap = {
     '上游運輸': 'upstream-transportation',
     '下游運輸': 'downstream-transportation',
     '員工通勤': 'employee-commuting',
-    '公務車': 'official-vehicle',
-    '上傳與修改資料': 'upload-and-modify-data'
+    '移動源排放': 'mobile-source-emissions',
+    '員工資料': 'employee-data',
+    '員工資料': 'vehicle-data'
 };
 
 export const englishToChineseMap = {
@@ -26,8 +27,9 @@ export const englishToChineseMap = {
     'upstream-transportation': '上游運輸',
     'downstream-transportation': '下游運輸',
     'employee-commuting': '員工通勤',
-    'official-vehicle': '公務車',
-    'upload-and-modify-data': '上傳與修改資料'
+    'mobile-source-emissions': '移動源排放',
+    'employee-data': '員工資料',
+    'vehicle-data': '車輛資料'
 };
 
 // export const departmentStructure = (data) => {

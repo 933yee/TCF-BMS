@@ -1,4 +1,4 @@
-.employee-travel .modal-overlay {
+.add-data-form .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,11 +11,11 @@
     z-index: 1000;
 }
 
-.employee-travel .modal-content-container {
+.add-data-form .modal-content-container {
     position: relative;
 }
 
-.employee-travel .modal-content {
+.add-data-form .modal-content {
     animation: slideDown 0.5s ease-in-out;
     background-color: white;
     padding: 20px 50px;
@@ -39,16 +39,16 @@
     }
 }
 
-.employee-travel .hidden {
+.add-data-form .hidden {
     display: none;
 }
 
-.employee-travel label {
+.add-data-form label {
     display: block;
     margin-bottom: .1rem;
 }
 
-.employee-travel .modal-overlay .close-button {
+.add-data-form .modal-overlay .close-button {
     font-size: 3rem;
     position: absolute;
     top: 0;
@@ -59,23 +59,23 @@
     transition: color 0.2s;
 }
 
-.employee-travel .modal-overlay .close-button:hover {
+.add-data-form .modal-overlay .close-button:hover {
     color: rgb(255, 0, 0, .5);
 }
 
-.employee-travel .modal-overlay .modal-content .title {
+.add-data-form .modal-overlay .modal-content .title {
     width: 100%;
     color: rgb(134, 134, 134);
     font-weight: 700;
     text-align: start;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group {
+.add-data-form .modal-overlay .modal-content .form-group {
     margin-bottom: 15px;
     margin-bottom: 30px;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group select {
+.add-data-form .modal-overlay .modal-content .form-group select {
     width: 90%;
     padding: 10px;
     border: 1px solid black;
@@ -83,7 +83,7 @@
     font-size: 1rem;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group .textfield {
+.add-data-form .modal-overlay .modal-content .form-group .textfield {
     padding: 10px 0px;
     border: 1px solid black;
     font-size: 1rem;
@@ -91,41 +91,41 @@
     padding-left: 1rem;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group .user-address {
+.add-data-form .modal-overlay .modal-content .form-group .user-address {
     display: flex;
     width: 90%;
     justify-content: space-between;
     padding-bottom: .2rem;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group .city,
-.employee-travel .modal-overlay .modal-content .form-group .town {
+.add-data-form .modal-overlay .modal-content .form-group .city,
+.add-data-form .modal-overlay .modal-content .form-group .town {
     width: 49%
 }
 
-.employee-travel .modal-overlay .modal-content .transportation-method {
+.add-data-form .modal-overlay .modal-content .transportation-method {
     background-color: rgb(236, 236, 236);
     padding: 10px;
 }
 
-.employee-travel .modal-overlay .modal-content .form-group .work-day,
-.employee-travel .modal-overlay .modal-content .form-group .common-transportation,
-.employee-travel .modal-overlay .modal-content .form-group .bus,
-.employee-travel .modal-overlay .modal-content .form-group .bus-and-truck,
-.employee-travel .modal-overlay .modal-content .form-group .normal-temperature-truck,
-.employee-travel .modal-overlay .modal-content .form-group .low-temperature-truck {
+.add-data-form .modal-overlay .modal-content .form-group .work-day,
+.add-data-form .modal-overlay .modal-content .form-group .common-transportation,
+.add-data-form .modal-overlay .modal-content .form-group .bus,
+.add-data-form .modal-overlay .modal-content .form-group .bus-and-truck,
+.add-data-form .modal-overlay .modal-content .form-group .normal-temperature-truck,
+.add-data-form .modal-overlay .modal-content .form-group .low-temperature-truck {
     display: flex;
     flex-wrap: wrap;
 }
 
-.employee-travel .modal-overlay .modal-content .submit-button-container {
+.add-data-form .modal-overlay .modal-content .submit-button-container {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.employee-travel .modal-overlay .modal-content .submit-button {
+.add-data-form .modal-overlay .modal-content .submit-button {
     font-size: 1.2rem;
     width: 10rem;
     background-color: rgb(73, 183, 26);
@@ -137,6 +137,6 @@
     transition: background-color 0.2s;
 }
 
-.employee-travel .modal-overlay .modal-content .submit-button:hover {
+.add-data-form .modal-overlay .modal-content .submit-button:hover {
     background-color: rgb(73, 183, 26, .8);
 }

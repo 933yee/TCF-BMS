@@ -6,10 +6,9 @@ import {
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { GetDashBoardOverview } from 'Utilities/ApiServices.js';
-import { postOverview } from 'States/actions.js';
-import Toolbar from 'Components/Toolbar.jsx';
 
 import './DataOverview.css';
+import { initDataOverview } from 'States/actions.js';
 
 function DataOverview(props) {
     const [dashboardData, setDashboardData] = useState({});
@@ -35,14 +34,14 @@ function DataOverview(props) {
 
     // 取得 DataOverview 的資料
     useEffect(() => {
-        if (Object.keys(props.overview).length !== 0) {
-            setDashboardData(props.overview);
+        if (Object.keys(props.data.dataOverview).length !== 0) {
+            setDashboardData(props.data.dataOverview);
             return;
         }
         GetDashBoardOverview(props.token, startDate).then((response) => {
             if (response.data.success) {
                 setDashboardData(response.data.data);
-                dispatch(postOverview(response.data.data));
+                dispatch(initDataOverview(response.data.data));
             }
         }
         ).catch((error) => {
@@ -63,7 +62,7 @@ function DataOverview(props) {
 
     return (
         <>
-            <Toolbar />
+            {/* <Toolbar /> */}
             <div className='data-overview'>
                 <div className='details'>
                     <div className='detail-blocks'>
@@ -257,6 +256,6 @@ function DataOverview(props) {
 export default connect((state) => {
     return {
         ...state.loginState,
-        ...state.dataState
+        ...state.localDatabaseState
     }
 })(DataOverview);

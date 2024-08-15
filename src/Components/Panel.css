@@ -85,20 +85,24 @@
     /* background-image: linear-gradient(0.5turn, rgb(25, 164, 208), rgb(152, 231, 255)); */
 }
 
-.panel-container .bottom-function-button.upload-and-modify-button {
+.panel-container .bottom-function-button.employee-data-button,
+.panel-container .bottom-function-button.vehicle-data-button {
     color: rgb(135, 135, 135);
 }
 
-.panel-container .bottom-function-button.upload-and-modify-button.not-focused {
+.panel-container .bottom-function-button.employee-data-button.not-focused,
+.panel-container .bottom-function-button.vehicle-data-button.not-focused {
     border-left: 0px solid white;
 }
 
-.panel-container .bottom-function-button.upload-and-modify-button:hover {
+.panel-container .bottom-function-button.employee-data-button:hover,
+.panel-container .bottom-function-button.vehicle-data-button:hover {
     color: rgb(191, 191, 191);
     border-left: 8px solid white;
 }
 
-.panel-container .bottom-function-button.upload-and-modify-button.focused {
+.panel-container .bottom-function-button.employee-data-button.focused,
+.panel-container .bottom-function-button.vehicle-data-button.focused {
     color: white;
 }
 
