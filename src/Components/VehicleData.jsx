@@ -14,10 +14,6 @@ function VehicleData(props) {
     const dataHeaders = [
         '車牌號碼', '交通工具', '交通工具種類', '員工', '員工編號', '部門',
     ];
-    const data = props.data.vehicleData.data;
-    const employeeData = props.data.employeeData.data;
-    const vehicleBindEmployee = props.data.vehicleData.vehicleBindEmployee;
-    const searchEmployeeCode = props.data.employeeData.searchEmployeeCode;
 
     const vehicles = [
         "低地板甲類市區公車運輸服務(包含營業據點及公車站點排放)",
@@ -53,7 +49,7 @@ function VehicleData(props) {
     ]
 
     // selected rows
-    const [selectedRows, setSelectedRows] = useState(data.map(() => false));
+    const [selectedRows, setSelectedRows] = useState(props.data.vehicleData.data.map(() => false));
     const handleSelectedRowsChange = (index) => {
         const newSelectedRows = selectedRows;
         newSelectedRows[index] = !newSelectedRows[index];
@@ -64,12 +60,12 @@ function VehicleData(props) {
     // delete button clicked
     const onClickDeleteData = () => {
         dispatch(deleteVehicleData(selectedRows));
-        setRerenderKey(rerenderKey + 1);
         const initSelectedRows = [];
         props.data.vehicleData.data.map((row, index) => {
             initSelectedRows.push(false);
         });
         setSelectedRows(initSelectedRows);
+        setRerenderKey(rerenderKey + 1);
     }
 
     const handleStopPropagation = (event) => {
@@ -105,7 +101,7 @@ function VehicleData(props) {
         // setMatchEmployee(newMatchEmployee);
         const license = props.data.vehicleData.data[index][0];
         const employeeName = event.target.value;
-        const employeeCode = employeeName != '' ? employeeData.find((employeeData) => employeeData[0] === employeeName)[1] : '';
+        const employeeCode = employeeName != '' ? props.data.employeeData.data.find((data) => data[0] === employeeName)[1] : '';
         dispatch(updateVehicleBindData([license, employeeCode]));
         setRerenderKey(prevKey => prevKey + 1);
     }
@@ -172,13 +168,13 @@ function VehicleData(props) {
                             </tr>
                         </thead>
 
-                        <tbody>
-                            {data.map((row, index) => {
+                        <tbody key={rerenderKey}>
+                            {props.data.vehicleData.data.map((row, index) => {
                                 const license = row[0];
                                 const vehicle = row[1];
                                 const vehicleType = row[2];
-                                const employeeCode = vehicleBindEmployee[license];
-                                const employee = employeeCode !== undefined ? searchEmployeeCode[employeeCode] : '';
+                                const employeeCode = props.data.vehicleData.vehicleBindEmployee[license];
+                                const employee = employeeCode !== undefined ? props.data.employeeData.searchEmployeeCode[employeeCode] : '';
                                 const employeeName = employee !== undefined ? employee[0] : '';
                                 const employeeDepartment = employee !== undefined ? employee[1] : '';
                                 return (
@@ -203,7 +199,7 @@ function VehicleData(props) {
                                                 <option>
                                                 </option>
                                                 {
-                                                    employeeData.map((option, optionIndex) => (
+                                                    props.data.employeeData.data.map((option, optionIndex) => (
                                                         <option value={option[0]} key={optionIndex}>
                                                             {option[0]}
                                                         </option>
