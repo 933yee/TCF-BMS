@@ -108,6 +108,16 @@ function Toolbar(props) {
                         <div className='sub-feature-container'>
                             <div className='export-all'>一鍵匯出</div>
                         </div>
+                        {
+                            props.showAddVehicleButton &&
+                            <div className='sub-feature-container'>
+                                <div className='add-new-data'
+                                    onClick={() => {
+                                        if (props.onClickAddVehicle) props.onClickAddVehicle();
+                                    }}
+                                >新增運具</div>
+                            </div>
+                        }
                         <div className='sub-feature-container'>
                             <div className='add-new-data'
                                 onClick={() => {

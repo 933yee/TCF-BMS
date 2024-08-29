@@ -2,45 +2,21 @@ import React, { useState, useEffect } from 'react';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { IoIosClose } from "react-icons/io";
 import Toolbar from 'Components/Toolbar.jsx';
-import { addVehicleData, deleteVehicleData, updateVehicleBindData } from 'States/actions.js';
+import { addVehicleData, deleteVehicleData, updateVehicleData, updateVehicleBindData } from 'States/actions.js';
 
 import './AddDataForm.css';
+import './VehicleData.css';
 import { connect, useDispatch } from 'react-redux';
 
 function VehicleData(props) {
     const dispatch = useDispatch();
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(true);
+    const [showAddData, setShowAddData] = useState(false);
+    const [showAddVehicle, setShowAddVehicle] = useState(true);
     const [rerenderKey, setRerenderKey] = useState(0);
     const dataHeaders = [
-        '車牌號碼', '交通工具', '交通工具種類', '員工', '員工編號', '部門',
+        '車牌號碼', '交通工具', '交通工具目的', '員工', '員工編號', '部門',
     ];
-
-    const vehicles = [
-        "低地板甲類市區公車運輸服務(包含營業據點及公車站點排放)",
-        "乙類市區公車運輸服務(包含營業據點及公車站點排放)",
-        "普通甲類市區公車運輸服務(包含營業據點及公車站點排放)",
-        "營業大客車(市區公車及公路客運-柴油)",
-        "自用大客車(柴油)",
-        "營業大貨車(柴油)",
-        "營業小貨車(柴油)",
-        "營業小貨車(汽油)",
-        "自用大貨車(柴油)",
-        "自用小貨車(柴油)",
-        "自用小貨車(汽油)",
-        "營業小貨車(汽油)",
-        "營業小貨車(柴油)",
-        "營業大貨車(柴油)",
-        "3.49噸低溫貨車服務(裝載率32％，包含營業據點排放)",
-        "3.49噸低溫貨車服務(裝載率77％，包含營業據點排放)",
-        "3.5~7.4噸低溫貨車服務(裝載率41％，包含營業據點排放)",
-        "3.5~7.4噸低溫貨車服務(裝載率69％，包含營業據點排放)",
-        "3.49噸多溫貨車服務(包含營業據點排放)",
-        "營業遊覽車(柴油)",
-        "自用小客車(汽油)",
-        "營業小客車(汽油)",
-        "機器腳踏車(汽油)",
-        "以柴油動力垃圾車清除運輸一般廢棄物"
-    ]
 
     const vehicleTypes = [
         "貨物長途運輸",
@@ -68,15 +44,22 @@ function VehicleData(props) {
         setRerenderKey(rerenderKey + 1);
     }
 
+    // add vehicle button clicked
+    const onClickAddVehicle = () => {
+        setShowModal(true);
+        setShowAddVehicle(true);
+    }
+
     const handleStopPropagation = (event) => {
         event.stopPropagation();
     };
 
     const onClickAddData = () => {
         setShowModal(true);
+        setShowAddData(true);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmitAddVehicleData = (event) => {
         event.preventDefault();
         const newData = [
             event.target.elements.license.value,
@@ -87,12 +70,17 @@ function VehicleData(props) {
             '',
         ]
         dispatch(addVehicleData(newData));
+        handleCloseModal();
+    }
 
-        setShowModal(false);
+    const handleSubmitAddVehicle = (event) => {
+        event.preventDefault();
     }
 
     const handleCloseModal = () => {
         setShowModal(false);
+        setShowAddData(false);
+        setShowAddVehicle(false);
     }
 
     const handleDropdownChange = (event, index) => {
@@ -106,8 +94,45 @@ function VehicleData(props) {
         setRerenderKey(prevKey => prevKey + 1);
     }
 
+    // Edit Vehicle Type Data
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [newVehicle, setNewVehicle] = useState('');
+    const [addVehiclePage, setAddVehiclePage] = useState(false);
+
+
+    const handleCheckboxChange = (index) => {
+        setSelectedItems((prevSelectedItems) =>
+            prevSelectedItems.includes(index)
+                ? prevSelectedItems.filter((i) => i !== index)
+                : [...prevSelectedItems, index]
+        );
+    };
+
+    const handleDeleteSelected = () => {
+        const newVehicleData = props.data.vehicleData.vehicles.filter(
+            (item, index) => !selectedItems.includes(index)
+        );
+        dispatch(updateVehicleData(newVehicleData));
+        setSelectedItems([]);
+    };
+
+    const handleAddVehicle = () => {
+        setAddVehiclePage(true);
+        // if (newVehicle.trim()) {
+        //     const updatedVehicleData = [...props.data.vehicleData.vehicles, newVehicle];
+        //     dispatch(updateVehicleData(updatedVehicleData));
+        //     setNewVehicle('');
+        // }
+    };
+
     return (
-        <> <Toolbar onClickAddData={onClickAddData} onClickDeleteData={onClickDeleteData} />
+        <div className='vehicle-data'>
+            <Toolbar
+                onClickAddData={onClickAddData}
+                onClickDeleteData={onClickDeleteData}
+                onClickAddVehicle={onClickAddVehicle}
+                showAddVehicleButton={true}
+            />
             <div className='employee-travel add-data-form'>
                 {showModal && (
                     <div className="modal-overlay">
@@ -116,40 +141,137 @@ function VehicleData(props) {
                                 <IoIosClose />
                             </div>
                             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                                <h2>新增資料</h2>
+                                {
+                                    showAddData && (
+                                        <>
+                                            <h2>新增資料</h2>
 
-                                <form onSubmit={handleSubmit}>
-                                    <div className="form-group">
-                                        <label className='title'>車牌號碼</label>
-                                        <input type="text" className='textfield' name='license' />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className='title'>交通工具</label>
-                                        <select name='vehicle'>
-                                            <option></option>
-                                            {vehicles.map((vehicle, index) => (
-                                                <option key={index}>{vehicle}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className='title'>交通工具種類</label>
-                                        <select name='vehicleType'>
-                                            <option></option>
-                                            {vehicleTypes.map((vehicleType, index) => (
-                                                <option key={index}>{vehicleType}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className='submit-button-container'>
-                                        <button
-                                            type="submit"
-                                            className='submit-button'
-                                        >
-                                            提交資料
-                                        </button>
-                                    </div>
-                                </form>
+                                            <form onSubmit={handleSubmitAddVehicleData}>
+                                                <div className="form-group">
+                                                    <label className='title'>車牌號碼</label>
+                                                    <input type="text" className='textfield' name='license' />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className='title'>交通工具</label>
+                                                    <select name='vehicle'>
+                                                        <option></option>
+                                                        {props.data.vehicleData.vehicles.map((vehicle, index) => (
+                                                            <option key={index}>{vehicle}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className='title'>運具碳排係數</label>
+                                                    <input type="text" className='textfield' name='carbon-coefficient' />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label className='title'>交通工具目的</label>
+                                                    <select name='vehicleType'>
+                                                        <option></option>
+                                                        {vehicleTypes.map((vehicleType, index) => (
+                                                            <option key={index}>{vehicleType}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <div className='submit-button-container'>
+                                                    <button
+                                                        type="submit"
+                                                        className='submit-button'
+                                                    >
+                                                        提交資料
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </>
+                                    )
+                                }
+                                {
+                                    showAddVehicle && (
+                                        <div className={`vehicle-form ${addVehiclePage ? 'add-form' : ''}`}>
+                                            <div className={`edit-vehicle-container`}>
+                                                <h2>編輯交通工具種類</h2>
+
+                                                <form onSubmit={handleSubmitAddVehicle}>
+                                                    <div className='edit-vehicle-form'>
+                                                        <table className='vehicle-table'>
+                                                            <tbody>
+                                                                {props.data.vehicleData.vehicles.map((item, index) => (
+                                                                    <tr key={index} style={{ borderBottom: '1px solid #ddd' }}>
+                                                                        <td>
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                checked={selectedItems.includes(index)}
+                                                                                onChange={() => handleCheckboxChange(index)}
+                                                                            />
+                                                                        </td>
+                                                                        <td>{item}</td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div className='edit-vehicle-button'>
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleDeleteSelected}
+                                                            className='delete-vehicle-button'
+                                                            disabled={selectedItems.length === 0}
+                                                        >
+                                                            刪除種類
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={handleAddVehicle}
+                                                            className='add-vehicle-button'
+                                                        >
+                                                            新增種類
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div className='add-vehicle-form'>
+                                                <h2>新增資料</h2>
+
+                                                <form onSubmit={handleSubmitAddVehicleData}>
+                                                    <div className="form-group">
+                                                        <label className='title'>車牌號碼</label>
+                                                        <input type="text" className='textfield' name='license' />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label className='title'>交通工具</label>
+                                                        <select name='vehicle'>
+                                                            <option></option>
+                                                            {props.data.vehicleData.vehicles.map((vehicle, index) => (
+                                                                <option key={index}>{vehicle}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label className='title'>運具碳排係數</label>
+                                                        <input type="text" className='textfield' name='carbon-coefficient' />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label className='title'>交通工具目的</label>
+                                                        <select name='vehicleType'>
+                                                            <option></option>
+                                                            {vehicleTypes.map((vehicleType, index) => (
+                                                                <option key={index}>{vehicleType}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    <div className='submit-button-container'>
+                                                        <button
+                                                            type="submit"
+                                                            className='submit-button'
+                                                        >
+                                                            提交資料
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div >
@@ -232,7 +354,7 @@ function VehicleData(props) {
         } */}
                 </div>
             </div >
-        </>
+        </div>
     );
 }
 export default connect((state) => {

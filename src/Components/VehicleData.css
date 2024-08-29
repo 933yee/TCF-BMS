@@ -1,0 +1,70 @@
+.vehicle-data .edit-vehicle-form {
+    height: 50vh;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.vehicle-data .vehicle-form {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    transition: transform 0.5s;
+    /* overflow-x: hidden; */
+
+}
+
+.vehicle-data .vehicle-form.add-form {
+    transform: translateX(calc(-100% - 50px));
+}
+
+.vehicle-data .add-vehicle-form {
+    /* position: absolute; */
+    transform: translateX(calc(100% + 50px));
+}
+
+.vehicle-data .edit-vehicle-container {}
+
+.vehicle-data .edit-vehicle-form .vehicle-table {
+    border-collapse: collapse;
+    flex-wrap: nowrap;
+    font-size: 1rem;
+}
+
+.vehicle-data .edit-vehicle-button {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.vehicle-data .edit-vehicle-button button {
+    font-size: 1.2rem;
+    width: 10rem;
+    color: white;
+    border: 0px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.vehicle-data .add-vehicle-button {
+    background-color: rgb(73, 183, 26);
+}
+
+.vehicle-data .add-vehicle-button:hover {
+    background-color: rgb(73, 183, 26, .8);
+}
+
+.vehicle-data .delete-vehicle-button {
+    background-color: rgb(183, 73, 73);
+}
+
+.vehicle-data .delete-vehicle-button:hover {
+    background-color: rgb(183, 73, 73, .8);
+}
+
+.vehicle-data .delete-vehicle-button:disabled {
+    background-color: rgb(183, 73, 73, .5);
+}

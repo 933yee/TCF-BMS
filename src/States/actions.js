@@ -116,6 +116,13 @@ export const deleteVehicleData = (selectedRows) => {
     };
 };
 
+export const updateVehicleData = (vehicleData) => {
+    return {
+        type: '@POST/UPDATE_VEHICLE_DATA',
+        vehicleData
+    };
+}
+
 export const updateVehicleBindData = (vehicleBindEmployeeData) => {
     return {
         type: '@POST/UPDATE_VEHICLE_BIND_EMPLOYEE',
