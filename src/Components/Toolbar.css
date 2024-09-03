@@ -83,7 +83,7 @@
 .toolbar .time-selector-text {
     display: flex;
     flex: 1;
-    padding: 3px 60px 3px 40px;
+    padding: 1px 50px 4px 30px;
     align-items: center;
     justify-content: center;
 }

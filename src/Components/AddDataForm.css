@@ -25,6 +25,8 @@
     max-width: 25vw;
     min-width: 20rem;
     overflow-y: auto;
+    overflow-x: hidden;
+
 }
 
 @keyframes slideDown {
@@ -50,10 +52,10 @@
 
 .add-data-form .modal-overlay .close-button {
     font-size: 3rem;
+    z-index: 10000;
     position: absolute;
     top: 0;
     right: 0;
-    margin: 10px;
     cursor: pointer;
     color: red;
     transition: color 0.2s;
