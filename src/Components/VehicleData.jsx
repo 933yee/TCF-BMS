@@ -112,7 +112,6 @@ function VehicleData(props) {
 
     // Edit Vehicle Type Data
     const [selectedItems, setSelectedItems] = useState([]);
-    const [newVehicle, setNewVehicle] = useState('');
     const [addVehiclePage, setAddVehiclePage] = useState(false);
 
 

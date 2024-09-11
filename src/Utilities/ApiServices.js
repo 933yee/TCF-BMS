@@ -48,3 +48,19 @@ export const GetEmployeeOverview = async (token, startDate) => {
         throw error;
     }
 }
+
+
+export const AddEmployee = async (username, departmentId, employeeName, employeeCode) => {
+    try {
+        const response = await api.get(`/api/v0/dashboard/employeeOverview?startDate=${startDate}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    }
+    catch (error) {
+        console.error('Error GetDashBoardOverview:', error);
+        throw error;
+    }
+}
