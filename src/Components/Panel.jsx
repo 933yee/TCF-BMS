@@ -25,7 +25,10 @@ function Panel(props) {
                 <Link to="/data-overview" className={`panel-item ${currentPathname === '/data-overview' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/data-overview')}>
                     數據總覽
                 </Link>
-                <Link to="/employee-travel" className={`panel-item  ${currentPathname === '/employee-travel' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-travel')}>
+                <Link to="/employee-travel" className={`panel-item  
+                    ${currentPathname.split('/')[1] === 'employee-travel' ? 'focused' : 'not-focused'}`}
+                    onClick={() => handleLinkClick('/employee-travel')}
+                >
                     員工差旅
                 </Link>
                 {/* <Link to="/upstream-transportation" className={`panel-item  ${props.currentPage === '上游運輸' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/upstream-transportation')}> */}

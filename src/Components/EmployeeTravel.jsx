@@ -4,19 +4,36 @@ import {
     useLocation,
     useNavigate,
 } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { changeCurrentPage } from 'States/actions.js';
 
 import './EmployeeTravel.css';
 
 function EmployeeTravel(props) {
-    const navigate = useNavigate();
-    const headers = [
-        '紀錄方式', '姓名', '員工編號', '出差日期', '出差時段', '出差時間', '交通工具', '公里數', '碳足跡-KG'
-    ]
-    const data = props.data.employeeTravel.data;
+    const isDetailed = props.isDetailed;
+    const detailIndex = props.detailIndex;
     const location = useLocation();
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const dataHeaders =
+        isDetailed ?
+            [
+                '出差日期', '出差時段', '出差時間', '交通工具', '公里數', '碳足跡-KG'
+            ]
+            : [
+                '紀錄方式', '姓名', '員工編號', '出差日期', '出差時段', '出差時間', '交通工具', '公里數', '碳足跡-KG'
+            ];
+    const data =
+        isDetailed ?
+            props.data.employeeTravel.detailedData[detailIndex] : props.data.employeeTravel.data
+
     const handleLinkClick = (index) => {
+        if (isDetailed === true) return;
+        const newPath = `${location.pathname}/${index + 1}`;
+        navigate(newPath);
+        dispatch(changeCurrentPage(`/employee-travel/${index + 1}`));
+
         // if (canCheckDetail === false) return;
         // const newPath = `${location.pathname}${index}`;
         // navigate(newPath);
@@ -27,7 +44,6 @@ function EmployeeTravel(props) {
     };
 
     const handleTextFieldChange = (event) => {
-        console.log(event.target.value);
     }
 
     return (
@@ -42,7 +58,7 @@ function EmployeeTravel(props) {
                         <thead>
                             <tr>
                                 <th></th>
-                                {headers.map((header, index) => (
+                                {dataHeaders.map((header, index) => (
                                     <th key={index}>{header}</th>
                                 ))}
                             </tr>
@@ -50,7 +66,7 @@ function EmployeeTravel(props) {
 
                         <tbody>
                             {data.map((row, index) => (
-                                <tr key={index} onClick={() => handleLinkClick(`/${index}`)}>
+                                <tr key={index} onClick={() => handleLinkClick(index)}>
                                     <td>
                                         <input type="checkbox" onClick={handleStopPropagation}></input>
                                     </td>

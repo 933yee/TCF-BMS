@@ -81,7 +81,21 @@ function Main(props) {
                                     <Route path="/current-usage-of-transportation-modes" exact element={<>交通工具使用情況</>} />
                                     <Route path="/current-usage-of-public-transportation" exact element={<>交通車使用情況</>} />
                                     <Route path="/accumulation-status" exact element={<>積點狀況</>} />
-                                    <Route path="/employee-travel/*" exact element={<EmployeeTravel />} />
+
+                                    <Route
+                                        path="/employee-travel"
+                                        exact
+                                        element={
+                                            <EmployeeTravel />
+                                        }
+                                    />
+                                    {localData['employeeTravel'].data.map((row, index) => (
+                                        console.log(`employee-travel/${index + 1}`),
+                                        <Route key={index} path={`/employee-travel/${index + 1}`} element={
+                                            <EmployeeTravel isDetailed={true} detailIndex={index} />
+                                        } />
+                                    ))}
+
                                     <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
