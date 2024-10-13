@@ -123,17 +123,17 @@ function MobileSourceEmissions(props) {
                                         <input type="checkbox" onClick={handleStopPropagation}></input>
                                     </td>
                                     {row.map((item, itemIndex) => {
-                                        if (isDetailed && itemIndex === 7) {
-                                            return (
-                                                <td key={itemIndex}>
-                                                    <input type='text' value={cargoWeight[itemIndex]}
-                                                        onChange={
-                                                            (event) => handleTextFieldChange(event, index)
-                                                        }>
-                                                    </input>
-                                                </td>
-                                            )
-                                        }
+                                        // if (isDetailed && itemIndex === 7) {
+                                        //     return (
+                                        //         <td key={itemIndex}>
+                                        //             <input type='text' value={cargoWeight[itemIndex]}
+                                        //                 onChange={
+                                        //                     (event) => handleTextFieldChange(event, index)
+                                        //                 }>
+                                        //             </input>
+                                        //         </td>
+                                        //     )
+                                        // }
                                         return (
                                             <td key={itemIndex}>{item}</td>
                                         )

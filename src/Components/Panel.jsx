@@ -18,7 +18,7 @@ function Panel(props) {
     return (
         <div className={`panel-container`}>
             <div to="/" className={`logo-text`}>
-                <img className='panel-home' src={`${window.location.origin}/images/GINTAN.png`}></img>
+                <img className='panel-home' src={`${window.location.origin}/images/logo.png`}></img>
             </div>
             {/* Rest of the code */}
             <div className={`panel-items`}>

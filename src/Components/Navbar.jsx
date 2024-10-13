@@ -38,7 +38,7 @@ function Navbar(props) {
         <div className='navbar-container'>
             <div className='path'>
                 {paths.length > 1 ? (
-                    <Link to={`/ ${paths[1]} `} className='path-text' onClick={() => handleLinkClick(paths[1])}>
+                    <Link to={`/${paths[1]}`} className='path-text' onClick={() => handleLinkClick(paths[1])}>
                         {englishToChineseMap[paths[1]]}
                     </Link>
                 ) : (

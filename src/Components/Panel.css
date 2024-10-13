@@ -21,6 +21,7 @@
     width: 80%;
     object-fit: contain;
     padding-left: 1rem;
+    padding-top: 1rem;
 }
 
 .panel-container .panel-items {

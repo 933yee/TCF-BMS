@@ -12,7 +12,7 @@ function VehicleData(props) {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showAddData, setShowAddData] = useState(false);
-    const [showAddVehicle, setShowAddVehicle] = useState(true);
+    const [showAddVehicle, setShowAddVehicle] = useState(false);
     const [rerenderKey, setRerenderKey] = useState(0);
     const dataHeaders = [
         '車牌號碼', '交通工具', '交通工具目的', '員工', '員工編號', '部門',
