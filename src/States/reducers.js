@@ -237,7 +237,8 @@ const initLocalDatabase = {
             ],
         },
         employeeCommuting: {
-            data: []
+            data: [],
+            detailedData: []
         },
         mobileSourceEmissions: {
             data: [
@@ -465,7 +466,42 @@ export function localDatabaseState(state = initLocalDatabase, action) {
                 ]);
             }
             return state;
-
+        case '@POST/INIT_EMPLOYEE_COMMUTING_DATA_DETAIL':
+            state.data.employeeCommuting.data = [];
+            // for (let employee of action.employeeCommutingData.employeeInfo) {
+            //     const transportationTypes = [];
+            //     for (let transportationType of employee.transportationTypes) {
+            //         switch (transportationType) {
+            //             case 'TRAIN':
+            //                 transportationTypes.push('火車');
+            //                 break;
+            //             case 'BUS':
+            //                 transportationTypes.push('公車');
+            //                 break;
+            //             case 'WALK':
+            //                 transportationTypes.push('走路');
+            //                 break;
+            //             case 'SCOOTER':
+            //                 transportationTypes.push('機車');
+            //                 break;
+            //             case 'CAR':
+            //                 transportationTypes.push('汽車');
+            //                 break;
+            //             case 'BIKE':
+            //                 transportationTypes.push('腳踏車');
+            //                 break;
+            //         }
+            //     }
+            //     state.data.employeeCommuting.data.push([
+            //         employee.name,
+            //         employee.code,
+            //         transportationTypes.join('、'),
+            //         employee.totalDistance / 1000,
+            //         employee.totalCarbon,
+            //         employee.reducedCarbon,
+            //     ]);
+            // }
+            return state;
         case '@POST/ADD_VEHICLE_DATA':
             state.data.vehicleData.data.push(action.vehicleData);
             return state;

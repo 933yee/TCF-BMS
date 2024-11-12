@@ -14,6 +14,8 @@ import Login from 'Components/Login.jsx';
 import EmployeeTravel from 'Components/EmployeeTravel.jsx';
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
+import EmployeeCommutingDetail from 'Components/EmployeeCommutingDetail.jsx';
+
 import EmployeeData from 'Components/EmployeeData.jsx';
 import VehicleData from 'Components/VehicleData.jsx';
 import CarbonFootprintDataOverview from 'Components/CarbonFootprintDataOverview.jsx';
@@ -90,7 +92,6 @@ function Main(props) {
                                         }
                                     />
                                     {localData['employeeTravel'].data.map((row, index) => (
-                                        console.log(`employee-travel/${index + 1}`),
                                         <Route key={index} path={`/employee-travel/${index + 1}`} element={
                                             <EmployeeTravel isDetailed={true} detailIndex={index} />
                                         } />
@@ -98,7 +99,10 @@ function Main(props) {
 
                                     <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
+
                                     <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
+                                    <Route path="/employee-commuting/:employeeCode" element={<EmployeeCommutingDetail/>} />
+
                                     <Route
                                         path="/mobile-source-emissions"
                                         exact

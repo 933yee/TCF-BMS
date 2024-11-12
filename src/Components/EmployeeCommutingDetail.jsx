@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { GetEmployeeOverview, GetEmployeeOverviewDay } from 'Utilities/ApiServices.js';
-import { initEmployeeCommutingData } from 'States/actions.js';
+import { initEmployeeCommutingDataDetail } from 'States/actions.js';
 import Toolbar from 'Components/Toolbar.jsx';
+import './Loader.css'
 import { TbDatabaseOff } from "react-icons/tb";
 
-import './EmployeeCommuting.css';
-import './Loader.css'
 
-
-function EmployeeCommuting(props) {
+function EmployeeCommutingDetail(props) {
+    const { employeeCode } = useParams();
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
     const [rerenderKey, setRerenderKey] = useState(0);
     const [selectedRows, setSelectedRows] = useState(new Set());
-    const [isLoading, setIsLoading] = useState(true);
 
-    const dataHeaders = ['姓名', '員工編號', '交通工具', '公里數', '碳足跡-KG', '減少碳足跡'];
+    const dataHeaders = ['交通工具', '起始地', '抵達地', '公里數', '碳足跡-KG'];
 
-    const data = props.data.employeeCommuting.data;
-
-    const handleRowClick = (index) => {
-        navigate(`/employee-commuting/${data[index][1]}`);
-    };
+    const handleRowClick = (index) => { };
 
     const handleCheckboxClick = (event, index) => {
         event.stopPropagation();
@@ -57,19 +53,20 @@ function EmployeeCommuting(props) {
 
     useEffect(() => {
         setIsLoading(true);
-        if (Object.keys(data).length !== 0) {
-            setIsLoading(false);
-            return;
-        }
-
-        // GetEmployeeOverviewDay(props.token, "A001", endDate).then((response) => {
-        //     // if (response.data.data === undefined) return;
-        //     // dispatch(initEmployeeCommutingData(response.data.data));
-        //     // setRerenderKey(rerenderKey + 1);
-        // });
-        GetEmployeeOverview(props.token, endDate).then((response) => {
-            if (response.data.data === undefined) return;
-            dispatch(initEmployeeCommutingData(response.data.data));
+        GetEmployeeOverviewDay(props.token, employeeCode, endDate).then((response) => {
+            if (response.data.data === undefined) {
+                setIsLoading(false);
+                return;
+            }
+            setData(
+                response.data.data.transportInfo.map((item) => [
+                    item.transportationType,
+                    `${item.start.lat}, ${item.start.lon}`,
+                    `${item.end.lat}, ${item.end.lon}`,
+                    item.distance,
+                    item.carbon
+                ])
+            );
             setIsLoading(false);
             setRerenderKey(rerenderKey + 1);
         });
@@ -151,4 +148,4 @@ export default connect((state) => ({
     ...state.loginState,
     ...state.dataState,
     ...state.localDatabaseState
-}))(EmployeeCommuting);
+}))(EmployeeCommutingDetail);

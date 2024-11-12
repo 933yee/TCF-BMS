@@ -1,0 +1,22 @@
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.loader {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #4db6ac 94%, #0000) top/9px 9px no-repeat,
+    conic-gradient(#0000 30%, #4db6ac);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 6px), #000 0);
+  animation: loader-c7wet2 1s infinite linear;
+}
+
+@keyframes loader-c7wet2 {
+  100% {
+    transform: rotate(1turn);
+  }
+}

@@ -2,7 +2,7 @@ import axios from 'axios';
 const baseApiUrl = "https://api.carbon-walker.com";
 const api = axios.create({
     baseURL: baseApiUrl,
-    timeout: 10000,
+    timeout: 100000,
 });
 
 export const UserLogin = async (account, password) => {
@@ -49,6 +49,21 @@ export const GetEmployeeOverview = async (token, startDate) => {
     }
 }
 
+
+export const GetEmployeeOverviewDay = async (token, employeeCode, startDate) => {
+    try {
+        const response = await api.get(`/api/v0/dashboard/employeeOverviewDay?employeeCode=${employeeCode}&startDate=${startDate}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    }
+    catch (error) {
+        console.error('Error GetDashBoardOverview:', error);
+        throw error;
+    }
+}
 
 export const AddEmployee = async (username, departmentId, employeeName, employeeCode) => {
     try {

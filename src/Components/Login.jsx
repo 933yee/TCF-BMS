@@ -39,7 +39,7 @@ function Login() {
             const password = event.target.elements.password.value;
             UserLogin(account, password).then((response) => {
                 console.log(response);
-                if (response.data.success) {
+                if (response.data.code === 0) {
                     const token = response.data.data.token;
                     localStorage.setItem('account', account);
                     localStorage.setItem('password', password);

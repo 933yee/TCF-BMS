@@ -95,6 +95,13 @@ export function initEmployeeCommutingData(employeeCommutingData) {
     };
 }
 
+export function initEmployeeCommutingDataDetail(employeeCommutingDataDetail) {
+    return {
+        type: '@POST/INIT_EMPLOYEE_COMMUTING_DATA_DETAIL',
+        employeeCommutingDataDetail,
+    };
+}
+
 export function updateEmployeeCommutingData(employeeCommutingData) {
     return {
         type: '@POST/EMPLOYEE_COMMUTING_DATA',

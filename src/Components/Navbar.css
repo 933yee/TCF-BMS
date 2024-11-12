@@ -4,7 +4,7 @@
     min-height: 2.5rem;
     /* background-color: rgb(49, 49, 49); */
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     font-family: 'Roboto', sans-serif;
     background-color: rgb(49, 49, 49);
@@ -41,7 +41,8 @@
 }
 
 .navbar-container .user-info {
-    color: white
+    color: white;
+    padding-right: 1rem;
 }
 
 .navbar-container .page {

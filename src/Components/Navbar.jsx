@@ -36,8 +36,8 @@ function Navbar(props) {
     }
     return (
         <div className='navbar-container'>
-            <div className='path'>
-                {paths.length > 1 ? (
+            {/* <div className='path'> */}
+            {/* {paths.length > 1 ? (
                     <Link to={`/${paths[1]}`} className='path-text' onClick={() => handleLinkClick(paths[1])}>
                         {englishToChineseMap[paths[1]]}
                     </Link>
@@ -57,9 +57,9 @@ function Navbar(props) {
                         </div>
 
                     </>
-                ) : ''}
+                ) : ''} */}
 
-            </div>
+            {/* </div> */}
             <div className='user-info'>
                 {props.account}
             </div>

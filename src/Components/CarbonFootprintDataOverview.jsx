@@ -14,7 +14,6 @@ function CarbonFootprintDataOverview(props) {
 
     return (
         <div className='carbon-footprint-data-overview'>
-            {/* 操你ㄇ */}
         </div>
     );
 }

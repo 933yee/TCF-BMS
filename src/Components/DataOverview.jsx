@@ -31,7 +31,6 @@ function DataOverview(props) {
 
     const endDate = formatDate(new Date(currentTime));
     const startDate = formatDate(new Date(oneMonthAgoTime));
-
     // 取得 DataOverview 的資料
     useEffect(() => {
         if (Object.keys(props.data.dataOverview).length !== 0) {
@@ -39,7 +38,7 @@ function DataOverview(props) {
             return;
         }
         GetDashBoardOverview(props.token, startDate).then((response) => {
-            if (response.data.success) {
+            if (response.data.code === 0) {
                 setDashboardData(response.data.data);
                 dispatch(initDataOverview(response.data.data));
             }
