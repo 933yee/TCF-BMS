@@ -9,8 +9,7 @@ import './Panel.css';
 
 function Panel(props) {
     const dispatch = useDispatch();
-    const currentPathname = window.location.pathname;
-
+    const currentPathname = window.location.pathname.split('/')[1];
     const handleLinkClick = (link) => {
         dispatch(changeCurrentPage(link));
     };
@@ -22,11 +21,11 @@ function Panel(props) {
             </div>
             {/* Rest of the code */}
             <div className={`panel-items`}>
-                <Link to="/data-overview" className={`panel-item ${currentPathname === '/data-overview' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/data-overview')}>
+                <Link to="/data-overview" className={`panel-item ${currentPathname === 'data-overview' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/data-overview')}>
                     數據總覽
                 </Link>
                 <Link to="/employee-travel" className={`panel-item  
-                    ${currentPathname.split('/')[1] === 'employee-travel' ? 'focused' : 'not-focused'}`}
+                    ${currentPathname === 'employee-travel' ? 'focused' : 'not-focused'}`}
                     onClick={() => handleLinkClick('/employee-travel')}
                 >
                     員工差旅
@@ -37,21 +36,21 @@ function Panel(props) {
                 {/* <Link to="/downstream-transportation" className={`panel-item  ${props.currentPage === '下游運輸' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/downstream-transportation')}> */}
                 {/* 下游運輸 */}
                 {/* </Link> */}
-                <Link to="/employee-commuting" className={`panel-item  ${currentPathname === '/employee-commuting' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-commuting')}>
+                <Link to="/employee-commuting" className={`panel-item  ${currentPathname === 'employee-commuting' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-commuting')}>
                     員工通勤
                 </Link>
                 <Link to="/mobile-source-emissions" className={`panel-item  
-                    ${currentPathname.split('/')[1] === 'mobile-source-emissions' ? 'focused' : 'not-focused'}`}
+                    ${currentPathname === 'mobile-source-emissions' ? 'focused' : 'not-focused'}`}
                     onClick={() => handleLinkClick('/mobile-source-emissions')}
                 >
                     移動源排放
                 </Link>
             </div>
             <div className='bottom-function-buttons'>
-                <Link to="/vehicle-data" className={`bottom-function-button vehicle-data-button ${currentPathname === '/vehicle-data' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/vehicle-data')}>
+                <Link to="/vehicle-data" className={`bottom-function-button vehicle-data-button ${currentPathname === 'vehicle-data' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/vehicle-data')}>
                     車輛資料
                 </Link>
-                <Link to="/employee-data" className={`bottom-function-button employee-data-button ${currentPathname === '/employee-data' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-data')}>
+                <Link to="/employee-data" className={`bottom-function-button employee-data-button ${currentPathname === 'employee-data' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/employee-data')}>
                     員工資料
                 </Link>
                 <div className={`bottom-function-button logout-button`}
