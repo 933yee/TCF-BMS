@@ -3,9 +3,10 @@
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
-    /* background-color: rgb(215, 215, 215); */
+    background-color: rgb(49, 49, 49);
     align-items: center;
-    margin-top: .5rem;
+    margin-bottom: 1rem;
+    padding: .5rem 0;
 }
 
 
@@ -54,8 +55,7 @@
     padding: 4px 20px;
     /* border-radius: 100px; */
     font-size: 1rem;
-    font-weight: bold;
-
+    border: 1px solid #ccc;
 }
 
 .toolbar .department-selector select option {
@@ -68,22 +68,24 @@
     /* background-image: linear-gradient(0.5turn, rgb(131, 131, 131), rgb(48, 48, 48)); */
     height: 100%;
     width: 100%;
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(49, 49, 49);
+     */
     font-size: 1rem;
     border: none;
     position: relative;
     /* color: rgb(48, 48, 48); */
     color: white;
-    /* border: 2px solid rgb(48, 48, 48); */
+    border: 1px solid #ccc;
     /* border-radius: 100px; */
     font-size: 1rem;
-    font-weight: bold;
+    margin-left: 0.2rem;
+    /* font-weight: bold; */
 }
 
 .toolbar .time-selector-text {
     display: flex;
     flex: 1;
-    padding: 1px 50px 4px 30px;
+    padding: 2px 50px 5px 30px;
     align-items: center;
     justify-content: center;
 }
@@ -145,7 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 1rem;
+    /* padding-right: 1rem; */
 }
 
 .toolbar .sub-feature-container {
@@ -164,7 +166,7 @@
     align-items: center;
     white-space: nowrap;
     flex-wrap: wrap;
-    padding: 2px 20px;
+    padding: 0px 20px;
     /* border-radius: 100px; */
     /* font-weight: bold; */
     color: white;
@@ -178,43 +180,63 @@
 .toolbar .export-all:hover,
 .toolbar .add-new-data:hover,
 .toolbar .delete-data:hover {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 
 .toolbar .map-show {
     /* background-image: linear-gradient(0.5turn, rgb(92, 229, 31), rgb(73, 183, 26)); */
-    background-color: rgb(89, 89, 89);
+    /* background-color: rgb(89, 89, 89); */
+    background-color: rgb(39, 129, 141);
 }
 
 .toolbar .add-new-data {
     /* background-image: linear-gradient(0.5turn, rgb(33, 156, 225), rgb(28, 122, 176)); */
-    background-color: rgb(73, 183, 26);
+    background-color: rgb(20, 161, 65);
+    /* background-color: rgb(89, 89, 89); */
+
 }
 
 .toolbar .export,
 .toolbar .export-all {
-    background-color: rgb(33, 156, 225);
+    background-color: rgb(39, 141, 114);
+    /* background-color: rgb(32, 171, 164); */
+    /* background-color: rgb(89, 89, 89); */
+
 }
 
 .toolbar .delete-data {
-    background-image: linear-gradient(0.5turn, rgb(185, 54, 13), rgb(185, 54, 13));
+    background-color: rgb(185, 54, 13);
+
+    /* background-image: linear-gradient(0.5turn, rgb(185, 54, 13), rgb(185, 54, 13)); */
 }
 
 .toolbar .search-keyword {
     display: flex;
     align-items: center;
     justify-content: center;
+    color : white;
+    padding-left: 1rem;
 }
 
 .toolbar .search-keyword-input {
-    padding: 6px 0px;
+    padding: 4px 10px;
     margin-right: .5rem;
 }
 
 .toolbar .vehicle-type-filter {
-    display: flex;
-    align-items: center;
-    width: 90%;
     padding-bottom: .5rem;
+    color: white;
+    padding-left: 1.5rem;
+    width: 100%;
+    user-select: none;
+}
+
+/* .toolbar .vehicle-type-filter label {
+    color: blue;
+} */
+
+.toolbar .user-info {
+    color: white;
+    padding-right: 1rem;
 }

@@ -7,8 +7,8 @@ import { FaSearch } from "react-icons/fa";
 function Toolbar(props) {
     const [timeSelectorToggle, setTimeSelectorToggle] = useState(false);
     const [department, setDepartment] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
+    const [startTime, setStartTime] = useState('2024.10.31');
+    const [endTime, setEndTime] = useState('2024.10.31');
 
     const departmentList = props.toolbar.departmentList;
     const showVehicleTypeFilter = props.showVehicleTypeFilter;
@@ -24,11 +24,11 @@ function Toolbar(props) {
     };
 
     const handleStartTimeChange = (event) => {
-        setStartTime(event.target.value);
+        setStartTime(event.target.value.split('-').join('.'));
     };
 
     const handleEndTimeChange = (event) => {
-        setEndTime(event.target.value);
+        setEndTime(event.target.value.split('-').join('.'));
     };
 
     const handleClickOutside = (event) => {
@@ -70,7 +70,9 @@ function Toolbar(props) {
                         <div className='feature-container'>
                             <div className="time-selector">
                                 <div className="time-selector-text" onClick={handleTimeSelectorToggle}>
-                                    時間搜尋
+                                    <div className='time'>{startTime}</div>
+                                    -
+                                    <div className='time'>{endTime}</div>
                                     <div className={`arrow ${timeSelectorToggle ? 'toggle' : ''}`}><GoTriangleRight /></div>
                                 </div>
                                 {
@@ -143,6 +145,10 @@ function Toolbar(props) {
                             </div>
                         </div>
                     </div>
+                    
+                </div>
+                <div className= 'user-info'>
+                    {props.account}
                 </div>
                 {showVehicleTypeFilter && <div className='vehicle-type-filter'>
                     <label>
@@ -180,6 +186,7 @@ function Toolbar(props) {
 
 export default connect((state) => {
     return {
+        ...state.loginState,
         ...state.localDatabaseState
     }
 })(Toolbar);

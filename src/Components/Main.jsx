@@ -74,7 +74,7 @@ function Main(props) {
                         <>
                             <Panel />
                             <div className='contents'>
-                                <Navbar />
+                                {/* <Navbar /> */}
                                 <Routes>
                                     <Route path="/data-overview" exact element={<DataOverview />} />
                                     <Route path="/carbon-footprint-data-overview" exact element={<CarbonFootprintDataOverview />} />
