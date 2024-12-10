@@ -15,6 +15,8 @@ import EmployeeTravel from 'Components/EmployeeTravel.jsx';
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
 import EmployeeCommutingDetail from 'Components/EmployeeCommutingDetail.jsx';
+import EmployeeCommutingDay from 'Components/EmployeeCommutingDay.jsx';
+import { GetDepartment } from 'Utilities/ApiServices.js';
 
 import EmployeeData from 'Components/EmployeeData.jsx';
 import VehicleData from 'Components/VehicleData.jsx';
@@ -26,7 +28,7 @@ import DetailedData from 'Components/DetailedData.jsx';
 import Toolbar from 'Components/Toolbar.jsx';
 
 import { connect, useDispatch } from 'react-redux';
-import { login, initializeDatabase } from 'States/actions.js';
+import { login, updateDepartmentList } from 'States/actions.js';
 
 import './Animations.css';
 import './Main.css';
@@ -42,9 +44,17 @@ function Main(props) {
 
     useEffect(() => {
         if (props.loading) {
-            setTimeout(() => {
-                dispatch(login(true));
-            }, 3000);
+            // setTimeout(() => {
+            //     dispatch(login(true));
+            // }, 10000);
+            GetDepartment(props.token).then((response) => {
+                if (response.data.code === 0) {
+                    dispatch(updateDepartmentList(response.data.data));
+                    setRenderKey(prevKey => prevKey + 1);
+                } else {
+                    console.log('get department list error');
+                }
+            });
         }
     }, [props.loading]);
 
@@ -101,7 +111,8 @@ function Main(props) {
                                     <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />
 
                                     <Route path="/employee-commuting" exact element={<EmployeeCommuting />} />
-                                    <Route path="/employee-commuting/:employeeCode" element={<EmployeeCommutingDetail/>} />
+                                    <Route path="/employee-commuting/:employeeCode/:startDate/:endDate" element={<EmployeeCommutingDay />} />
+                                    <Route path="/employee-commuting/:employeeCode/:date" element={<EmployeeCommutingDetail />} />
 
                                     <Route
                                         path="/mobile-source-emissions"

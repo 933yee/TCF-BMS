@@ -57,8 +57,13 @@
 
 .data-table tr:hover {
     background-color: #dddddd;
+    cursor: pointer;
 }
 
+.data-table.hidden tr:hover {
+    background-color: #dddddd;
+    cursor: default;
+}
 
 .data-table button {
     background-color: transparent;

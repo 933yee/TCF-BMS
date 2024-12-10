@@ -62,7 +62,7 @@ export function pageState(state = initPages, action) {
             };
         case '@PAGE/DELETE_PAGE': {
             const newPages = state.pages.filter((page) => page !== action.deletedPage);
-            console.log(state.currentPage === action.deletedPage ? newPages[newPages.length - 1] : state.currentPage,)
+            //console.log(state.currentPage === action.deletedPage ? newPages[newPages.length - 1] : state.currentPage,)
             return {
                 ...state,
                 pages: newPages,
@@ -238,7 +238,30 @@ const initLocalDatabase = {
         },
         employeeCommuting: {
             data: [],
-            detailedData: []
+            detailedData: [],
+            vehicles:{
+                "小客車":{
+                    "coef":115,
+                },
+                "機車":{
+                    "coef":95.1,
+                },
+                "電動車":{
+                    "coef":78,
+                },
+                "公車":{
+                    "coef":76.7,
+                },
+                "火車":{
+                    "coef":54,
+                },
+                "高鐵":{
+                    "coef":32,
+                },
+                "電動機車":{
+                    "coef":25.2,
+                },
+            }
         },
         mobileSourceEmissions: {
             data: [
@@ -430,39 +453,45 @@ const initLocalDatabase = {
 
 export function localDatabaseState(state = initLocalDatabase, action) {
     switch (action.type) {
+        case '@POST/UPDATE_DEPARTMENT_LIST':
+            state.toolbar.departmentList = action.departmentList;
+            return state;
         case '@POST/INIT_EMPLOYEE_COMMUTING_DATA':
             state.data.employeeCommuting.data = [];
+            //console.log (action.employeeCommutingData);
             for (let employee of action.employeeCommutingData.employeeInfo) {
                 const transportationTypes = [];
-                for (let transportationType of employee.transportationTypes) {
-                    switch (transportationType) {
-                        case 'TRAIN':
-                            transportationTypes.push('火車');
-                            break;
-                        case 'BUS':
-                            transportationTypes.push('公車');
-                            break;
-                        case 'WALK':
-                            transportationTypes.push('走路');
-                            break;
-                        case 'SCOOTER':
-                            transportationTypes.push('機車');
-                            break;
-                        case 'CAR':
-                            transportationTypes.push('汽車');
-                            break;
-                        case 'BIKE':
-                            transportationTypes.push('腳踏車');
-                            break;
-                    }
-                }
+                // for (let transportationType of employee.transportationTypes) {
+                //     switch (transportationType) {
+                //         case 'TRAIN':
+                //             transportationTypes.push('火車');
+                //             break;
+                //         case 'BUS':
+                //             transportationTypes.push('公車');
+                //             break;
+                //         case 'WALK':
+                //             transportationTypes.push('走路');
+                //             break;
+                //         case 'SCOOTER':
+                //             transportationTypes.push('機車');
+                //             break;
+                //         case 'CAR':
+                //             transportationTypes.push('汽車');
+                //             break;
+                //         case 'BIKE':
+                //             transportationTypes.push('腳踏車');
+                //             break;
+                //     }
+                // }
                 state.data.employeeCommuting.data.push([
                     employee.name,
+                    employee.dept,
                     employee.code,
-                    transportationTypes.join('、'),
+                    '12345',
+                    // transportationTypes.join('、'),
                     employee.totalDistance / 1000,
-                    employee.totalCarbon,
-                    employee.reducedCarbon,
+                    employee.totalCarbon / 1000,
+                    employee.reducedCarbon / 1000,
                 ]);
             }
             return state;

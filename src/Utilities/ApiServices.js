@@ -34,9 +34,9 @@ export const GetDashBoardOverview = async (token, startDate) => {
 }
 
 
-export const GetEmployeeOverview = async (token, startDate) => {
+export const GetEmployeeOverview = async (token, startDate, endDate) => {
     try {
-        const response = await api.get(`/api/v0/dashboard/employeeOverview?startDate=${startDate}`, {
+        const response = await api.get(`/api/v0/dashboard/employeeOverview?startDate=${startDate}&endDate=${endDate}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -50,9 +50,25 @@ export const GetEmployeeOverview = async (token, startDate) => {
 }
 
 
-export const GetEmployeeOverviewDay = async (token, employeeCode, startDate) => {
+export const GetEmployeeOverviewDay = async (token, employeeCode, startDate, endDate) => {
     try {
-        const response = await api.get(`/api/v0/dashboard/employeeOverviewDay?employeeCode=${employeeCode}&startDate=${startDate}`, {
+        const response = await api.get(`/api/v0/dashboard/employeeOverviewDay?employeeCode=${employeeCode}&startDate=${startDate}&endDate=${endDate}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    }
+    catch (error) {
+        console.error('Error GetDashBoardOverview:', error);
+        throw error;
+    }
+}
+
+export const GetReverse = async (token, lat, lon) => {
+    try {
+        console.log(lat, lon);
+        const response = await api.get(`/api/v0/util/reverse?lat=${lat}&lon=${lon}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -68,6 +84,21 @@ export const GetEmployeeOverviewDay = async (token, employeeCode, startDate) => 
 export const AddEmployee = async (username, departmentId, employeeName, employeeCode) => {
     try {
         const response = await api.get(`/api/v0/dashboard/employeeOverview?startDate=${startDate}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response;
+    }
+    catch (error) {
+        console.error('Error GetDashBoardOverview:', error);
+        throw error;
+    }
+}
+
+export const GetDepartment = async (token) => {
+    try {
+        const response = await api.get(`/api/v0/company/department`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }

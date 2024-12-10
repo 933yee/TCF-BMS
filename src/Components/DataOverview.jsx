@@ -6,6 +6,7 @@ import {
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { GetDashBoardOverview } from 'Utilities/ApiServices.js';
+import Toolbar from 'Components/Toolbar.jsx';
 
 import './DataOverview.css';
 import { initDataOverview } from 'States/actions.js';
@@ -61,7 +62,7 @@ function DataOverview(props) {
 
     return (
         <>
-            {/* <Toolbar /> */}
+            <Toolbar hideAll={true} />
             <div className='data-overview'>
                 <div className='details'>
                     <div className='detail-blocks'>

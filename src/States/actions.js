@@ -75,9 +75,10 @@ export function login(loginInfo) {
 //     };
 // }
 
-export const initializeDatabase = () => {
+export const updateDepartmentList = (departmentList) => {
     return {
-        type: '@POST/INIT_LOCAL_DATABASE',
+        type: '@POST/UPDATE_DEPARTMENT_LIST',
+        departmentList
     };
 };
 

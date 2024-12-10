@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
-import { GetEmployeeOverview, GetEmployeeOverviewDay, GetReverse } from 'Utilities/ApiServices.js';
+import { GetEmployeeOverview, GetEmployeeOverviewDay } from 'Utilities/ApiServices.js';
 import { initEmployeeCommutingDataDetail } from 'States/actions.js';
 import { typeToChineseMap } from 'Utilities/Auxiliary.js';
 
@@ -11,8 +11,8 @@ import './Loader.css'
 import { TbDatabaseOff } from "react-icons/tb";
 
 
-function EmployeeCommutingDetail(props) {
-    const { employeeCode, date } = useParams();
+function EmployeeCommutingDay(props) {
+    const { employeeCode, startDate, endDate } = useParams();
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
@@ -22,12 +22,15 @@ function EmployeeCommutingDetail(props) {
     const [rerenderKey, setRerenderKey] = useState(0);
     const [selectedRows, setSelectedRows] = useState(new Set());
 
-    const dataHeaders = ['交通工具', '起始時間', '結束時間', '起始地', '抵達地','精準度','公里數', '碳足跡-KG'];
+    const dataHeaders = ['日期', '公里數', '碳足跡-KG',];
 
-    const handleRowClick = (index) => { };
+    const handleRowClick = (index) => {
+        navigate(`/employee-commuting/${employeeCode}/${data[index][0]}`);
+    };
 
     const onClickAddData = () => {
     };
+
 
     const handleCheckboxClick = (event, index) => {
         event.stopPropagation();
@@ -40,64 +43,26 @@ function EmployeeCommutingDetail(props) {
         setSelectedRows(newSelectedRows);
     };
 
+    // set date range 
     useEffect(() => {
         setIsLoading(true);
-        GetEmployeeOverviewDay(props.token, employeeCode, date, date).then((response) => {
+        GetEmployeeOverviewDay(props.token, employeeCode, startDate, endDate).then((response) => {
             if (response.data.data === undefined) {
                 setIsLoading(false);
                 return;
             }
-            if (response.data.data.dayOverviews.length != 0) {
-                console.log(response.data.data.dayOverviews[0].transportInfo);
-                const initialData = response.data.data.dayOverviews[0].transportInfo.map((item) => {
-                    const startDate = new Date(item.start.time);
-                    const formattedStartTime = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')} ${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}`;
-                    const endDate = new Date(item.end.time);
-                    const formattedEndTime = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')} ${String(endDate.getHours()).padStart(2, '0')}:${String(endDate.getMinutes()).padStart(2, '0')}`;
-                    return [
-                        `${typeToChineseMap[item.transportationType]}`,
-                        formattedStartTime,
-                        formattedEndTime,
-                        `${item.start.addr}`,
-                        `${item.end.addr}`,
-                        item.accuracy,
-                        item.distance / 1000,
-                        item.carbon / 1000,
-                    ];
-                });
-                setData(initialData);
-            }
-
-            // response.data.data.transportInfo.forEach((item, index) => {
-            //     GetReverse(props.token, item.start.lat, item.start.lon).then((startAddressResponse) => {
-            //         const startData = startAddressResponse.data;
-            //         const startLocation = startData?.name || `${startData?.address?.city || ''} ${startData?.address?.street || ''}`;
-            //         console.log(startLocation);
-            //         setData((prevData) => {
-            //             const updatedData = [...prevData];
-            //             updatedData[index][3] = startLocation;
-            //             return updatedData;
-            //         });
-            //     });
-
-            //     GetReverse(props.token, item.end.lat, item.end.lon).then((endAddressResponse) => {
-            //         const endData = endAddressResponse.data;
-            //         const endLocation = endData?.name || `${endData?.address?.city || ''} ${endData?.address?.street || ''}`;
-            //         console.log(endLocation);
-            //         setData((prevData) => {
-            //             const updatedData = [...prevData];
-            //             updatedData[index][4] = endLocation;
-            //             return updatedData;
-            //         });
-            //     });
-            // });
-
+            const dateOverview = response.data.data.dayOverviews;
+            setData(
+                dateOverview.map((item) => [
+                    item.date.split('+')[0],
+                    item.totalDistance / 1000,
+                    item.totalCarbon / 1000,
+                ])
+            )
             setIsLoading(false);
-            setRerenderKey((prev) => prev + 1);
+            setRerenderKey(rerenderKey + 1);
         });
     }, []);
-
-
 
     if (isLoading) {
         return (
@@ -133,7 +98,7 @@ function EmployeeCommutingDetail(props) {
         <>
             <Toolbar />
             <div className="employee-travel">
-                <div className="data-table hidden">
+                <div className="data-table">
                     <table>
                         <thead>
                             <tr>
@@ -175,4 +140,4 @@ export default connect((state) => ({
     ...state.loginState,
     ...state.dataState,
     ...state.localDatabaseState
-}))(EmployeeCommutingDetail);
+}))(EmployeeCommutingDay);

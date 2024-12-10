@@ -32,6 +32,15 @@ export const englishToChineseMap = {
     'vehicle-data': '車輛資料'
 };
 
+export const typeToChineseMap = {
+    'TRAIN': '火車',
+    'BUS': '公車',
+    'WALK': '走路',
+    'SCOOTER': '機車',
+    'CAR': '汽車',
+    'BIKE': '腳踏車'
+};
+
 // export const departmentStructure = (data) => {
 //     let department = {};
 //     for (employee in data.employeeInfo) {

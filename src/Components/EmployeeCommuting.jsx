@@ -6,9 +6,11 @@ import { GetEmployeeOverview, GetEmployeeOverviewDay } from 'Utilities/ApiServic
 import { initEmployeeCommutingData } from 'States/actions.js';
 import Toolbar from 'Components/Toolbar.jsx';
 import { TbDatabaseOff } from "react-icons/tb";
+import { IoIosClose } from "react-icons/io";
 
 import './EmployeeCommuting.css';
 import './Loader.css'
+import './AddDataForm.css';
 
 
 function EmployeeCommuting(props) {
@@ -20,12 +22,50 @@ function EmployeeCommuting(props) {
     const [selectedRows, setSelectedRows] = useState(new Set());
     const [isLoading, setIsLoading] = useState(true);
 
-    const dataHeaders = ['姓名', '員工編號', '交通工具', '公里數', '碳足跡-KG', '減少碳足跡'];
-
+    const dataHeaders = ['姓名', '部門', '員工編號', '上班天數', '公里數', '碳足跡-KG', '減少碳足跡'];
     const data = props.data.employeeCommuting.data;
 
+    const [selectedDepartment, setSelectedDepartment] = useState('');
+
+    const handleDepartmentChange = (department) => {
+        setSelectedRows(new Set());
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 200);
+        if (department === "請選擇部門") department = '';
+        setSelectedDepartment(department);
+    };
+
+    const downloadFile = (content, fileName, mimeType) => {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+
+    const convertToCSV = (data) => {
+        const rows = data.map(item => Object.values(item).join(','));
+        return '\uFEFF' + [dataHeaders.join(','), ...rows].join('\n');
+    };
+
+    const onClickExport = () => {
+        if (selectedRows.size === 0) return;
+        const csvContent = convertToCSV(filterData(data).filter((row, index) => selectedRows.has(index)));
+        downloadFile(csvContent, 'exported_data.csv', 'text/csv');
+    };
+
+    const onClickExportAll = () => {
+        const csvContent = convertToCSV(filterData(data));
+        downloadFile(csvContent, 'exported_data.csv', 'text/csv');
+    };
+
     const handleRowClick = (index) => {
-        navigate(`/employee-commuting/${data[index][1]}`);
+        navigate(`/employee-commuting/${data[index][2]}/${startDate}/${endDate}`);
     };
 
     const handleCheckboxClick = (event, index) => {
@@ -39,21 +79,9 @@ function EmployeeCommuting(props) {
         setSelectedRows(newSelectedRows);
     };
 
-    const formatDate = (date) => {
-        const padZero = (num) => num < 10 ? `0${num}` : num;
-        const year = date.getFullYear();
-        const month = padZero(date.getMonth() + 1);
-        const day = padZero(date.getDate());
-        //tmp
-        return `${2024}-${10}-${31}%2B08:00`;
-        // return `${year}-${month}-${day}%2B08:00`;
-    };
-
-    const currentTime = new Date().getTime();
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    const endDate = formatDate(new Date(currentTime));
-    const startDate = formatDate(oneMonthAgo);
+    // default date range
+    const [startDate, setStartDate] = useState("2024-10-01");
+    const [endDate, setEndDate] = useState("2024-10-31");
 
     useEffect(() => {
         setIsLoading(true);
@@ -61,13 +89,7 @@ function EmployeeCommuting(props) {
             setIsLoading(false);
             return;
         }
-
-        // GetEmployeeOverviewDay(props.token, "A001", endDate).then((response) => {
-        //     // if (response.data.data === undefined) return;
-        //     // dispatch(initEmployeeCommutingData(response.data.data));
-        //     // setRerenderKey(rerenderKey + 1);
-        // });
-        GetEmployeeOverview(props.token, endDate).then((response) => {
+        GetEmployeeOverview(props.token, startDate, endDate).then((response) => {
             if (response.data.data === undefined) return;
             dispatch(initEmployeeCommutingData(response.data.data));
             setIsLoading(false);
@@ -75,13 +97,47 @@ function EmployeeCommuting(props) {
         });
     }, []);
 
+    // Serach Data in the range of selected date    
+    const selectedDataRange = async (startDate, endDate) => {
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setIsLoading(true);
+        GetEmployeeOverview(props.token, startDate, endDate).then((response) => {
+            if (response.data.data === undefined) return;
+            dispatch(initEmployeeCommutingData(response.data.data));
+            setIsLoading(false);
+            setRerenderKey(rerenderKey + 1);
+        });
+    }
+        
+    const filterData = (data) => {
+        if (selectedDepartment === '') return data;
+        data = data.filter((row) => row[1] === selectedDepartment);
+        return data;
+    }
+
+    const onClickAddData = () => {
+        setShowModal(true);
+        setShowAddData(true);
+    }
+    const [showModal, setShowModal] = useState(false);
+    const [showAddData, setShowAddData] = useState(false);
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setShowAddData(false);
+    }
+
+    const handleSubmitAddData = (e) => {
+    }
+
     if (isLoading) {
         return (
             <>
-                <Toolbar />
+                <Toolbar
+                    handleDepartmentChange={handleDepartmentChange}
+                />
                 <div className="loader-container">
                     <div className='loader'>
-
                     </div>
                 </div>
             </>
@@ -92,7 +148,9 @@ function EmployeeCommuting(props) {
     if (data.length === 0) {
         return (
             <>
-                <Toolbar />
+                <Toolbar
+                    handleDepartmentChange={handleDepartmentChange}
+                />
                 <div className="no-data-container">
                     <div className="no-data-icon">
                         <TbDatabaseOff />
@@ -105,9 +163,91 @@ function EmployeeCommuting(props) {
         );
     }
 
+
     return (
         <>
-            <Toolbar />
+            <Toolbar
+                selectedDataRange={selectedDataRange}
+                onClickExportAll={onClickExportAll}
+                handleDepartmentChange={handleDepartmentChange}
+                onClickExport={onClickExport}
+                onClickAddData={onClickAddData}
+            />
+            <div className='add-data-form'>
+                {showModal && <div className="modal-overlay">
+                    <div className="modal-content-container">
+                        <div className='close-button' onClick={handleCloseModal}>
+                            <IoIosClose />
+                        </div>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            {
+                                showAddData && (
+                                    <>
+                                        <h2>新增資料</h2>
+
+                                        <form onSubmit={handleSubmitAddData}>
+                                            <div className="form-group">
+                                                <label className='title'>日期</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>時間</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>出發地</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>抵達地</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>員工編號</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>交通工具</label>
+                                                <select name='vehicle'>
+                                                    <option></option>
+                                                    {Object.keys(props.data.employeeCommuting.vehicles).map((vehicle, index) => (
+                                                        <option key={index}>{vehicle}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>里程數</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>交通金額</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>出差事由</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
+                                                <label className='title'>照片上傳</label>
+                                                <input type="file" className='textfield' name='photoUpload' accept="image/*" />
+                                            </div>
+                                            <div className='submit-button-container'>
+                                                <button
+                                                    type="submit"
+                                                    className='submit-button'
+                                                >
+                                                    提交資料
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </>
+                                )
+                            }
+                        </div>
+                    </div>
+                </div >
+                }
+            </div>
             <div className="employee-travel">
                 <div className="data-table">
                     <table>
@@ -121,7 +261,7 @@ function EmployeeCommuting(props) {
                         </thead>
 
                         <tbody>
-                            {data.map((row, index) => (
+                            {filterData(data).map((row, index) => (
                                 <tr
                                     key={index}
                                     onClick={() => handleRowClick(index, row)}

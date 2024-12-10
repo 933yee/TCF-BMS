@@ -16,7 +16,7 @@
 }
 
 .add-data-form .modal-content {
-    animation: slideDown 0.5s ease-in-out;
+    /* animation: slideDown 0.5s ease-in-out; */
     background-color: white;
     padding: 20px 50px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -75,6 +75,7 @@
 .add-data-form .modal-overlay .modal-content .form-group {
     margin-bottom: 15px;
     margin-bottom: 30px;
+    min-width: 25rem;
 }
 
 .add-data-form .modal-overlay .modal-content .form-group select {

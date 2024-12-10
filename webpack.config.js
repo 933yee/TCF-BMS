@@ -26,7 +26,7 @@ module.exports = {
     output: {
         path: distPath,
         filename: '[name].bundle.js',
-        publicPath: (isDev ? '/' : './')
+        publicPath: (isDev ? '/' :  'https://bms.carbon-walker.com/')
     },
     module: {
         rules: [
