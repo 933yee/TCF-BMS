@@ -38,25 +38,9 @@ function Main(props) {
     const dispatch = useDispatch();
     const localData = props.data;
 
-    useEffect(() => {
-        setRenderKey(prevKey => prevKey + 1);
-    }, [props.currentPage]);
-
-    useEffect(() => {
-        if (props.loading) {
-            // setTimeout(() => {
-            //     dispatch(login(true));
-            // }, 10000);
-            GetDepartment(props.token).then((response) => {
-                if (response.data.code === 0) {
-                    dispatch(updateDepartmentList(response.data.data));
-                    setRenderKey(prevKey => prevKey + 1);
-                } else {
-                    console.log('get department list error');
-                }
-            });
-        }
-    }, [props.loading]);
+    // useEffect(() => {
+    //     setRenderKey(prevKey => prevKey + 1);
+    // }, [props.currentPage]);
 
     // return <EmployeeData></EmployeeData>
     return (

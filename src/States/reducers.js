@@ -127,7 +127,7 @@ export function loginState(state = initLogin, action) {
 
 const initLocalDatabase = {
     toolbar: {
-        departmentList: ['研發部', '行政部', '市場部', '客服部', '財務部'],
+        departmentList: [],
     },
     data: {
         dataOverview: {},
@@ -453,6 +453,9 @@ const initLocalDatabase = {
 
 export function localDatabaseState(state = initLocalDatabase, action) {
     switch (action.type) {
+        case '@POST/INIT_DATA_OVERVIEW':
+            state.data.dataOverview = action.dataOverview;
+            return state;
         case '@POST/UPDATE_DEPARTMENT_LIST':
             state.toolbar.departmentList = action.departmentList;
             return state;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Toolbar.css';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { GoTriangleRight } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -8,17 +8,37 @@ import { VscAccount } from "react-icons/vsc";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { englishToChineseMap } from 'Utilities/Auxiliary.js';
 import { RiArrowDropRightFill } from "react-icons/ri";
+import {  updateDepartmentList } from 'States/actions.js';
+import { GetDepartment } from 'Utilities/ApiServices.js';
+
 
 function Toolbar(props) {
+    const dispatch = useDispatch();
     const hideAll = props.hideAll;
     const [timeSelectorToggle, setTimeSelectorToggle] = useState(false);
     const [department, setDepartment] = useState('');
     const [startTime, setStartTime] = useState('2024.10.01');
     const [endTime, setEndTime] = useState('2024.10.31');
 
-    const departmentList = props.toolbar.departmentList;
+    const [departmentList, setDepartmentList] = useState([]);
     const showVehicleTypeFilter = props.showVehicleTypeFilter;
     const vehicleTypeFilters = props.vehicleTypeFilters;
+
+    // Get department list from server
+    useEffect(() => {
+        if (props.toolbar && props.toolbar.departmentList.length > 0) {
+            setDepartmentList(props.toolbar.departmentList);
+            return;
+        }
+        GetDepartment(props.token).then((response) => {
+            if (response.data.code === 0) {
+                dispatch(updateDepartmentList(response.data.data));
+                setDepartmentList(response.data.data);
+            } else {
+                console.log('get department list error');
+            }
+        });
+    }, []);
 
     const handleDepartmentChange = (event) => {
         setDepartment(event.target.value);

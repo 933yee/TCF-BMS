@@ -32,7 +32,8 @@ function DataOverview(props) {
 
     const endDate = formatDate(new Date(currentTime));
     const startDate = formatDate(new Date(oneMonthAgoTime));
-    // 取得 DataOverview 的資料
+
+    // Get dashboard overview data from server
     useEffect(() => {
         if (Object.keys(props.data.dataOverview).length !== 0) {
             setDashboardData(props.data.dataOverview);
@@ -40,14 +41,33 @@ function DataOverview(props) {
         }
         GetDashBoardOverview(props.token, startDate).then((response) => {
             if (response.data.code === 0) {
-                setDashboardData(response.data.data);
+                const data = response.data.data;
+                const initData = {
+                    totalEmployeeCarbon: data.totalEmployeeCarbon,
+                    totalFreightCarbon: data.totalFreightCarbon,
+                    totalEmployeeCount: data.totalEmployeeCount,
+                    totalCarbon: data.totalCarbon,
+                    totalEmployeeCarbonReduce: data.totalEmployeeCarbonReduce,
+                    totalFreightCarbonReduce : data.totalFreightCarbonReduce,
+                    totalCarbonReduce: data.totalCarbonReduce,
+                    totalEmployeeCountReduce: data.totalEmployeeCountReduce,
+                    transInfo: data.transInfo.reduce((result, item) => {
+                        result[item.t] = item.cnt;
+                        return result;
+                    }, {}),
+                    reduce: data.transInfo.reduce((result, item) => {
+                        result[item.t] = item.pnt;
+                        return result;
+                    }, {}),
+                }
+                setDashboardData(initData);
                 dispatch(initDataOverview(response.data.data));
             }
         }
         ).catch((error) => {
             console.log(error);
         });
-    }, []);
+    }, [startDate]);
 
     const handleLinkClick = (page) => {
         // dispatch(changePageState(page));
@@ -171,7 +191,7 @@ function DataOverview(props) {
                                 <div className='block'>
                                     公車
                                     <div className='block-data'>
-                                        {formattedNumber(dashboardData.busTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.BUS)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
@@ -181,7 +201,7 @@ function DataOverview(props) {
                                     步行
                                     <div className='block-data'>
                                         {/* TODO 沒有捷運 */}
-                                        {formattedNumber(dashboardData.walkTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.WALK)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
@@ -190,7 +210,7 @@ function DataOverview(props) {
                                 <div className='block'>
                                     汽車
                                     <div className='block-data'>
-                                        {formattedNumber(dashboardData.carTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.CAR)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
@@ -199,7 +219,7 @@ function DataOverview(props) {
                                 <div className='block'>
                                     機車
                                     <div className='block-data'>
-                                        {formattedNumber(dashboardData.scooterTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.SCOOTER)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
@@ -208,7 +228,7 @@ function DataOverview(props) {
                                 <div className='block'>
                                     火車
                                     <div className='block-data'>
-                                        {formattedNumber(dashboardData.trainTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.TRAIN)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
@@ -217,7 +237,7 @@ function DataOverview(props) {
                                 <div className='block'>
                                     腳踏車
                                     <div className='block-data'>
-                                        {formattedNumber(dashboardData.bikeTransportCount)}
+                                        {dashboardData.transInfo && formattedNumber(dashboardData.transInfo.BIKE)}
                                         <div className='block-data-compare'>
                                             0 %
                                         </div>
