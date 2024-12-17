@@ -11,6 +11,7 @@ import DataOverview from 'Components/DataOverview.jsx';
 import Panel from 'Components/Panel.jsx';
 import Navbar from 'Components/Navbar.jsx';
 import Login from 'Components/Login.jsx';
+import Register from 'Components/Register.jsx';
 import EmployeeTravel from 'Components/EmployeeTravel.jsx';
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
@@ -128,7 +129,11 @@ function Main(props) {
                     </CSSTransition>
                 </>
             ) : (
-                <Login />
+                // <Login />
+                <Routes>
+                    <Route path="/*" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
             )}
         </div>
     );
