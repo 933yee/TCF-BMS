@@ -4,10 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Roboto', sans-serif;
 }
 
 .login-container .login-panel {
     background-color: white;
+    z-index: 1;
     width: 30rem;
     height: 33rem;
     display: flex;
@@ -15,13 +17,12 @@
     align-items: center;
     flex-direction: column;
     border-radius: .5rem;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     box-shadow: 0 0.5rem 0.4rem rgba(0, 0, 0, 0.2);
-    position: relative;
 }
 
 .login-container .login-form {
-    width: 100%;
+    width: 75%;
     height: auto;
     display: flex;
     justify-content: center;
@@ -31,22 +32,57 @@
 
 .login-container .logo {
     height: 10rem;
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
     object-fit: contain;
     padding-top: 3rem;
 }
 
-.login-container .login-account {
-    width: 60%;
-    height: 1.5rem;
-    text-align: center;
-    margin: 1rem 0;
+.login-container .login-account-container,
+.login-container .login-password-container {
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1rem;
 }
 
-.login-container .login-password {
-    width: 60%;
-    height: 1.5rem;
-    text-align: center;
+.login-container .login-account-container .login-account-title,
+.login-container .login-password-container .login-password-title{
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.login-container .login-password,
+.login-container .login-account {
+    padding-left: 40px;
+    width: 100%;
+    height: 2rem;
+    margin-top: 0.2rem;
+    border-radius: .1rem;
+    border: 1px solid rgb(184, 184, 184);
+}
+
+.login-container .login-account-wrapper,
+.login-container .login-password-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.login-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: rgb(194, 194, 194); 
+  }
+
+.login-container .login-account::placeholder,
+.login-container .login-password::placeholder {
+    text-align: left;
 }
 
 .login-container .login-capthca {
@@ -58,27 +94,67 @@
     transform: scale(1);
 }
 
+.login-container .login-rember-forget {
+    padding: 0.5rem 0 1rem 0;
+    width: 100%;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-container .login-rember-forget a {
+    text-decoration: none;
+    transition: opacity .1s;
+}
+
+.login-container .login-rember-forget a:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.login-container .login-rember{
+    display: flex;
+    align-items: center;
+}
+
 .login-container .login-submit {
     height: 3rem;
-    position: absolute;
     width: 100%;
-    bottom: 0;
-    left: 0;
-    border: 0;
-    border-radius: 0 0 .5rem .5rem;
     font-weight: 700;
-    transition: opacity .2s;
+    transition: opacity .1s;
     background-color: rgb(39, 129, 141);
     color: white;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: .5rem;
 }
 
 .login-container .login-submit:hover {
     cursor: pointer;
+    opacity: 0.9;
+}
+
+.login-container .login-register {
+    width: 100%;
+    display: flex;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+}
+
+.login-container .login-register a {
+    text-decoration: none;
+    transition: opacity .1s;
+}
+
+.login-container .login-register a:hover {
+    cursor: pointer;
     opacity: 0.8;
 }
 
-
+.login-container .login-register .register-text {
+    padding-left: 0.5rem;
+}
 
 @media (min-width: 1200px) {}
 

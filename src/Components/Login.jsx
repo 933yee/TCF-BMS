@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginAndLoading } from 'States/actions.js';
 import { useDispatch } from 'react-redux';
 import { UserLogin } from 'Utilities/ApiServices.js';
+import { MdAccountCircle } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 import './Login.css';
 
@@ -72,16 +74,48 @@ function Login() {
             <div className='login-panel'>
                 <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <input className='login-account' type="text" name="account" placeholder="帳號" />
-                    <input className='login-password' type="password" name="password" placeholder="密碼" />
-                    <div className='login-capthca'>
+                    <div className='login-account-container'>
+                        <div className='login-account-title'> 
+                            Username 
+                        </div>
+                        <div className='login-account-wrapper'>
+                            <MdAccountCircle className='login-icon' />
+                            <input className='login-account' type="text" name="account" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div className='login-password-container'>
+                        <div className='login-password-title'>
+                            Password
+                        </div>
+                        <div className='login-password-wrapper'>
+                            <RiLockPasswordFill className='login-icon'/>
+                            <input className='login-password' type="password" name="password" placeholder="Password" />
+                        </div>
+                    </div>
+                    <div className='login-rember-forget'>
+                        <div className='login-rember'>
+                            <input type='checkbox' id='rember'></input>
+                            <label htmlFor='rember'> Remember me</label>
+                        </div>
+                        {/* 忘記密碼 */}
+                        <Link to='/forget-password'>
+                            <div>Forgot password?</div>
+                        </Link>
+                    </div>
+                    {/* <div className='login-capthca'>
                         <ReCAPTCHA
                             className='login-capthca'
                             sitekey="6Ld_Q5MpAAAAAGW87uMuYMynl3cxZndatKGM_UMc"
                             onChange={handleRecaptchaChange}
                         />
+                    </div> */}
+                    <button className='login-submit' type="submit">Login</button>
+                    <div className='login-register'>
+                        Don't have an account? 
+                        <Link to='/register'>
+                            <div className='register-text'>Register now</div>
+                        </Link>
                     </div>
-                    <button className='login-submit' type="submit">登入</button>
                 </form>
             </div>
         </div>
