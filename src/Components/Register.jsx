@@ -57,7 +57,7 @@ function Register() {
             <ToastContainer 
                 position="top-center"
                 autoClose={5000}
-                hideProgressBar={false}
+                hideProgressBar={true}
                 newestOnTop={true}
                 closeOnClick
                 pauseOnHover
