@@ -35,7 +35,7 @@
     object-fit: contain;
 }
 
-.login-container .login-account-container,
+.login-container .login-username-container,
 .login-container .login-password-container {
     width: 98%;
     display: flex;
@@ -45,14 +45,14 @@
     padding-top: 1rem;
 }
 
-.login-container .login-account-container .login-account-title,
+.login-container .login-username-container .login-username-title,
 .login-container .login-password-container .login-password-title{
     width: 100%;
     font-size: 0.9rem;
 }
 
 .login-container .login-password,
-.login-container .login-account {
+.login-container .login-username {
     padding-left: 40px;
     width: 100%;
     height: 2rem;
@@ -61,7 +61,7 @@
     border: 1px solid rgb(184, 184, 184);
 }
 
-.login-container .login-account-wrapper,
+.login-container .login-username-wrapper,
 .login-container .login-password-wrapper {
     width: 100%;
     display: flex;
@@ -78,7 +78,7 @@
     color: rgb(194, 194, 194); 
   }
 
-.login-container .login-account::placeholder,
+.login-container .login-username::placeholder,
 .login-container .login-password::placeholder {
     text-align: left;
 }

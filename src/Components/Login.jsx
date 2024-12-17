@@ -20,7 +20,7 @@ function Login() {
             dispatch(loginAndLoading({
                 login: true,
                 loading: true,
-                account: localStorage.getItem('account'),
+                username: localStorage.getItem('username'),
                 token: token
             }));
             // history('/data-overview');
@@ -34,29 +34,29 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (recaptchaValue) {
-            // console.log("帳號:", event.target.elements.account.value);
+            // console.log("帳號:", event.target.elements.username.value);
             // console.log("密碼:", event.target.elements.password.value);
             // console.log("驗證碼:", recaptchaValue);
-            const account = event.target.elements.account.value;
+            const username = event.target.elements.username.value;
             const password = event.target.elements.password.value;
 
-            if (account === '' || password === '') {
+            if (username === '' || password === '') {
                 alert("請輸入帳號密碼");
                 return;
             }
 
-            UserLogin(account, password).then((response) => {
+            UserLogin(username, password).then((response) => {
                 //console.log(response);
                 if (response.data.code === 0) {
                     const token = response.data.data.token;
-                    localStorage.setItem('account', account);
+                    localStorage.setItem('username', username);
                     localStorage.setItem('password', password);
                     localStorage.setItem('token', token);
                     dispatch(loginAndLoading(
                         {
                             login: true,
                             loading: true,
-                            account: account,
+                            username: username,
                             token: token
                         }
                     ));
@@ -80,13 +80,13 @@ function Login() {
             <div className='login-panel'>
                 <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <div className='login-account-container'>
-                        <div className='login-account-title'> 
+                    <div className='login-username-container'>
+                        <div className='login-username-title'> 
                             Username 
                         </div>
-                        <div className='login-account-wrapper'>
+                        <div className='login-username-wrapper'>
                             <MdAccountCircle className='login-icon' />
-                            <input className='login-account' type="text" name="account" placeholder="Username" />
+                            <input className='login-username' type="text" name="username" placeholder="Username" />
                         </div>
                     </div>
                     <div className='login-password-container'>
