@@ -9,11 +9,10 @@
 
 .login-container .login-panel {
     background-color: white;
-    z-index: 1;
     width: 30rem;
-    height: 33rem;
+    height: 35rem;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: .5rem;
@@ -34,7 +33,6 @@
     height: 10rem;
     padding-bottom: 1rem;
     object-fit: contain;
-    padding-top: 3rem;
 }
 
 .login-container .login-account-container,

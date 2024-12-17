@@ -12,7 +12,7 @@ import './Login.css';
 function Login() {
     const dispatch = useDispatch();
     const history = useNavigate();
-    const [recaptchaValue, setRecaptchaValue] = useState(null);
+    const [recaptchaValue, setRecaptchaValue] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -39,6 +39,12 @@ function Login() {
             // console.log("驗證碼:", recaptchaValue);
             const account = event.target.elements.account.value;
             const password = event.target.elements.password.value;
+
+            if (account === '' || password === '') {
+                alert("請輸入帳號密碼");
+                return;
+            }
+
             UserLogin(account, password).then((response) => {
                 //console.log(response);
                 if (response.data.code === 0) {
