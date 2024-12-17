@@ -37,6 +37,8 @@ function Toolbar(props) {
             } else {
                 console.log('get department list error');
             }
+        }).catch((error) => {
+            console.error('Error GetDepartment:', error);
         });
     }, []);
 

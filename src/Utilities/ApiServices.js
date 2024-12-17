@@ -37,6 +37,8 @@ export const UserRegister = async (username, password, email) => {
 
 export const GetDashBoardOverview = async (token, startDate) => {
     try {
+        console.log(token);
+        console.log(startDate);
         const response = await api.get(`/api/v0/dashboard/overview?startDate=${startDate}`, {
             headers: {
                 Authorization: `Bearer ${token}`,

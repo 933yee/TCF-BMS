@@ -94,6 +94,9 @@ function EmployeeCommuting(props) {
             dispatch(initEmployeeCommutingData(response.data.data));
             setIsLoading(false);
             setRerenderKey(rerenderKey + 1);
+        }).catch((error) => {
+            console.error('Error GetEmployeeOverview:', error);
+            setIsLoading(false);
         });
     }, []);
 
