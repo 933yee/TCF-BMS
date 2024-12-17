@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { UserRegister } from 'Utilities/ApiServices.js';
 import { MdAccountCircle, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Register.css';
 
 function Register() {
@@ -17,35 +19,33 @@ function Register() {
         const email = event.target.elements.email.value;
         
         if (username === '') {
-            alert("Please enter a username");
+            toast.error("Please enter a username");
             return;
         }
 
         if (password === '') {
-            alert("Please enter a password");
+            toast.error("Please enter a password");
             return;
         }
 
         if (password !== passwordConfirm) {
-            alert("Passwords do not match");
+            toast.error("Passwords do not match");
             return;
         }
 
         if (email === '') {
-            alert("Please enter an email");
+            toast.error("Please enter an email");
             return;
         }
 
         UserRegister(username, password, email).then((response) => {
             if (response.data.code === 0) {
-                alert("Registration successful");
-
                 // Redirect to login page
-                window.location.href = '/login';
-
+                const successMessage = encodeURIComponent("Registration successful");
+                window.location.href = `/login?toastMessage=${successMessage}&toastType=success`;
             } else {
                 const msg = response.data.msg;
-                alert("Registration failed: " + msg);
+                toast.error("Registration failed: " + msg);
             }
         }).catch((error) => {
             console.error('Error Register:', error);
@@ -54,6 +54,14 @@ function Register() {
 
     return (
         <div className='register-container'>
+            <ToastContainer 
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                pauseOnHover
+            />
             <div className='register-panel'>
                 <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='register-form' onSubmit={handleSubmit}>

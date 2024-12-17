@@ -89,6 +89,13 @@ export function initDataOverview(dataOverview) {
     };
 }
 
+export function initEmployeeBusinessTravelData(employeeBusinessTravelData) {
+    return {
+        type: '@POST/INIT_EMPLOYEE_BUSINESS_TRAVEL_DATA',
+        employeeBusinessTravelData,
+    };
+}
+
 export function initEmployeeCommutingData(employeeCommutingData) {
     return {
         type: '@POST/INIT_EMPLOYEE_COMMUTING_DATA',

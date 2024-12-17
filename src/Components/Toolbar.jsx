@@ -217,7 +217,7 @@ function Toolbar(props) {
                     <div className='user-icon'>
                         <VscAccount />
                     </div>
-                    {props.account}
+                    {props.username}
                 </div>
                 {showVehicleTypeFilter && <div className='vehicle-type-filter'>
                     <label>

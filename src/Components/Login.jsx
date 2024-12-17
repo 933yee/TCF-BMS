@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { UserLogin } from 'Utilities/ApiServices.js';
 import { MdAccountCircle } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 
 function Login() {
@@ -17,17 +18,34 @@ function Login() {
 
     useEffect(() => {
         const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        const username = localStorage.getItem('username') || sessionStorage.getItem('username');
         if (token) {
             // Auto login if token exists
             dispatch(
                 loginAndLoading({
                     login: true,
                     loading: true,
-                    username: localStorage.getItem('username'),
+                    // tmp
+                    basic_info: true,
+                    username: username,
                     token: token
                 })
             );
         }
+
+        // Check if there is a toast message
+        const queryParams = new URLSearchParams(location.search);
+        const toastMessage = queryParams.get('toastMessage');
+        const toastType = queryParams.get('toastType');
+
+        // Display toast message
+        if (toastMessage) {
+            if (toastType === 'success') {
+                toast.success(decodeURIComponent(toastMessage));
+            } 
+            window.history.replaceState(null, '', '/login');
+        }
+
     }, []);
 
     const handleRecaptchaChange = (value) => {
@@ -41,12 +59,12 @@ function Login() {
             const password = event.target.elements.password.value;
 
             if (username === '') {
-                alert("Please enter a username");
+                toast.error("Please enter a username");
                 return;
             }
-
+            
             if (password === '') {
-                alert("Please enter a password");
+                toast.error("Please enter a password");
                 return;
             }
 
@@ -70,6 +88,8 @@ function Login() {
                         loginAndLoading({
                             login: true,
                             loading: true,
+                            // tmp
+                            basic_info: false,
                             username: username,
                             token: token
                         })
@@ -80,7 +100,7 @@ function Login() {
 
                 } else {
                     const msg = response.data.msg;
-                    alert("Login failed: " + msg);
+                    toast.error("Login failed: " + msg);
                 }
             }
             ).catch((error) => {
@@ -94,35 +114,58 @@ function Login() {
 
     return (
         <div className='login-container'>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000} 
+                hideProgressBar={true} 
+                newestOnTop={true} 
+                closeOnClick 
+                pauseOnHover 
+                theme="light"
+            />
             <div className='login-panel'>
                 <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <div className='login-username-container'>
-                        <div className='login-username-title'> 
+                    <div className='login-data-container'>
+                        <div className='login-data-title'> 
                             Username 
                         </div>
-                        <div className='login-username-wrapper'>
+                        <div className='login-data-wrapper'>
                             <MdAccountCircle className='login-icon' />
-                            <input className='login-username' type="text" name="username" placeholder="Username" />
+                            <input className='login-data' type="text" name="username" placeholder="Username" />
                         </div>
                     </div>
-                    <div className='login-password-container'>
-                        <div className='login-password-title'>
+                    <div className='login-data-container'>
+                        <div className='login-data-title'>
                             Password
                         </div>
-                        <div className='login-password-wrapper'>
+                        <div className='login-data-wrapper'>
                             <RiLockPasswordFill className='login-icon'/>
-                            <input className='login-password' type="password" name="password" placeholder="Password" />
+                            <input className='login-data' type="password" name="password" placeholder="Password" />
                         </div>
                     </div>
                     <div className='login-rember-forget'>
                         <div className='login-rember'>
-                            <input type='checkbox' id='rember' name='rember' onChange={() => setRemember(!remember)} />
+                            <input 
+                                type='checkbox' 
+                                id='rember' 
+                                name='rember' 
+                                onChange={() => setRemember(!remember)} 
+                            />
                             <label htmlFor='rember'> Remember me</label>
                         </div>
-                        <Link to='/forget-password'>
-                            <div>Forgot password?</div>
-                        </Link>
+                        <a 
+                            onClick={() => {
+                                toast.info(
+                                    <div>
+                                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a>
+                                    </div>,
+                                    { autoClose: false, closeOnClick: true }
+                                );
+                            }}
+                        >
+                            Forgot password?
+                        </a>
                     </div>
                     {/* <div className='login-capthca'>
                         <ReCAPTCHA

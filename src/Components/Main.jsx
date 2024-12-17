@@ -12,7 +12,11 @@ import Panel from 'Components/Panel.jsx';
 import Navbar from 'Components/Navbar.jsx';
 import Login from 'Components/Login.jsx';
 import Register from 'Components/Register.jsx';
-import EmployeeTravel from 'Components/EmployeeTravel.jsx';
+
+import EmployeeBusinessTravel from 'Components/EmployeeBusinessTravel.jsx';
+import EmployeeBusinessTravelDay from 'Components/EmployeeBusinessTravelDay.jsx';
+import EmployeeBusinessTravelDetail from 'Components/EmployeeBusinessTravelDetail.jsx';
+
 import UpstreamTransportation from 'Components/UpstreamTransportation.jsx';
 import EmployeeCommuting from 'Components/EmployeeCommuting.jsx';
 import EmployeeCommutingDetail from 'Components/EmployeeCommutingDetail.jsx';
@@ -79,18 +83,9 @@ function Main(props) {
                                     <Route path="/current-usage-of-public-transportation" exact element={<>交通車使用情況</>} />
                                     <Route path="/accumulation-status" exact element={<>積點狀況</>} />
 
-                                    <Route
-                                        path="/employee-travel"
-                                        exact
-                                        element={
-                                            <EmployeeTravel />
-                                        }
-                                    />
-                                    {localData['employeeTravel'].data.map((row, index) => (
-                                        <Route key={index} path={`/employee-travel/${index + 1}`} element={
-                                            <EmployeeTravel isDetailed={true} detailIndex={index} />
-                                        } />
-                                    ))}
+                                    <Route path="/employee-business-travel" exact element={<EmployeeBusinessTravel />}/>
+                                    <Route path="/employee-business-travel/:employeeCode/:startDate/:endDate" element={<EmployeeBusinessTravelDay />} />
+                                    <Route path="/employee-business-travel/:employeeCode/:date" element={<EmployeeBusinessTravelDetail />} />
 
                                     <Route path="/upstream-transportation" exact element={<UpstreamTransportation />} />
                                     <Route path="/downstream-transportation" exact element={<UpstreamTransportation />} />

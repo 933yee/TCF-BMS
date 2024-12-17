@@ -3,17 +3,17 @@ import { connect, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { GetEmployeeOverview, GetEmployeeOverviewDay } from 'Utilities/ApiServices.js';
-import { initEmployeeCommutingData } from 'States/actions.js';
+import { initEmployeeBusinessTravelData } from 'States/actions.js';
 import Toolbar from 'Components/Toolbar.jsx';
 import { TbDatabaseOff } from "react-icons/tb";
 import { IoIosClose } from "react-icons/io";
 
-import './EmployeeCommuting.css';
+import './EmployeeBusinessTravel.css';
 import './Loader.css'
 import './AddDataForm.css';
 
 
-function EmployeeCommuting(props) {
+function EmployeeBusinessTravel(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -23,7 +23,7 @@ function EmployeeCommuting(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     const dataHeaders = ['姓名', '部門', '員工編號', '上班天數', '公里數', '碳足跡-KG', '減少碳足跡'];
-    const data = props.data.employeeCommuting.data;
+    const data = props.data.employeeBusinessTravel.data;
 
     const [selectedDepartment, setSelectedDepartment] = useState('');
 
@@ -65,7 +65,7 @@ function EmployeeCommuting(props) {
     };
 
     const handleRowClick = (index) => {
-        navigate(`/employee-commuting/${data[index][2]}/${startDate}/${endDate}`);
+        navigate(`/employee-business-travel/${data[index][2]}/${startDate}/${endDate}`);
     };
 
     const handleCheckboxClick = (event, index) => {
@@ -91,7 +91,7 @@ function EmployeeCommuting(props) {
         }
         GetEmployeeOverview(props.token, startDate, endDate).then((response) => {
             if (response.data.data === undefined) return;
-            dispatch(initEmployeeCommutingData(response.data.data));
+            dispatch(initEmployeeBusinessTravelData(response.data.data));
             setIsLoading(false);
             setRerenderKey(rerenderKey + 1);
         }).catch((error) => {
@@ -107,7 +107,7 @@ function EmployeeCommuting(props) {
         setIsLoading(true);
         GetEmployeeOverview(props.token, startDate, endDate).then((response) => {
             if (response.data.data === undefined) return;
-            dispatch(initEmployeeCommutingData(response.data.data));
+            dispatch(initEmployeeBusinessTravelData(response.data.data));
             setIsLoading(false);
             setRerenderKey(rerenderKey + 1);
         });
@@ -210,10 +210,14 @@ function EmployeeCommuting(props) {
                                                 <input type="text" className='textfield' name='license' />
                                             </div>
                                             <div className="form-group">
+                                                <label className='title'>部門</label>
+                                                <input type="text" className='textfield' name='license' />
+                                            </div>
+                                            <div className="form-group">
                                                 <label className='title'>交通工具</label>
                                                 <select name='vehicle'>
                                                     <option></option>
-                                                    {Object.keys(props.data.employeeCommuting.vehicles).map((vehicle, index) => (
+                                                    {Object.keys(props.data.employeeBusinessTravel.vehicles).map((vehicle, index) => (
                                                         <option key={index}>{vehicle}</option>
                                                     ))}
                                                 </select>
@@ -251,7 +255,7 @@ function EmployeeCommuting(props) {
                 </div >
                 }
             </div>
-            <div className="employee-commuting">
+            <div className="employee-business-travel">
                 <div className="data-table">
                     <table>
                         <thead>
@@ -294,4 +298,4 @@ export default connect((state) => ({
     ...state.loginState,
     ...state.dataState,
     ...state.localDatabaseState
-}))(EmployeeCommuting);
+}))(EmployeeBusinessTravel);

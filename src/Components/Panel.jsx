@@ -24,9 +24,9 @@ function Panel(props) {
                 <Link to="/data-overview" className={`panel-item ${currentPathname === 'data-overview' ? 'focused' : 'not-focused'}`} onClick={() => handleLinkClick('/data-overview')}>
                     數據總覽
                 </Link>
-                <Link to="/employee-travel" className={`panel-item  
-                    ${currentPathname === 'employee-travel' ? 'focused' : 'not-focused'}`}
-                    onClick={() => handleLinkClick('/employee-travel')}
+                <Link to="/employee-business-travel" className={`panel-item  
+                    ${currentPathname === 'employee-business-travel' ? 'focused' : 'not-focused'}`}
+                    onClick={() => handleLinkClick('/employee-business-travel')}
                 >
                     員工差旅
                 </Link>

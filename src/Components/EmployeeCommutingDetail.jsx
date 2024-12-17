@@ -132,7 +132,7 @@ function EmployeeCommutingDetail(props) {
     return (
         <>
             <Toolbar />
-            <div className="employee-travel">
+            <div className="employee-commuting">
                 <div className="data-table hidden">
                     <table>
                         <thead>

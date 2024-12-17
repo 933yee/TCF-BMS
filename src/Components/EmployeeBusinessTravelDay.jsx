@@ -3,7 +3,6 @@ import { connect, useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CarbonDataTable from 'Components/CarbonDataTable.jsx';
 import { GetEmployeeOverview, GetEmployeeOverviewDay } from 'Utilities/ApiServices.js';
-import { initEmployeeCommutingDataDetail } from 'States/actions.js';
 import { typeToChineseMap } from 'Utilities/Auxiliary.js';
 
 import Toolbar from 'Components/Toolbar.jsx';
@@ -11,7 +10,7 @@ import './Loader.css'
 import { TbDatabaseOff } from "react-icons/tb";
 
 
-function EmployeeCommutingDay(props) {
+function EmployeeBusinessTravelDay(props) {
     const { employeeCode, startDate, endDate } = useParams();
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +24,7 @@ function EmployeeCommutingDay(props) {
     const dataHeaders = ['日期', '公里數', '碳足跡-KG',];
 
     const handleRowClick = (index) => {
-        navigate(`/employee-commuting/${employeeCode}/${data[index][0]}`);
+        navigate(`/employee-business-travel/${employeeCode}/${data[index][0]}`);
     };
 
     const onClickAddData = () => {
@@ -97,7 +96,7 @@ function EmployeeCommutingDay(props) {
     return (
         <>
             <Toolbar />
-            <div className="employee-commuting">
+            <div className="employee-business-travel">
                 <div className="data-table">
                     <table>
                         <thead>
@@ -140,4 +139,4 @@ export default connect((state) => ({
     ...state.loginState,
     ...state.dataState,
     ...state.localDatabaseState
-}))(EmployeeCommutingDay);
+}))(EmployeeBusinessTravelDay);

@@ -78,7 +78,9 @@ export function pageState(state = initPages, action) {
 const initLogin = {
     login: false,
     loading: false,
-    account: '',
+    // tmp
+    basic_info: false,
+    username: '',
     token: '',
 };
 
@@ -89,7 +91,8 @@ export function loginState(state = initLogin, action) {
                 ...state,
                 loading: action.loginInfo.loading,
                 login: action.loginInfo.login,
-                account: action.loginInfo.account,
+                basic_info: action.loginInfo.basic_info,
+                username: action.loginInfo.username,
                 token: action.loginInfo.token,
             };
         case '@USER/LOGIN':
@@ -131,110 +134,32 @@ const initLocalDatabase = {
     },
     data: {
         dataOverview: {},
-        employeeTravel: {
-            data: [
-                ['自動', '陳美華', 'A001', '2024-07-01', '10:00 ~ 15:12', '5小時12分鐘', '火車、公車、走路、機車', 25, 2.02],
-                ['手動', '許曉明', 'B002', '2024-07-02', '13:00 ~ 14:12', '1小時12分鐘', '走路、汽車', 15, 1.89],
-                ['自動', '王揚鈞', 'A002', '2024-07-03', '15:00 ~ 15:32', '32分鐘', '公車', 7, 1.06],
-                ['自動', '陳姓會', 'A005', '2024-07-04', '09:00 ~ 12:12', '3小時12分鐘', '機車', 13, 5.02],
-                ['自動', '吳勝明', 'A006', '2024-07-05', '09:08 ~ 10:12', '1小時4分鐘', '機車', 32, 10.02],
-                ['手動', '林秉聖', 'B008', '2024-07-06', '13:00 ~ 14:12', '1小時12分鐘', '走路、汽車', 6, 1.89],
-                ['自動', '孫燕姿', 'A007', '2024-07-07', '11:00 ~ 13:12', '2小時12分鐘', '走路、機車', 12, 1.02],
-                ['自動', '莫可霖', 'A009', '2024-07-08', '10:00 ~ 15:12', '5小時12分鐘', '火車、公車、走路、機車', 15, 2.02],
-                ['手動', '梁志豪', 'B010', '2024-07-09', '08:00 ~ 10:00', '2小時', '火車', 50, 2.50],
-                ['自動', '王冠中', 'A011', '2024-07-10', '09:30 ~ 10:45', '1小時15分鐘', '機車', 20, 4.50],
-                ['手動', '李惠珍', 'B012', '2024-07-11', '14:00 ~ 15:30', '1小時30分鐘', '走路、公車', 10, 1.20],
-                ['自動', '張淑芬', 'A013', '2024-07-12', '12:00 ~ 13:00', '1小時', '汽車', 18, 3.60],
-                ['手動', '黃文祥', 'B014', '2024-07-13', '11:00 ~ 12:45', '1小時45分鐘', '走路、火車', 35, 2.80],
-                ['自動', '趙麗華', 'A015', '2024-07-14', '08:15 ~ 09:45', '1小時30分鐘', '機車', 25, 6.25],
-                ['手動', '鄭浩仁', 'B016', '2024-07-15', '13:30 ~ 15:00', '1小時30分鐘', '公車', 12, 1.40],
-                ['自動', '吳佳穎', 'A017', '2024-07-16', '09:00 ~ 10:30', '1小時30分鐘', '機車', 30, 7.50],
-                ['手動', '劉士龍', 'B018', '2024-07-17', '15:00 ~ 16:30', '1小時30分鐘', '走路、汽車', 20, 2.00],
-            ],
-            detailedData: [
-                [
-                    ['2024-07-01', '10:00 ~ 11:00', '1小時', '火車', 5, 0.4],
-                    ['2024-07-01', '11:00 ~ 12:00', '1小時', '公車', 2, 0.2],
-                    ['2024-07-01', '12:00 ~ 13:00', '1小時', '走路', 8, 0.6],
-                    ['2024-07-01', '13:00 ~ 14:00', '1小時', '機車', 10, 0.82],
-                    ['2024-07-01', '14:00 ~ 15:00', '1小時', '機車', 10, 0.8],
-                    ['2024-07-01', '15:00 ~ 15:12', '12分鐘', '機車', 10, 0.8],
-                ],
-                [
-                    ['2024-07-02', '13:00 ~ 14:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-02', '14:00 ~ 14:12', '12分鐘', '汽車', 10, 1.49],
-                ],
-                [
-                    ['2024-07-03', '15:00 ~ 15:32', '32分鐘', '公車', 7, 1.06],
-                ],
-                [
-                    ['2024-07-04', '09:00 ~ 10:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-04', '10:00 ~ 11:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-04', '11:00 ~ 12:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-04', '12:00 ~ 12:12', '12分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-05', '09:00 ~ 10:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-05', '10:00 ~ 11:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-05', '11:00 ~ 12:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-05', '12:00 ~ 13:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-05', '13:00 ~ 13:12', '12分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-06', '13:00 ~ 14:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-06', '14:00 ~ 14:12', '12分鐘', '汽車', 10, 1.49],
-                ],
-                [
-                    ['2024-07-07', '11:00 ~ 12:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-07', '12:00 ~ 13:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-07', '13:00 ~ 13:12', '12分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-08', '10:00 ~ 11:00', '1小時', '火車', 5, 0.4],
-                    ['2024-07-08', '11:00 ~ 12:00', '1小時', '公車', 2, 0.2],
-                    ['2024-07-08', '12:00 ~ 13:00', '1小時', '走路', 8, 0.6],
-                    ['2024-07-08', '13:00 ~ 14:00', '1小時', '機車', 10, 0.82],
-                    ['2024-07-08', '14:00 ~ 15:00', '1小時', '機車', 10, 0.8],
-                    ['2024-07-08', '15:00 ~ 15:12', '12分鐘', '機車', 10, 0.8],
-                ],
-                [
-                    ['2024-07-09', '08:00 ~ 09:00', '1小時', '火車', 5, 0.4],
-                    ['2024-07-09', '09:00 ~ 10:00', '1小時', '火車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-10', '09:30 ~ 10:30', '1小時', '機車', 5, 0.4],
-                    ['2024-07-10', '12:30 ~ 12:45', '15分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-11', '14:00 ~ 15:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-11', '15:00 ~ 15:30', '30分鐘', '公車', 2, 0.2],
-                ],
-                [
-                    ['2024-07-12', '12:00 ~ 13:00', '1小時', '汽車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-13', '11:00 ~ 12:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-13', '12:00 ~ 12:45', '45分鐘', '火車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-14', '08:15 ~ 09:15', '1小時', '機車', 5, 0.4],
-                    ['2024-07-14', '09:15 ~ 09:45', '30分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-15', '13:30 ~ 14:30', '1小時', '公車', 5, 0.4],
-                    ['2024-07-15', '14:30 ~ 15:00', '30分鐘', '公車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-16', '09:00 ~ 10:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-16', '10:00 ~ 11:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-16', '11:00 ~ 12:00', '1小時', '機車', 5, 0.4],
-                    ['2024-07-16', '12:00 ~ 12:30', '30分鐘', '機車', 5, 0.4],
-                ],
-                [
-                    ['2024-07-17', '15:00 ~ 16:00', '1小時', '走路', 5, 0.4],
-                    ['2024-07-17', '16:00 ~ 16:30', '30分鐘', '汽車', 5, 0.4],
-                ],
-            ],
+        employeeBusinessTravel: {
+            data: [],
+            detailedData: [],
+            vehicles:{
+                "小客車":{
+                    "coef":115,
+                },
+                "機車":{
+                    "coef":95.1,
+                },
+                "電動車":{
+                    "coef":78,
+                },
+                "公車":{
+                    "coef":76.7,
+                },
+                "火車":{
+                    "coef":54,
+                },
+                "高鐵":{
+                    "coef":32,
+                },
+                "電動機車":{
+                    "coef":25.2,
+                },
+            }
         },
         employeeCommuting: {
             data: [],
@@ -459,80 +384,33 @@ export function localDatabaseState(state = initLocalDatabase, action) {
         case '@POST/UPDATE_DEPARTMENT_LIST':
             state.toolbar.departmentList = action.departmentList;
             return state;
-        case '@POST/INIT_EMPLOYEE_COMMUTING_DATA':
-            state.data.employeeCommuting.data = [];
-            //console.log (action.employeeCommutingData);
-            for (let employee of action.employeeCommutingData.employeeInfo) {
-                const transportationTypes = [];
-                // for (let transportationType of employee.transportationTypes) {
-                //     switch (transportationType) {
-                //         case 'TRAIN':
-                //             transportationTypes.push('火車');
-                //             break;
-                //         case 'BUS':
-                //             transportationTypes.push('公車');
-                //             break;
-                //         case 'WALK':
-                //             transportationTypes.push('走路');
-                //             break;
-                //         case 'SCOOTER':
-                //             transportationTypes.push('機車');
-                //             break;
-                //         case 'CAR':
-                //             transportationTypes.push('汽車');
-                //             break;
-                //         case 'BIKE':
-                //             transportationTypes.push('腳踏車');
-                //             break;
-                //     }
-                // }
-                state.data.employeeCommuting.data.push([
+        case '@POST/INIT_EMPLOYEE_BUSINESS_TRAVEL_DATA':
+            state.data.employeeBusinessTravel.data = [];
+            for (let employee of action.employeeBusinessTravelData.employeeInfo) {
+                state.data.employeeBusinessTravel.data.push([
                     employee.name,
                     employee.dept,
                     employee.code,
                     '12345',
-                    // transportationTypes.join('、'),
                     employee.totalDistance / 1000,
                     employee.totalCarbon / 1000,
                     employee.reducedCarbon / 1000,
                 ]);
             }
             return state;
-        case '@POST/INIT_EMPLOYEE_COMMUTING_DATA_DETAIL':
+        case '@POST/INIT_EMPLOYEE_COMMUTING_DATA':
             state.data.employeeCommuting.data = [];
-            // for (let employee of action.employeeCommutingData.employeeInfo) {
-            //     const transportationTypes = [];
-            //     for (let transportationType of employee.transportationTypes) {
-            //         switch (transportationType) {
-            //             case 'TRAIN':
-            //                 transportationTypes.push('火車');
-            //                 break;
-            //             case 'BUS':
-            //                 transportationTypes.push('公車');
-            //                 break;
-            //             case 'WALK':
-            //                 transportationTypes.push('走路');
-            //                 break;
-            //             case 'SCOOTER':
-            //                 transportationTypes.push('機車');
-            //                 break;
-            //             case 'CAR':
-            //                 transportationTypes.push('汽車');
-            //                 break;
-            //             case 'BIKE':
-            //                 transportationTypes.push('腳踏車');
-            //                 break;
-            //         }
-            //     }
-            //     state.data.employeeCommuting.data.push([
-            //         employee.name,
-            //         employee.code,
-            //         transportationTypes.join('、'),
-            //         employee.totalDistance / 1000,
-            //         employee.totalCarbon,
-            //         employee.reducedCarbon,
-            //     ]);
-            // }
+            for (let employee of action.employeeCommutingData.employeeInfo) {
+                state.data.employeeCommuting.data.push([
+                    employee.name,
+                    employee.dept,
+                    employee.code,
+                    '12345',
+                    employee.totalDistance / 1000,
+                    employee.totalCarbon / 1000,
+                    employee.reducedCarbon / 1000,
+                ]);
+            }
             return state;
         case '@POST/ADD_VEHICLE_DATA':
             state.data.vehicleData.data.push(action.vehicleData);
