@@ -56,7 +56,11 @@ function Panel(props) {
                 <div className={`bottom-function-button logout-button`}
                     onClick={() => {
                         localStorage.removeItem('token');
-                        localStorage.removeItem('account');
+                        localStorage.removeItem('username');
+                        localStorage.removeItem('password');
+                        sessionStorage.removeItem('token');
+                        sessionStorage.removeItem('username');
+                        sessionStorage.removeItem('password');
                         window.location.href = '/login'
                     }}
                 >

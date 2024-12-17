@@ -13,17 +13,20 @@ function Login() {
     const dispatch = useDispatch();
     const history = useNavigate();
     const [recaptchaValue, setRecaptchaValue] = useState(true);
+    const [remember, setRemember] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
         if (token) {
-            dispatch(loginAndLoading({
-                login: true,
-                loading: true,
-                username: localStorage.getItem('username'),
-                token: token
-            }));
-            // history('/data-overview');
+            // Auto login if token exists
+            dispatch(
+                loginAndLoading({
+                    login: true,
+                    loading: true,
+                    username: localStorage.getItem('username'),
+                    token: token
+                })
+            );
         }
     }, []);
 
@@ -34,9 +37,6 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (recaptchaValue) {
-            // console.log("帳號:", event.target.elements.username.value);
-            // console.log("密碼:", event.target.elements.password.value);
-            // console.log("驗證碼:", recaptchaValue);
             const username = event.target.elements.username.value;
             const password = event.target.elements.password.value;
 
@@ -51,21 +51,33 @@ function Login() {
             }
 
             UserLogin(username, password).then((response) => {
-                //console.log(response);
                 if (response.data.code === 0) {
                     const token = response.data.data.token;
-                    localStorage.setItem('username', username);
-                    localStorage.setItem('password', password);
-                    localStorage.setItem('token', token);
-                    dispatch(loginAndLoading(
-                        {
+
+                    // Save login info to local storage
+                    if (remember) {
+                        localStorage.setItem('username', username);
+                        localStorage.setItem('password', password);
+                        localStorage.setItem('token', token);
+                    } else{
+                        sessionStorage.setItem('username', username);
+                        sessionStorage.setItem('password', password);
+                        sessionStorage.setItem('token', token);
+                    }
+
+                    // Login success
+                    dispatch(
+                        loginAndLoading({
                             login: true,
                             loading: true,
                             username: username,
                             token: token
-                        }
-                    ));
+                        })
+                    );
+
+                    // Redirect to data overview page
                     history('/data-overview');
+
                 } else {
                     const msg = response.data.msg;
                     alert("Login failed: " + msg);
@@ -105,10 +117,9 @@ function Login() {
                     </div>
                     <div className='login-rember-forget'>
                         <div className='login-rember'>
-                            <input type='checkbox' id='rember'></input>
+                            <input type='checkbox' id='rember' name='rember' onChange={() => setRemember(!remember)} />
                             <label htmlFor='rember'> Remember me</label>
                         </div>
-                        {/* 忘記密碼 */}
                         <Link to='/forget-password'>
                             <div>Forgot password?</div>
                         </Link>
