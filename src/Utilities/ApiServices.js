@@ -5,15 +5,32 @@ const api = axios.create({
     timeout: 100000,
 });
 
-export const UserLogin = async (account, password) => {
+export const UserLogin = async (username, password) => {
     try {
         const response = await api.post('/api/v0/auth/login', {
-            "username": account,
+            "username": username,
             "password": password
         });
         return response;
     } catch (error) {
         console.error('Error Login:', error);
+        throw error;
+    }
+};
+
+export const UserRegister = async (username, password, email) => {
+    try {
+        const response = await api.post('/api/v0/auth/register', {
+            "firstname": "",
+            "lastname": "",
+            "username": username,
+            "avatarId": 0,
+            "email": email,
+            "password": password,
+        });
+        return response;
+    } catch (error) {
+        console.error('Error Register:', error);
         throw error;
     }
 };

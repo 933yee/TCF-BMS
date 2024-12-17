@@ -40,8 +40,13 @@ function Login() {
             const username = event.target.elements.username.value;
             const password = event.target.elements.password.value;
 
-            if (username === '' || password === '') {
-                alert("請輸入帳號密碼");
+            if (username === '') {
+                alert("Please enter a username");
+                return;
+            }
+
+            if (password === '') {
+                alert("Please enter a password");
                 return;
             }
 
@@ -62,12 +67,12 @@ function Login() {
                     ));
                     history('/data-overview');
                 } else {
-                    alert("登入失敗");
+                    const msg = response.data.msg;
+                    alert("Login failed: " + msg);
                 }
             }
             ).catch((error) => {
                 console.error('Error Login:', error);
-                alert("登入失敗");
             }
             );
         } else {

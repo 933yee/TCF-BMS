@@ -3,75 +3,53 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAndLoading } from 'States/actions.js';
 import { useDispatch } from 'react-redux';
-import { UserLogin } from 'Utilities/ApiServices.js';
+import { UserRegister } from 'Utilities/ApiServices.js';
 import { MdAccountCircle, MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import './Register.css';
 
 function Register() {
-    const dispatch = useDispatch();
-    const history = useNavigate();
-    const [recaptchaValue, setRecaptchaValue] = useState(true);
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            dispatch(loginAndLoading({
-                login: true,
-                loading: true,
-                username: localStorage.getItem('username'),
-                token: token
-            }));
-            // history('/data-overview');
-        }
-    }, []);
-
-    const handleRecaptchaChange = (value) => {
-        setRecaptchaValue(value);
-    };
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (recaptchaValue) {
-            // console.log("帳號:", event.target.elements.username.value);
-            // console.log("密碼:", event.target.elements.password.value);
-            // console.log("驗證碼:", recaptchaValue);
-            const username = event.target.elements.username.value;
-            const password = event.target.elements.password.value;
-
-            if (username === '' || password === '') {
-                alert("請輸入帳號密碼");
-                return;
-            }
-
-            UserLogin(username, password).then((response) => {
-                //console.log(response);
-                if (response.data.code === 0) {
-                    const token = response.data.data.token;
-                    localStorage.setItem('username', username);
-                    localStorage.setItem('password', password);
-                    localStorage.setItem('token', token);
-                    dispatch(loginAndLoading(
-                        {
-                            login: true,
-                            loading: true,
-                            username: username,
-                            token: token
-                        }
-                    ));
-                    history('/data-overview');
-                } else {
-                    alert("登入失敗");
-                }
-            }
-            ).catch((error) => {
-                console.error('Error Login:', error);
-                alert("登入失敗");
-            }
-            );
-        } else {
-            alert("你是機器人嗎");
+        const username = event.target.elements.username.value;
+        const password = event.target.elements.password.value;
+        const passwordConfirm = event.target.elements['password-confirm'].value;
+        const email = event.target.elements.email.value;
+        
+        if (username === '') {
+            alert("Please enter a username");
+            return;
         }
+
+        if (password === '') {
+            alert("Please enter a password");
+            return;
+        }
+
+        if (password !== passwordConfirm) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        if (email === '') {
+            alert("Please enter an email");
+            return;
+        }
+
+        UserRegister(username, password, email).then((response) => {
+            if (response.data.code === 0) {
+                alert("Registration successful");
+
+                // Redirect to login page
+                window.location.href = '/login';
+
+            } else {
+                const msg = response.data.msg;
+                alert("Registration failed: " + msg);
+            }
+        }).catch((error) => {
+            console.error('Error Register:', error);
+        });
     };
 
     return (
@@ -103,7 +81,7 @@ function Register() {
                         </div>
                         <div className='register-data-wrapper'>
                             <RiLockPasswordFill className='register-icon'/>
-                            <input className='register-data' type="password" name="password" placeholder="Confirm Password" />
+                            <input className='register-data' type="password" name="password-confirm" placeholder="Confirm Password" />
                         </div>
                     </div>
                     <div className='register-data-container'>
