@@ -22,7 +22,7 @@ function EmployeeCommutingDetail(props) {
     const [rerenderKey, setRerenderKey] = useState(0);
     const [selectedRows, setSelectedRows] = useState(new Set());
 
-    const dataHeaders = ['交通工具', '起始時間', '結束時間', '起始地', '抵達地','精準度','公里數', '碳足跡-KG'];
+    const dataHeaders = ['交通工具', '起始時間', '結束時間', '起始地', '抵達地', '精準度', '公里數', '碳足跡-KG'];
 
     const handleRowClick = (index) => { };
 
@@ -48,7 +48,6 @@ function EmployeeCommutingDetail(props) {
                 return;
             }
             if (response.data.data.dayOverviews.length != 0) {
-                console.log(response.data.data.dayOverviews[0].transportInfo);
                 const initialData = response.data.data.dayOverviews[0].transportInfo.map((item) => {
                     const startDate = new Date(item.start.time);
                     const formattedStartTime = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')} ${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}`;

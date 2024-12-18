@@ -37,8 +37,6 @@ export const UserRegister = async (username, password, email) => {
 
 export const GetDashBoardOverview = async (token, startDate) => {
     try {
-        console.log(token);
-        console.log(startDate);
         const response = await api.get(`/api/v0/dashboard/overview?startDate=${startDate}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -86,7 +84,6 @@ export const GetEmployeeOverviewDay = async (token, employeeCode, startDate, end
 
 export const GetReverse = async (token, lat, lon) => {
     try {
-        console.log(lat, lon);
         const response = await api.get(`/api/v0/util/reverse?lat=${lat}&lon=${lon}`, {
             headers: {
                 Authorization: `Bearer ${token}`,

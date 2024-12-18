@@ -17,7 +17,7 @@ function Register() {
         const password = event.target.elements.password.value;
         const passwordConfirm = event.target.elements['password-confirm'].value;
         const email = event.target.elements.email.value;
-        
+
         if (username === '') {
             toast.error("Please enter a username");
             return;
@@ -54,7 +54,7 @@ function Register() {
 
     return (
         <div className='register-container'>
-            <ToastContainer 
+            <ToastContainer
                 position="top-center"
                 autoClose={5000}
                 hideProgressBar={true}
@@ -66,8 +66,8 @@ function Register() {
                 <img className='logo' src='./images/logo.png' alt='ECHO_TCF'></img>
                 <form className='register-form' onSubmit={handleSubmit}>
                     <div className='register-data-container'>
-                        <div className='register-data-title'> 
-                            Username 
+                        <div className='register-data-title'>
+                            Username
                         </div>
                         <div className='register-data-wrapper'>
                             <MdAccountCircle className='register-icon' />
@@ -79,7 +79,7 @@ function Register() {
                             Password
                         </div>
                         <div className='register-data-wrapper'>
-                            <RiLockPasswordFill className='register-icon'/>
+                            <RiLockPasswordFill className='register-icon' />
                             <input className='register-data' type="password" name="password" placeholder="Password" />
                         </div>
                     </div>
@@ -88,7 +88,7 @@ function Register() {
                             Confirm Password
                         </div>
                         <div className='register-data-wrapper'>
-                            <RiLockPasswordFill className='register-icon'/>
+                            <RiLockPasswordFill className='register-icon' />
                             <input className='register-data' type="password" name="password-confirm" placeholder="Confirm Password" />
                         </div>
                     </div>
@@ -97,7 +97,7 @@ function Register() {
                             Email
                         </div>
                         <div className='register-data-wrapper'>
-                            <MdEmail className='register-icon'/>
+                            <MdEmail className='register-icon' />
                             <input className='register-data' type="email" name="email" placeholder="Email" />
                         </div>
                     </div>

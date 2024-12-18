@@ -1,0 +1,199 @@
+.basic-information-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.basic-information-container .basic-information {
+    height: 75%;
+    width: 70%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.basic-information-container .basic-information form {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.basic-information-container .basic-information .personal-information,
+.basic-information-container .basic-information .activity-information {
+    width: 50%;
+    height: 100%;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.basic-information-container .basic-information .personal-information {}
+
+.basic-information-container .basic-information .activity-information {}
+
+.basic-information-container .basic-information h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.basic-information-container .basic-information label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+}
+
+.basic-information-container .basic-information input[type="text"],
+.basic-information-container .basic-information select {
+    box-sizing: border-box;
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.basic-information-container .basic-information .activity-list {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+.basic-information-container .basic-information .activity {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 0px 10px 10px 8px;
+}
+
+.basic-information-container .basic-information .activity h4 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.basic-information-container .basic-information .activity .button-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.basic-information-container .basic-information .activity button {
+    background-color: rgb(54, 166, 180);
+    color: white;
+    border: none;
+    padding: 3px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.basic-information-container .basic-information .activity .location,
+.basic-information-container .basic-information .activity .vehicle {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.basic-information-container .basic-information .activity .location .delete,
+.basic-information-container .basic-information .activity .vehicle .delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.basic-information-container .basic-information .activity .location .delete:hover {
+    opacity: 0.7;
+}
+
+.basic-information-container .basic-information .activity label {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.basic-information-container .basic-information .activity input[type="text"] {
+    box-sizing: border-box;
+    display: block;
+    width: 90%;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.basic-information-container .basic-information button:hover {
+    opacity: 0.9;
+}
+
+.basic-information-container .basic-information .activity-section {
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.basic-information-container .basic-information .activity-section.active {
+    display: block;
+}
+
+.basic-information-container .basic-information .submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basic-information-container .basic-information .submit-button button {
+    width: 20%;
+    background-color: rgb(54, 166, 180);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.basic-information-container .basic-information .submit-button button:hover {
+    opacity: 0.9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

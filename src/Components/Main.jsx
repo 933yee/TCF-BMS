@@ -3,7 +3,9 @@ import {
     useLocation,
     Route,
     Routes,
-    Switch
+    Switch,
+    useNavigate,
+    Navigate
 } from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
@@ -12,6 +14,7 @@ import Panel from 'Components/Panel.jsx';
 import Navbar from 'Components/Navbar.jsx';
 import Login from 'Components/Login.jsx';
 import Register from 'Components/Register.jsx';
+import BasicInformation from 'Components/BasicInformation.jsx';
 
 import EmployeeBusinessTravel from 'Components/EmployeeBusinessTravel.jsx';
 import EmployeeBusinessTravelDay from 'Components/EmployeeBusinessTravelDay.jsx';
@@ -41,6 +44,7 @@ import './Main.css';
 function Main(props) {
     const [renderKey, setRenderKey] = useState(0);
     const dispatch = useDispatch();
+    const history = useNavigate();
     const localData = props.data;
 
     // useEffect(() => {
@@ -83,7 +87,7 @@ function Main(props) {
                                     <Route path="/current-usage-of-public-transportation" exact element={<>交通車使用情況</>} />
                                     <Route path="/accumulation-status" exact element={<>積點狀況</>} />
 
-                                    <Route path="/employee-business-travel" exact element={<EmployeeBusinessTravel />}/>
+                                    <Route path="/employee-business-travel" exact element={<EmployeeBusinessTravel />} />
                                     <Route path="/employee-business-travel/:employeeCode/:startDate/:endDate" element={<EmployeeBusinessTravelDay />} />
                                     <Route path="/employee-business-travel/:employeeCode/:date" element={<EmployeeBusinessTravelDetail />} />
 
@@ -116,8 +120,7 @@ function Main(props) {
                                         <EmployeeData />
                                     }
                                     />
-                                    <Route path="/*" element="404 not found" />
-                                    {/* <Route path="/employee-detail" element={<DetailedData />} /> */}
+                                    <Route path="*" element={<Navigate to="/data-overview" replace />} />
                                 </Routes>
                             </div>
                         </>
@@ -126,8 +129,10 @@ function Main(props) {
             ) : (
                 // <Login />
                 <Routes>
-                    <Route path="/*" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/basic-information" element={<BasicInformation />} />
+                    <Route path="*" element={<Navigate to="/login" replace />} />
                 </Routes>
             )}
         </div>

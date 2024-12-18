@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { changeCurrentPage } from 'States/actions.js';
 import { englishToChineseMap } from 'Utilities/Auxiliary.js';
@@ -9,7 +9,8 @@ import './Panel.css';
 
 function Panel(props) {
     const dispatch = useDispatch();
-    const currentPathname = window.location.pathname.split('/')[1];
+    const location = useLocation();
+    const currentPathname = location.pathname.split('/')[1];
     const handleLinkClick = (link) => {
         dispatch(changeCurrentPage(link));
     };

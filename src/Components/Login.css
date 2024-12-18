@@ -44,7 +44,7 @@
     padding-top: 1rem;
 }
 
-.login-container .login-data-container .login-data-title{
+.login-container .login-data-container .login-data-title {
     width: 100%;
     font-size: 0.9rem;
 }
@@ -71,8 +71,8 @@
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
-    color: rgb(194, 194, 194); 
-  }
+    color: rgb(194, 194, 194);
+}
 
 .login-container .login-data::placeholder {
     text-align: left;
@@ -99,7 +99,7 @@
 .login-container .login-rember-forget a {
     text-decoration: none;
     transition: opacity .1s;
-    color : blue;
+    color: blue;
 }
 
 .login-container .login-rember-forget a:hover {
@@ -107,7 +107,7 @@
     cursor: pointer;
 }
 
-.login-container .login-rember{
+.login-container .login-rember {
     display: flex;
     align-items: center;
 }
@@ -118,7 +118,7 @@
     width: 100%;
     font-weight: 700;
     transition: opacity .1s;
-    background-color: rgb(39, 129, 141);
+    background-color: rgb(54, 166, 180);
     color: white;
     font-size: 1rem;
     border: none;
@@ -140,7 +140,7 @@
 .login-container .login-register a {
     text-decoration: none;
     transition: opacity .1s;
-    color : blue;
+    color: blue;
 }
 
 .login-container .login-register a:hover {

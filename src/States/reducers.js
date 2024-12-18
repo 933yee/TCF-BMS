@@ -78,8 +78,6 @@ export function pageState(state = initPages, action) {
 const initLogin = {
     login: false,
     loading: false,
-    // tmp
-    basic_info: false,
     username: '',
     token: '',
 };
@@ -91,7 +89,6 @@ export function loginState(state = initLogin, action) {
                 ...state,
                 loading: action.loginInfo.loading,
                 login: action.loginInfo.login,
-                basic_info: action.loginInfo.basic_info,
                 username: action.loginInfo.username,
                 token: action.loginInfo.token,
             };

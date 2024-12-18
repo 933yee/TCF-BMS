@@ -25,8 +25,6 @@ function Login() {
                 loginAndLoading({
                     login: true,
                     loading: true,
-                    // tmp
-                    basic_info: true,
                     username: username,
                     token: token
                 })
@@ -84,19 +82,20 @@ function Login() {
                     }
 
                     // Login success
-                    dispatch(
-                        loginAndLoading({
-                            login: true,
-                            loading: true,
-                            // tmp
-                            basic_info: false,
-                            username: username,
-                            token: token
-                        })
-                    );
+                    // dispatch(
+                    //     loginAndLoading({
+                    //         login: true,
+                    //         loading: true,
+                    //         username: username,
+                    //         token: token
+                    //     })
+                    // );
 
                     // Redirect to data overview page
-                    history('/data-overview');
+                    // history('/data-overview');
+
+                    // Tmp redirect to basic information page
+                    history('/basic-information');
 
                 } else {
                     const msg = response.data.msg;
